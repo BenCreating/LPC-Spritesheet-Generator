@@ -15,6 +15,8 @@ export default class SpritesheetManager {
 
   async update() {
     const canvas = document.getElementById('spritesheet')
+
+    // TODO: set width and height dynamically based on the animations displayed
     canvas.width = 832
     canvas.height = 1344
 
