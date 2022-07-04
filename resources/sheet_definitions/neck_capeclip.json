@@ -1,0 +1,22 @@
+{
+  "name": "Capeclip",
+  "type_name": "neck",
+  "layer_1": {
+    "zPos": 90,
+    "female": "neck/capeclip/female/",
+    "pregnant": "neck/capeclip/female/"
+  },
+  "variants": [
+    "black",
+    "blue",
+    "brown",
+    "gray",
+    "green",
+    "lavender",
+    "maroon",
+    "pink",
+    "red",
+    "white",
+    "yellow"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "name": "Arms",
+  "type_name": "arms",
+  "layer_1": {
+    "zPos": 60,
+    "male": "arms/male/",
+    "female": "arms/female/",
+    "pregnant": "arms/female/"
+  },
+  "variants": [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6"
+  ]
+}

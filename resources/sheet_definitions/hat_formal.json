@@ -1,0 +1,16 @@
+{
+  "name": "Formal",
+  "type_name": "hat",
+  "layer_1": {
+    "zPos": 130,
+    "male": "hat/formal/",
+    "female": "hat/formal/",
+    "muscular": "hat/formal/",
+    "pregnant": "hat/formal/"
+  },
+  "variants": [
+    "round",
+    "black",
+    "brown"
+  ]
+}

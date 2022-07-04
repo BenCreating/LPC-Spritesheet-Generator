@@ -1,0 +1,11 @@
+{
+  "name": "Tabard",
+  "type_name": "jacket",
+  "layer_1": {
+    "zPos": 55,
+    "female": "torso/jacket/tabard/female/"
+  },
+  "variants": [
+    "lila"
+  ]
+}

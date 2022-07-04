@@ -1,0 +1,24 @@
+{
+  "name": "Slash oversize",
+  "type_name": "weapon",
+  "layer_1": {
+    "zPos": 140,
+    "male": "weapon/slash_oversize/male/universal/",
+    "muscular": "weapon/slash_oversize/male/universal/",
+    "female": "weapon/slash_oversize/female/universal/",
+    "pregnant": "weapon/slash_oversize/female/universal/"
+  },
+  "layer_2": {
+    "oversize": "slash",
+    "zPos": 150,
+    "male": "weapon/slash_oversize/male/",
+    "muscular": "weapon/slash_oversize/male/",
+    "female": "weapon/slash_oversize/female/",
+    "pregnant": "weapon/slash_oversize/female/"
+  },
+  "variants": [
+    "flail",
+    "halberd",
+    "waraxe"
+  ]
+}

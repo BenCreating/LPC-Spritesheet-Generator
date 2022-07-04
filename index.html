@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liberated Pixel Cup Character Sheet Generator</title>
+    <link rel="stylesheet" type="text/css" href="resources/style.css">
+    <script type="module" src="index.js"></script>
+  </head>
+
+  <body>
+    <div class="sidebar">
+      <fieldset>
+        <legend>Body Type</legend>
+        <label>
+          <input type="radio" name="body-type" value="male" checked>
+          Male
+        </label>
+        <label>
+          <input type="radio" name="body-type" value="female">
+          Female
+        </label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Hair</legend>
+        <label>
+          <input type="radio" name="hair" value="none" checked>
+          None
+        </label>
+        <label>
+          <input type="radio" name="hair" value="afro">
+          Afro
+        </label>
+        <label>
+          <input type="radio" name="hair" value="bangs">
+          Bangs
+        </label>
+        <label>
+          <input type="radio" name="hair" value="buzzcut">
+          Buzzcut
+        </label>
+      </fieldset>
+    </div>
+    <canvas></canvas>
+  </body>
+</html>

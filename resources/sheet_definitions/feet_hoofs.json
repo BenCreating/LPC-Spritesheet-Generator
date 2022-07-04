@@ -1,0 +1,12 @@
+{
+  "name": "Hoofs",
+  "type_name": "shoes",
+  "layer_1": {
+    "zPos": 15,
+    "male": "feet/hoofs/male/",
+    "muscular": "feet/hoofs/male/"
+  },
+  "variants": [
+    "hoofs"
+  ]
+}

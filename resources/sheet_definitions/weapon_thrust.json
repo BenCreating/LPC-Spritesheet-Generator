@@ -1,0 +1,24 @@
+{
+  "name": "Thrust",
+  "type_name": "weapon",
+  "layer_1": {
+    "zPos": 140,
+    "male": "weapon/thrust/male/",
+    "muscular": "weapon/thrust/male/",
+    "female": "weapon/thrust/female/",
+    "pregnant": "weapon/thrust/female/"
+  },
+  "variants": [
+    "cane",
+    "crossbow",
+    "shovel",
+    "shovel 2",
+    "simple staff",
+    "spear",
+    "spear 2",
+    "spear black",
+    "spear green",
+    "spear metal",
+    "spear purple"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "name": "Bow",
+  "type_name": "weapon",
+  "preview_row": 17,
+  "layer_1": {
+    "zPos": 140,
+    "male": "weapon/bow/",
+    "muscular": "weapon/bow/",
+    "female": "weapon/bow/",
+    "pregnant": "weapon/bow/"
+  },
+  "variants": [
+    "great",
+    "normal",
+    "recurve",
+    "6",
+    "7",
+    "8",
+    "9",
+    "10"
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "name": "Tattered",
+  "type_name": "cape",
+  "layer_1": {
+    "zPos": 85,
+    "female": "cape/tattered/female/",
+    "pregnant": "cape/tattered/female/"
+  },
+  "layer_2": {
+    "zPos": 5,
+    "female": "cape/tattered_behind/",
+    "pregnant": "cape/tattered_behind/"
+  },
+  "variants": [
+    "black",
+    "blue",
+    "brown",
+    "gray",
+    "green",
+    "maroon",
+    "pink",
+    "red",
+    "white",
+    "yellow"
+  ]
+}

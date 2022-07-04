@@ -1,0 +1,15 @@
+{
+  "name": "Tunic",
+  "type_name": "clothes",
+  "layer_1": {
+    "zPos": 35,
+    "female": "torso/clothes/tunic/female/"
+  },
+  "variants": [
+    "brown",
+    "maroon",
+    "teal",
+    "white",
+    "sara"
+  ]
+}

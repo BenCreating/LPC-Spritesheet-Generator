@@ -1,0 +1,18 @@
+{
+  "name": "Leather Belt",
+  "type_name": "belt",
+  "layer_1": {
+    "zPos": 70,
+    "male": "torso/waist/belt_leather/male/",
+    "female": "torso/waist/belt_leather/female/"
+  },
+  "variants": [
+    "brown",
+    "charcoal",
+    "leather",
+    "slate",
+    "tan",
+    "walnut",
+    "white"
+  ]
+}

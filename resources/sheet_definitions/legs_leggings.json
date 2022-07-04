@@ -1,0 +1,11 @@
+{
+  "name": "Leggings",
+  "type_name": "legs",
+  "layer_1": {
+    "zPos": 20,
+    "female": "legs/leggings/female/"
+  },
+  "variants": [
+    "sara"
+  ]
+}

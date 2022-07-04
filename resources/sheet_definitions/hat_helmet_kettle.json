@@ -1,0 +1,14 @@
+{
+  "name": "Kettle helm",
+  "type_name": "hat",
+  "layer_1": {
+    "zPos": 135,
+    "female": "hat/helmet/kettle/female/",
+    "pregnant": "hat/helmet/kettle/female/",
+    "male": "hat/helmet/kettle/male/",
+    "muscular": "hat/helmet/kettle/male/"
+  },
+  "variants": [
+    "steel"
+  ]
+}
