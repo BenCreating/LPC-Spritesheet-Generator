@@ -1,15 +1,18 @@
 export default class OptionManager {
-  constructor(urlParameterManager, spritesheetManager) {
-    this._urlParameterManager = urlParameterManager
-    this._spritesheetManager = spritesheetManager
+  constructor(characterGenerator) {
+    this._characterGenerator = characterGenerator
+  }
+
+  characterGenerator() {
+    return this._characterGenerator
   }
 
   urlParameterManager() {
-    return this._urlParameterManager
+    return this.characterGenerator().urlParameterManager()
   }
 
   spritesheetManager() {
-    return this._spritesheetManager
+    return this.characterGenerator().spritesheetManager()
   }
 
   setupOptionButtons() {
@@ -35,5 +38,10 @@ export default class OptionManager {
       const radioButton = document.querySelector(`.sidebar input[type=radio][name=${name}][value=${value}]`)
       radioButton.checked = true
     })
+  }
+
+  getSelectedOption(categoryName) {
+    const selectedButton = document.querySelector(`.sidebar input[type=radio][name=${categoryName}]:checked`)
+    return selectedButton.value
   }
 }
