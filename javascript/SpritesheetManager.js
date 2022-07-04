@@ -1,11 +1,12 @@
 export default class SpritesheetManager {
-  update() {
-    const canvas = document.querySelector('canvas')
+  async update() {
+    const canvas = document.getElementById('spritesheet')
     const context = canvas.getContext('2d')
 
-    const image = new Image()
-    image.src = 'resources/spritesheets/body/male/human/zombie.png'
+    this.image = new Image()
+    this.image.src = 'resources/spritesheets/body/male/human/zombie.png'
+    await this.image.decode()
 
-    context.drawImage(image, 0, 0)
+    context.drawImage(this.image, 0, 0)
   }
 }
