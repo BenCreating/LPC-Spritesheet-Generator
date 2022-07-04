@@ -1,12 +1,4 @@
-const animations = [
-  { name: 'cast', x: 0, y: 0 },
-  { name: 'thrust', x: 0, y: 256 },
-  { name: 'idle', x: 0, y: 512 },
-  { name: 'walk', x: 64, y: 512 },
-  { name: 'shoot', x: 0, y: 768 },
-  { name: 'slash', x: 0, y: 1024 },
-  { name: 'hurt', x: 0, y: 1280 },
-]
+import animations from "./animations.js"
 
 export default class SpritesheetManager {
   constructor(characterGenerator) {
@@ -31,11 +23,14 @@ export default class SpritesheetManager {
     const body = this.optionManager().getSelectedOption('body-type')
 
     await Promise.all(animations.map(async animation => {
-      this.image = new Image()
-      this.image.src = `resources/spritesheets/body/${animation.name}/${body}.png`
-      await this.image.decode()
+      const image = new Image()
+      image.src = `resources/spritesheets/body/${animation.name}/${body}.png`
+      await image.decode()
+      animation.width = image.width
 
-      context.drawImage(this.image, animation.x, animation.y)
+      context.drawImage(image, animation.x, animation.y)
     }))
+
+    this.canvas = canvas
   }
 }

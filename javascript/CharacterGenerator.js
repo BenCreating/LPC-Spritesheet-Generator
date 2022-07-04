@@ -1,5 +1,4 @@
 import OptionManager from './OptionManager.js'
-import PreviewAnimation from './previewAnimation.js'
 import SpritesheetManager from './SpritesheetManager.js'
 import URLParameterManager from './URLParameterManager.js'
 
@@ -36,8 +35,8 @@ export default class CharacterGenerator {
 
     await spritesheetManager.update()
 
-    const previewCanvas = document.querySelector('#animation_preview canvas')
-    const preview = new PreviewAnimation(spritesheetManager.image, previewCanvas)
+    const preview = document.querySelector('animation-preview')
+    preview.source = spritesheetManager.canvas
     preview.start()
   }
 }
