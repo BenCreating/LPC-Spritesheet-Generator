@@ -40,4 +40,18 @@ export default class SpritesheetManager {
 
     this.canvas = canvas
   }
+
+  download() {
+    const link = document.createElement('a')
+    link.download = 'spritesheet.png'
+
+    this.canvas.toBlob(blob => {
+      const url = URL.createObjectURL(blob)
+      link.href = url
+
+      link.click()
+
+      URL.revokeObjectURL(url)
+    }, 'image/png')
+  }
 }

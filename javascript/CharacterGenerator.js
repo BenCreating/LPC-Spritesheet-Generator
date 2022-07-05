@@ -29,6 +29,9 @@ export default class CharacterGenerator {
     const spritesheetManager = this.spritesheetManager()
     const optionManager = this.optionManager()
 
+    const downloadButton = document.querySelector('#download-button')
+    downloadButton.addEventListener('click', spritesheetManager.download.bind(spritesheetManager))
+
     optionManager.setupOptionButtons()
     const parameters = urlParameterManager.getURLParameters()
     optionManager.setOptions(parameters)
