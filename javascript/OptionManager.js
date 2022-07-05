@@ -1,6 +1,10 @@
 export default class OptionManager {
   constructor(characterGenerator) {
     this._characterGenerator = characterGenerator
+
+    window.addEventListener('popstate', () => {
+      this.setOptions(this.urlParameterManager().getURLParameters())
+    })
   }
 
   characterGenerator() {
