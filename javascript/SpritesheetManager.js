@@ -22,15 +22,20 @@ export default class SpritesheetManager {
 
     const context = canvas.getContext('2d')
 
-    const body = this.optionManager().getSelectedOption('body-type')
+    const categories = this.optionManager().categories()
 
-    await Promise.all(animations.map(async animation => {
-      const image = new Image()
-      image.src = `resources/spritesheets/body/${animation.name}/${body}.png`
-      await image.decode()
-      animation.width = image.width
+    await Promise.all(categories.map(async category => {
+      await Promise.all(animations.map(async animation => {
+        const selectedItem = this.optionManager().getSelectedOption(category)
+        if (selectedItem === 'none') return
 
-      context.drawImage(image, animation.x, animation.y)
+        const image = new Image()
+        image.src = `resources/spritesheets/${category}/${animation.name}/${selectedItem}.png`
+        await image.decode()
+        animation.width = image.width
+
+        context.drawImage(image, animation.x, animation.y)
+      }))
     }))
 
     this.canvas = canvas
