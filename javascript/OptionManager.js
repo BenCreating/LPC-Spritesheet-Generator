@@ -19,12 +19,66 @@ export default class OptionManager {
     return this.characterGenerator().spritesheetManager()
   }
 
-  setupOptionButtons() {
-    const buttons = document.querySelectorAll('.sidebar input[type=radio]')
+  async setupOptionButtons(urlParameters = {}) {
+    await this.loadSheetDefinitions()
 
-    buttons.forEach(button => {
-      button.addEventListener('click', this.selectOption.bind(this))
+    this.buildOptionsHTML()
+    this.setOptions(urlParameters)
+  }
+
+  buildOptionsHTML() {
+    const sheetDefinitions = this.sheetDefinitions
+    this.optionCategories = Object.keys(sheetDefinitions)
+
+    const sidebar = document.querySelector('.sidebar')
+
+    this.optionCategories.forEach(categoryName => {
+      const category = this.buildCategory(categoryName)
+      sidebar.appendChild(category)
     })
+  }
+
+  buildCategory(category) {
+    const categoryContainer = document.createElement('fieldset')
+    const categoryLabel = document.createElement('legend')
+    categoryLabel.textContent = category
+    categoryContainer.appendChild(categoryLabel)
+
+    const radioButton = this.buildRadioButton(category, 'none', true)
+    categoryContainer.appendChild(radioButton)
+
+    const options = Object.keys(this.sheetDefinitions[category])
+    options.forEach(option => {
+      const isDefault = this.sheetDefinitions[category][option]['default']
+      const radioButton = this.buildRadioButton(category, option, isDefault)
+      categoryContainer.appendChild(radioButton)
+    })
+
+    return categoryContainer
+  }
+
+  buildRadioButton(category, option, checked = false) {
+    const radioButton = document.createElement('input')
+    radioButton.setAttribute('type', 'radio')
+    radioButton.setAttribute('name', category)
+    radioButton.setAttribute('value', option)
+    radioButton.addEventListener('click', this.selectOption.bind(this))
+
+    radioButton.checked = checked
+
+    const radioButtonContainer = document.createElement('label')
+    radioButtonContainer.textContent = option
+    radioButtonContainer.appendChild(radioButton)
+
+    return radioButtonContainer
+  }
+
+  async loadSheetDefinitions() {
+    const response = await fetch('resources/sheet-definitions.json')
+
+    if (!response.ok) throw new Error(`HTTP error: ${response.status}`)
+
+    this.sheetDefinitions = await response.json()
   }
 
   selectOption(event) {
@@ -50,11 +104,8 @@ export default class OptionManager {
   }
 
   categories() {
-    const buttons = [...document.querySelectorAll('.sidebar input[type=radio]')]
-    const categoryNames = buttons.map(button => button.name)
-
-    const uniqueCategories = new Set(categoryNames)
-
-    return [...uniqueCategories]
+    // TODO: fix sheetDefinitions being undefined the first time this is called
+    const sheetDefinitions = this.sheetDefinitions ?? {}
+    return Object.keys(sheetDefinitions)
   }
 }

@@ -1,0 +1,92 @@
+{
+  "body": {
+    "male": {
+      "default": true,
+      "only-for": [],
+      "palettes": [
+        "skin"
+      ],
+      "artists": [
+        "Stephen Challener (Redshrike)",
+        "Johannes Sjölund (wulax)"
+      ],
+      "licenses": [
+        "CC-BY-SA 3.0",
+        "GPL 3.0"
+      ],
+      "links": [
+        "https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles",
+        "https://opengameart.org/content/lpc-medieval-fantasy-character-sprites"
+      ]
+    },
+    "female": {
+      "only-for": [],
+      "palettes": [
+        "skin"
+      ],
+      "artists": [
+        "Stephen Challener (Redshrike)",
+        "Johannes Sjölund (wulax)",
+        "Matthew Krohn (makrohn)"
+      ],
+      "licenses": [
+        "CC-BY-SA 3.0",
+        "GPL 3.0"
+      ],
+      "links": [
+        "https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles",
+        "https://opengameart.org/content/lpc-medieval-fantasy-character-sprites",
+        "https://opengameart.org/content/lpc-ladies"
+      ]
+    }
+  },
+
+  "hair": {
+    "afro": {
+      "only-for": [],
+      "palettes": [
+        "hair"
+      ],
+      "artists": [
+        "bluecarrot16"
+      ],
+      "licenses": [
+        "CC0"
+      ],
+      "links": [
+        "https://opengameart.org/content/lpc-hair"
+      ]
+    },
+    "bangs": {
+      "only-for": [],
+      "palettes": [
+        "hair"
+      ],
+      "artists": [
+        "Manuel Riecke (MrBeast)"
+      ],
+      "licenses": [
+        "CC-BY-SA 3.0",
+        "GPL 3.0"
+      ],
+      "links": [
+        "https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles"
+      ]
+    },
+    "buzzcut": {
+      "only-for": [],
+      "palettes": [
+        "hair"
+      ],
+      "artists": [
+        "ElizaWy"
+      ],
+      "licenses": [
+        "OGA-BY 3.0"
+      ],
+      "links": [
+        "https://opengameart.org/content/lpc-hair"
+      ]
+    }
+  }
+}
