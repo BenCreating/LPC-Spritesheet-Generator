@@ -2,15 +2,11 @@ import animations from "./animations.js"
 
 export default class SpritesheetManager {
   constructor(characterGenerator) {
-    this._characterGenerator = characterGenerator
-  }
-
-  characterGenerator() {
-    return this._characterGenerator
+    this.characterGenerator = characterGenerator
   }
 
   optionManager() {
-    return this.characterGenerator().optionManager()
+    return this.characterGenerator.optionManager
   }
 
   async update() {
@@ -22,7 +18,7 @@ export default class SpritesheetManager {
 
     const context = canvas.getContext('2d')
 
-    const categories = this.optionManager().categories()
+    const categories = this.optionManager().optionCategories()
 
     await Promise.all(categories.map(async category => {
       await Promise.all(animations.map(async animation => {

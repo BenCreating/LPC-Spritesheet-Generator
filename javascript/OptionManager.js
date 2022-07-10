@@ -1,38 +1,25 @@
 export default class OptionManager {
   constructor(characterGenerator) {
-    this._characterGenerator = characterGenerator
+    this.characterGenerator = characterGenerator
 
     window.addEventListener('popstate', () => {
-      this.setOptions(this.urlParameterManager().getURLParameters())
+      this.setOptions(this.urlParameterManager.getURLParameters())
     })
   }
 
-  characterGenerator() {
-    return this._characterGenerator
-  }
+  get urlParameterManager() { return this.characterGenerator.urlParameterManager }
+  get spritesheetManager() { return this.characterGenerator.spritesheetManager }
+  get sheetDefinitions() { return this.characterGenerator.sheetDefinitions }
 
-  urlParameterManager() {
-    return this.characterGenerator().urlParameterManager()
-  }
-
-  spritesheetManager() {
-    return this.characterGenerator().spritesheetManager()
-  }
-
-  async setupOptionButtons(urlParameters = {}) {
-    await this.loadSheetDefinitions()
-
+  setupOptionButtons(urlParameters = {}) {
     this.buildOptionsHTML()
     this.setOptions(urlParameters)
   }
 
   buildOptionsHTML() {
-    const sheetDefinitions = this.sheetDefinitions
-    this.optionCategories = Object.keys(sheetDefinitions)
-
     const sidebar = document.querySelector('.sidebar')
 
-    this.optionCategories.forEach(categoryName => {
+    this.optionCategories().forEach(categoryName => {
       const category = this.buildCategory(categoryName)
       sidebar.appendChild(category)
     })
@@ -47,9 +34,11 @@ export default class OptionManager {
     const radioButton = this.buildRadioButton(category, 'none', true)
     categoryContainer.appendChild(radioButton)
 
-    const options = Object.keys(this.sheetDefinitions[category])
+    const sheetDefinitions = this.sheetDefinitions
+
+    const options = Object.keys(sheetDefinitions[category])
     options.forEach(option => {
-      const isDefault = this.sheetDefinitions[category][option]['default']
+      const isDefault = sheetDefinitions[category][option]['default']
       const radioButton = this.buildRadioButton(category, option, isDefault)
       categoryContainer.appendChild(radioButton)
     })
@@ -73,19 +62,11 @@ export default class OptionManager {
     return radioButtonContainer
   }
 
-  async loadSheetDefinitions() {
-    const response = await fetch('resources/sheet-definitions.json')
-
-    if (!response.ok) throw new Error(`HTTP error: ${response.status}`)
-
-    this.sheetDefinitions = await response.json()
-  }
-
   selectOption(event) {
     const option = event.target
 
-    this.urlParameterManager().setURLParameters(option)
-    this.spritesheetManager().update()
+    this.urlParameterManager.setURLParameters(option)
+    this.spritesheetManager.update()
   }
 
   setOptions(urlParameters = {}) {
@@ -103,9 +84,7 @@ export default class OptionManager {
     return selectedButton.value
   }
 
-  categories() {
-    // TODO: fix sheetDefinitions being undefined the first time this is called
-    const sheetDefinitions = this.sheetDefinitions ?? {}
-    return Object.keys(sheetDefinitions)
+  optionCategories() {
+    return Object.keys(this.sheetDefinitions)
   }
 }
