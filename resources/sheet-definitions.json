@@ -4,7 +4,8 @@
       "default": true,
       "only-for": [],
       "palettes": [
-        "skin"
+        "skin",
+        "eyes"
       ],
       "authors": [
         "Stephen Challener (Redshrike)",
@@ -22,7 +23,8 @@
     "female": {
       "only-for": [],
       "palettes": [
-        "skin"
+        "skin",
+        "eyes"
       ],
       "authors": [
         "Stephen Challener (Redshrike)",
