@@ -9,6 +9,7 @@ export default class OptionManager {
 
   get urlParameterManager() { return this.characterGenerator.urlParameterManager }
   get spritesheetManager() { return this.characterGenerator.spritesheetManager }
+  get attributionManager() { return this.characterGenerator.attributionManager }
   get sheetDefinitions() { return this.characterGenerator.sheetDefinitions }
 
   setupOptionButtons(urlParameters = {}) {
@@ -67,6 +68,7 @@ export default class OptionManager {
 
     this.urlParameterManager.setURLParameters(option)
     this.spritesheetManager.update()
+    this.attributionManager.update()
   }
 
   setOptions(urlParameters = {}) {
@@ -77,6 +79,8 @@ export default class OptionManager {
       const radioButton = document.querySelector(`.sidebar input[type=radio][name=${name}][value=${value}]`)
       if (radioButton) radioButton.checked = true
     })
+
+    this.attributionManager.update()
   }
 
   getSelectedOption(categoryName) {
