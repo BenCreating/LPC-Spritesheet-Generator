@@ -113,10 +113,14 @@ export default class AttributionManager {
     return linkList
   }
 
-  copy() {
+  fullPlainText() {
     const authors = this.authorsPlainText()
     const sources = this.sourcesPlainText()
-    const attribution = `${authors}\n\n${sources}`
+    return `${authors}\n\n${sources}`
+  }
+
+  copy() {
+    const attribution = this.fullPlainText()
 
     navigator.clipboard.writeText(attribution)
   }

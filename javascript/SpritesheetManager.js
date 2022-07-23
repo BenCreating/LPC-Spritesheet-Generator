@@ -37,17 +37,16 @@ export default class SpritesheetManager {
     this.canvas = canvas
   }
 
-  download() {
-    const link = document.createElement('a')
-    link.download = 'spritesheet.png'
+  getCanvasBlob() {
+    return new Promise(resolve => {
+      this.canvas.toBlob(resolve, 'image/png')
+    })
+  }
 
-    this.canvas.toBlob(blob => {
-      const url = URL.createObjectURL(blob)
-      link.href = url
+  async getPNG() {
+    const blob = await this.getCanvasBlob()
 
-      link.click()
-
-      URL.revokeObjectURL(url)
-    }, 'image/png')
+    const arrayBuffer = await blob.arrayBuffer()
+    return new Uint8Array(arrayBuffer)
   }
 }
