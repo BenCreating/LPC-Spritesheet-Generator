@@ -10,13 +10,19 @@
   </head>
 
   <body>
-    <animation-preview></animation-preview>
+    <div class="header">
+      <animation-preview></animation-preview>
+      <button type="button" id="download-button">Download</button>
+    </div>
 
-    <button type="button" id="download-button">Download</button>
 
-    <div class="sidebar"></div>
+    <div class="editor">
+      <div class="sidebar"></div>
 
-    <canvas id="spritesheet"></canvas>
+      <div class="spritesheet-container">
+        <canvas id="spritesheet"></canvas>
+      </div>
+    </div>
 
     <div class="attribution">
       <button type="button" id="copy-attribution-button">Copy</button>
