@@ -1,16 +1,26 @@
 import { zipSync } from 'https://cdn.skypack.dev/pin/fflate@v0.7.3-x0OS7MYd1pAJyCyfqyxe/mode=imports,min/optimized/fflate.js'
 import AttributionManager from './AttributionManager.js'
+import ColorManager from './ColorManager.js'
 import OptionManager from './OptionManager.js'
 import SpritesheetManager from './SpritesheetManager.js'
 import URLParameterManager from './URLParameterManager.js'
 
 export default class CharacterGenerator {
+  constructor() {
+    window.addEventListener('popstate', () => {
+      this.setOptions(this.urlParameterManager.getURLParameters())
+    })
+  }
+
   async setup() {
     this.urlParameterManager = new URLParameterManager()
     this.spritesheetManager = new SpritesheetManager(this)
     this.optionManager = new OptionManager(this)
     this.attributionManager = new AttributionManager(this)
-    this.sheetDefinitions = await this.loadSheetDefinitions()
+    this.colorManager = new ColorManager(this)
+
+    this.sheetDefinitions = await this.loadDefinitions('sheet')
+    this.paletteDefinitions = await this.loadDefinitions('palette')
 
     const downloadButton = document.querySelector('#download-button')
     downloadButton.addEventListener('click', this.download)
@@ -18,8 +28,13 @@ export default class CharacterGenerator {
     const copyAttributionButton = document.querySelector('#copy-attribution-button')
     copyAttributionButton.addEventListener('click', this.attributionManager.copy.bind(this.attributionManager))
 
-    const urlParameters = this.urlParameterManager.getURLParameters()
-    this.optionManager.setupOptionButtons(urlParameters)
+    // URL parameters have to be applied twice because colors are dependent on
+    // which options are selected. If the option isn't selected yet the color
+    // options won't exist.
+    this.optionManager.setupOptionButtons()
+    this.applyURLParameters()
+    this.colorManager.setupColorButtons()
+    this.applyURLParameters()
 
     await this.spritesheetManager.update()
 
@@ -28,8 +43,8 @@ export default class CharacterGenerator {
     preview.start()
   }
 
-  async loadSheetDefinitions() {
-    const response = await fetch('resources/sheet-definitions.json')
+  async loadDefinitions(type) {
+    const response = await fetch(`resources/${type}-definitions.json`)
     if (!response.ok) throw new Error(`HTTP error: ${response.status}`)
 
     return await response.json()
@@ -55,5 +70,18 @@ export default class CharacterGenerator {
     link.click()
 
     setTimeout(() => URL.revokeObjectURL(url), 100)
+  }
+
+  applyURLParameters() {
+    const urlParameters = this.urlParameterManager.getURLParameters()
+    const optionNames = [...urlParameters.keys()]
+
+    optionNames.forEach(name => {
+      const value = urlParameters.get(name)
+      const radioButton = document.querySelector(`.sidebar input[type=radio][name="${name}"][value="${value}"]`)
+      if (radioButton) radioButton.checked = true
+    })
+
+    this.attributionManager.update()
   }
 }

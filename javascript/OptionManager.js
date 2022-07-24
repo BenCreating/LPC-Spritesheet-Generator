@@ -1,20 +1,16 @@
 export default class OptionManager {
   constructor(characterGenerator) {
     this.characterGenerator = characterGenerator
-
-    window.addEventListener('popstate', () => {
-      this.setOptions(this.urlParameterManager.getURLParameters())
-    })
   }
 
   get urlParameterManager() { return this.characterGenerator.urlParameterManager }
   get spritesheetManager() { return this.characterGenerator.spritesheetManager }
   get attributionManager() { return this.characterGenerator.attributionManager }
   get sheetDefinitions() { return this.characterGenerator.sheetDefinitions }
+  get colorManager() { return this.characterGenerator.colorManager }
 
-  setupOptionButtons(urlParameters = {}) {
+  setupOptionButtons() {
     this.buildOptionsHTML()
-    this.setOptions(urlParameters)
   }
 
   buildOptionsHTML() {
@@ -28,6 +24,7 @@ export default class OptionManager {
 
   buildCategory(category) {
     const categoryContainer = document.createElement('fieldset')
+    categoryContainer.id = `${category}-options`
     const categoryLabel = document.createElement('legend')
     categoryLabel.textContent = category
     categoryContainer.appendChild(categoryLabel)
@@ -69,18 +66,7 @@ export default class OptionManager {
     this.urlParameterManager.setURLParameters(option)
     this.spritesheetManager.update()
     this.attributionManager.update()
-  }
-
-  setOptions(urlParameters = {}) {
-    const optionNames = [...urlParameters.keys()]
-
-    optionNames.forEach(name => {
-      const value = urlParameters.get(name)
-      const radioButton = document.querySelector(`.sidebar input[type=radio][name=${name}][value=${value}]`)
-      if (radioButton) radioButton.checked = true
-    })
-
-    this.attributionManager.update()
+    this.colorManager.update(option.name)
   }
 
   getSelectedOption(categoryName) {
