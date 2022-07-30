@@ -71,12 +71,10 @@ export default class ColorManager {
   }
 
   selectColor(event) {
-    console.time('select color')
     const color = event.target
 
     this.urlParameterManager.setURLParameters(color)
     this.spritesheetManager.applyRecolor()
-    console.timeEnd('select color')
   }
 
   setupColorButtons() {
