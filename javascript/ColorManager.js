@@ -71,10 +71,12 @@ export default class ColorManager {
   }
 
   selectColor(event) {
+    console.time('select color')
     const color = event.target
 
     this.urlParameterManager.setURLParameters(color)
     this.spritesheetManager.applyRecolor()
+    console.timeEnd('select color')
   }
 
   setupColorButtons() {
@@ -113,10 +115,25 @@ export default class ColorManager {
       const newRamp = paletteColorRamps[selectedRampIndex]
 
       originalRamp.forEach((originalColor, index) => {
-        recolor[originalColor.toLowerCase()] = newRamp[index]
+        // Regular Number gives negatives with some left shifts, but BigInt
+        // behaves correctly. Key is RGBA because that's what a DataView can
+        // pull from an array buffer in a single operation.
+        const [r, g, b] = this.hexToRGB(originalColor).map(n => BigInt(n))
+        const key = (r << 24n) + (g << 16n) + (b << 8n) + 255n
+        recolor[key] = this.hexToRGB(newRamp[index])
       })
     })
 
     return recolor
+  }
+
+  hexToRGB(hexCode) {
+    const colorOffsets = [
+      [1, 3], // r
+      [3, 5], // g
+      [5, 7], // b
+    ]
+
+    return colorOffsets.map(([start, end]) => parseInt(hexCode.slice(start, end), 16))
   }
 }

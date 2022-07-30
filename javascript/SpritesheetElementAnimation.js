@@ -31,30 +31,18 @@ export default class SpritesheetElementAnimation {
 
   recolor(mapping) {
     this.recoloredImageData.data.set(this.originalImageData.data)
+    const view = new DataView(this.originalImageData.data.buffer)
 
     for (let i = 0; i < this.originalImageData.data.length; i += 4) {
-      const originalRGBA = this.originalImageData.data.slice(i, i + 4)
-      const hex = this.rgbToHex(originalRGBA.slice(0, 3))
-      const replacement = mapping[hex]
+      const key = view.getUint32(i)
+      const replacement = mapping[key]
 
       if (replacement) {
-        const replacementRGB = this.hexToRGB(replacement)
-        const replacementRGBA = [...replacementRGB, 255]
-        this.recoloredImageData.data.set(replacementRGBA, i)
+        this.recoloredImageData.data.set(replacement, i)
       }
     }
 
     this.context.putImageData(this.recoloredImageData, 0, 0)
-  }
-
-  hexToRGB(hexCode) {
-    const colorOffsets = [
-      [1, 3], // r
-      [3, 5], // g
-      [5, 7], // b
-    ]
-
-    return colorOffsets.map(([start, end]) => parseInt(hexCode.slice(start, end), 16))
   }
 
   rgbToHex(rgbArray) {
