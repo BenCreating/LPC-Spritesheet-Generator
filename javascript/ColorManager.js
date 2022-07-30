@@ -1,10 +1,18 @@
+/**
+ * @typedef {import('./CharacterGenerator').default} CharacterGenerator
+ */
+
 export default class ColorManager {
+  /**
+   * @param {CharacterGenerator} characterGenerator
+   */
   constructor(characterGenerator) {
     this.characterGenerator = characterGenerator
   }
 
   get urlParameterManager() { return this.characterGenerator.urlParameterManager }
   get optionManager() { return this.characterGenerator.optionManager }
+  get spritesheetManager() { return this.characterGenerator.spritesheetManager }
   get sheetDefinitions() { return this.characterGenerator.sheetDefinitions }
   get paletteDefinitions() { return this.characterGenerator.paletteDefinitions }
 
@@ -66,6 +74,7 @@ export default class ColorManager {
     const color = event.target
 
     this.urlParameterManager.setURLParameters(color)
+    this.spritesheetManager.applyRecolor()
   }
 
   setupColorButtons() {
@@ -83,5 +92,31 @@ export default class ColorManager {
     if (selectedOption === 'none') return []
 
     return sheetDefinitions[category][selectedOption].palettes
+  }
+
+  getSelectedRampIndex(category, palette) {
+    const inputName = `${category}-color-${palette}`
+    const radioButton = document.querySelector(`input[type=radio][name="${inputName}"]:checked`)
+    return parseInt(radioButton.value, 10)
+  }
+
+  getRecolor(category) {
+    const paletteNames = this.palettesForCategory(category)
+    const recolor = {}
+
+    paletteNames.forEach(palette => {
+      const paletteColorRamps = this.paletteDefinitions[palette]
+      const selectedRampIndex = this.getSelectedRampIndex(category, palette)
+      if (selectedRampIndex === 0) return // no recolor
+
+      const originalRamp = paletteColorRamps[0]
+      const newRamp = paletteColorRamps[selectedRampIndex]
+
+      originalRamp.forEach((originalColor, index) => {
+        recolor[originalColor.toLowerCase()] = newRamp[index]
+      })
+    })
+
+    return recolor
   }
 }

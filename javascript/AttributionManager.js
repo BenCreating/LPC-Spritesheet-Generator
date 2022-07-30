@@ -1,4 +1,11 @@
+/**
+ * @typedef {import('./CharacterGenerator').default} CharacterGenerator
+ */
+
 export default class AttributionManager {
+  /**
+   * @param {CharacterGenerator} characterGenerator
+   */
   constructor(characterGenerator) {
     this.characterGenerator = characterGenerator
   }

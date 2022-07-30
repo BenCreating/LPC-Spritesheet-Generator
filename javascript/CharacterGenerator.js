@@ -6,6 +6,12 @@ import SpritesheetManager from './SpritesheetManager.js'
 import URLParameterManager from './URLParameterManager.js'
 
 export default class CharacterGenerator {
+  urlParameterManager = new URLParameterManager()
+  spritesheetManager = new SpritesheetManager(this)
+  optionManager = new OptionManager(this)
+  attributionManager = new AttributionManager(this)
+  colorManager = new ColorManager(this)
+
   constructor() {
     window.addEventListener('popstate', () => {
       this.setOptions(this.urlParameterManager.getURLParameters())
@@ -13,12 +19,6 @@ export default class CharacterGenerator {
   }
 
   async setup() {
-    this.urlParameterManager = new URLParameterManager()
-    this.spritesheetManager = new SpritesheetManager(this)
-    this.optionManager = new OptionManager(this)
-    this.attributionManager = new AttributionManager(this)
-    this.colorManager = new ColorManager(this)
-
     this.sheetDefinitions = await this.loadDefinitions('sheet')
     this.paletteDefinitions = await this.loadDefinitions('palette')
 

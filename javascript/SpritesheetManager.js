@@ -1,40 +1,62 @@
+/**
+ * @typedef {import('./CharacterGenerator').default} CharacterGenerator
+ */
 import animations from "./animations.js"
+import SpritesheetElement from "./SpritesheetElement.js"
 
 export default class SpritesheetManager {
+  /**
+   * @param {CharacterGenerator} characterGenerator
+   */
   constructor(characterGenerator) {
     this.characterGenerator = characterGenerator
+    this.canvas = document.getElementById('spritesheet')
   }
+
+  get sheetDefinitions() { return this.characterGenerator.sheetDefinitions }
+  get colorManager() { return this.characterGenerator.colorManager }
 
   optionManager() {
     return this.characterGenerator.optionManager
   }
 
   async update() {
-    const canvas = document.getElementById('spritesheet')
-
     // TODO: set width and height dynamically based on the animations displayed
-    canvas.width = 832
-    canvas.height = 1344
-
-    const context = canvas.getContext('2d')
+    this.canvas.width = 832
+    this.canvas.height = 1344
 
     const categories = this.optionManager().optionCategories()
 
-    await Promise.all(categories.map(async category => {
-      await Promise.all(animations.map(async animation => {
-        const selectedItem = this.optionManager().getSelectedOption(category)
-        if (selectedItem === 'none') return
+    this.spritesheetElements = categories.map((category, layer) => {
+      const selectedItem = this.optionManager().getSelectedOption(category)
+      if (selectedItem === 'none') return
 
-        const image = new Image()
-        image.src = `resources/spritesheets/${category}/${animation.name}/${selectedItem}.png`
-        await image.decode()
-        animation.width = image.width
+      const definition = this.sheetDefinitions[category][selectedItem]
 
-        context.drawImage(image, animation.x, animation.y)
-      }))
+      return new SpritesheetElement(category, selectedItem, definition, layer, animations)
+    }).filter(item => item)
+
+    await Promise.all(this.spritesheetElements.map(element => {
+      return element.load()
     }))
 
-    this.canvas = canvas
+    this.spritesheetElements.sort(SpritesheetElement.layerComparitor)
+    this.applyRecolor()
+  }
+
+  applyRecolor() {
+    this.spritesheetElements.forEach(element => {
+      const category = element.category
+      const mapping = this.colorManager.getRecolor(category)
+      element.recolor(mapping)
+    })
+    this.draw()
+  }
+
+  draw() {
+    const context = this.canvas.getContext('2d')
+    context.clearRect(0, 0, this.canvas.width, this.canvas.height)
+    this.spritesheetElements.forEach(element => element.draw(context))
   }
 
   getCanvasBlob() {

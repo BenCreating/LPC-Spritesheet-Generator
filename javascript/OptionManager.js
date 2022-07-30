@@ -1,4 +1,11 @@
+/**
+ * @typedef {import('./CharacterGenerator').default} CharacterGenerator
+ */
+
 export default class OptionManager {
+  /**
+   * @param {CharacterGenerator} characterGenerator
+   */
   constructor(characterGenerator) {
     this.characterGenerator = characterGenerator
   }
@@ -64,9 +71,9 @@ export default class OptionManager {
     const option = event.target
 
     this.urlParameterManager.setURLParameters(option)
+    this.colorManager.update(option.name)
     this.spritesheetManager.update()
     this.attributionManager.update()
-    this.colorManager.update(option.name)
   }
 
   getSelectedOption(categoryName) {
