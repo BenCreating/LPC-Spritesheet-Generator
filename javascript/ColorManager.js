@@ -41,8 +41,12 @@ export default class ColorManager {
 
       const paletteColorRamps = this.paletteDefinitions[palette]
 
+      const urlParameterName = this.urlParameterName(category, palette)
+      const parameterValue = this.urlParameterManager.getParameterValue(urlParameterName)
+      const selectedRamp = Number(parameterValue) || 0
+
       paletteColorRamps.forEach((ramp, index) => {
-        const checked = index === 0
+        const checked = index === selectedRamp
         const radioButton = this.buildRadioButton(category, palette, ramp, index, checked)
         paletteContainer.appendChild(radioButton)
       })
@@ -57,7 +61,7 @@ export default class ColorManager {
   buildRadioButton(category, palette, ramp, rampIndex, checked = false) {
     const radioButton = document.createElement('input')
     radioButton.setAttribute('type', 'radio')
-    radioButton.setAttribute('name', `${category}-color-${palette}`)
+    radioButton.setAttribute('name', this.urlParameterName(category, palette))
     radioButton.setAttribute('value', rampIndex)
     radioButton.addEventListener('click', this.selectColor.bind(this))
 
@@ -68,6 +72,10 @@ export default class ColorManager {
     radioButton.style.borderColor = ramp[1]
 
     return radioButton
+  }
+
+  urlParameterName(category, palette) {
+    return `${category}-color-${palette}`
   }
 
   selectColor(event) {
@@ -95,7 +103,7 @@ export default class ColorManager {
   }
 
   getSelectedRampIndex(category, palette) {
-    const inputName = `${category}-color-${palette}`
+    const inputName = this.urlParameterName(category, palette)
     const radioButton = document.querySelector(`input[type=radio][name="${inputName}"]:checked`)
     return parseInt(radioButton.value, 10)
   }

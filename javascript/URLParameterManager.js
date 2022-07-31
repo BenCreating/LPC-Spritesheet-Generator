@@ -10,4 +10,9 @@ export default class URLParameterManager {
 
     window.history.pushState({}, undefined, url)
   }
+
+  getParameterValue(parameterName) {
+    const urlParameters = this.getURLParameters()
+    return urlParameters.get(parameterName)
+  }
 }
