@@ -73,6 +73,18 @@ legend {
   margin-bottom: 0.25em
 }
 
+.item-color-options fieldset {
+  display: flex;
+  align-items: center;
+}
+
+.item-color-options legend {
+  border: none;
+  float: left;
+  width: fit-content;
+  margin-right: 0.5em;
+}
+
 .color-option {
   -webkit-appearance: none;
   appearance: none;
@@ -83,6 +95,7 @@ legend {
   border-style: solid;
   border-radius: 50%;
   margin-right: 5px;
+  margin-bottom: 0.25em;
   cursor: pointer;
   transition: 120ms transform ease-in-out;
 }

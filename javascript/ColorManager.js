@@ -27,6 +27,7 @@ export default class ColorManager {
 
     const colorsContainer = document.createElement('div')
     colorsContainer.id = colorsContatinerID
+    colorsContainer.className = 'item-color-options'
 
     const categoryContainer = document.getElementById(`${category}-options`)
     categoryContainer.prepend(colorsContainer)
