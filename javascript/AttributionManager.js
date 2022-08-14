@@ -11,32 +11,28 @@ export default class AttributionManager {
   }
 
   get optionManager() { return this.characterGenerator.optionManager }
-  get sheetDefinitions() { return this.characterGenerator.sheetDefinitions }
 
   update() {
     const attributionContainer = document.querySelector('.attribution-content')
 
     const authorsHTML = this.authorsHTML()
-    const sourcesHTML = this.sourcesHTML()
+    const attributionHTML = this.attributionHTML()
 
-    attributionContainer.replaceChildren(authorsHTML, sourcesHTML)
+    attributionContainer.replaceChildren(authorsHTML, attributionHTML)
   }
 
-  selectedOptionsData() {
-    return this.optionManager.optionCategories().map(category => {
-      const selectedOption = this.optionManager.getSelectedOption(category)
-      if (selectedOption === 'none') return
+  copy() {
+    const attribution = this.fullPlainText()
+    navigator.clipboard.writeText(attribution)
+  }
 
-      const optionData = this.sheetDefinitions[category][selectedOption]
-      optionData['category'] = category
-      optionData['name'] = selectedOption
-
-      return optionData
-    }).filter(option => option)
+  selectedOptions() {
+    return this.optionManager.selectedOptions().filter(option => option.name !== 'none')
   }
 
   authors() {
-    const authors = this.selectedOptionsData().flatMap(optionData => optionData['authors'])
+    const selectedOptions = this.selectedOptions()
+    const authors = selectedOptions.flatMap(option => option.authors())
     const uniqueAuthors = new Set(authors)
 
     return [...uniqueAuthors]
@@ -55,80 +51,26 @@ export default class AttributionManager {
     return authorsHTML
   }
 
-  sources() {
-    return this.selectedOptionsData().map(optionData => {
-      const category = optionData['category']
-      const optionName = optionData['name']
-      const authors = optionData['authors'].join(', ')
-      const licenses = optionData['licenses'].join(', ')
-      const links = optionData['links']
+  attributionHTML() {
+    const attribution = document.createElement('ul')
 
-      const attribution = `${category}: ${optionName} by ${authors}. Licenses: ${licenses}.`
-      return { attribution: attribution, links: links}
-    })
-  }
-
-  sourcesPlainText() {
-    const sourceItems = this.sources().map(source => {
-      const attribution = source.attribution
-      const links = this.linkListPlainText(source.links)
-
-      return `${attribution}\n${links}`
+    this.selectedOptions().forEach(option => {
+      const optionAttribution = option.attributionHTML()
+      attribution.appendChild(optionAttribution)
     })
 
-    return sourceItems.join('\n\n')
+    return attribution
   }
 
-  sourcesHTML() {
-    const sourcesHTML = document.createElement('ul')
-
-    this.sources().forEach(source => {
-      const attributionHTML = document.createElement('span')
-      attributionHTML.textContent = source.attribution
-
-      const linkListHTML = this.linkListHTML(source.links)
-
-      const sourceItem = document.createElement('li')
-      sourceItem.appendChild(attributionHTML)
-      sourceItem.appendChild(linkListHTML)
-
-      sourcesHTML.appendChild(sourceItem)
-    })
-
-    return sourcesHTML
-  }
-
-  linkListPlainText(urlArray) {
-    const listBullet = ' - '
-    return listBullet + urlArray.join(`\n${listBullet}`)
-  }
-
-  linkListHTML(urlArray) {
-    const linkList = document.createElement('ul')
-
-    urlArray.forEach(url => {
-      const link = document.createElement('a')
-      link.setAttribute('href', url)
-      link.textContent = url
-
-      const listItem = document.createElement('li')
-      listItem.appendChild(link)
-
-      linkList.appendChild(listItem)
-    })
-
-    return linkList
+  attributionPlainText() {
+    const items = this.selectedOptions().map(option => option.attributionPlainText())
+    return items.join('\n\n')
   }
 
   fullPlainText() {
     const authors = this.authorsPlainText()
-    const sources = this.sourcesPlainText()
-    return `${authors}\n\n${sources}`
-  }
+    const attribution = this.attributionPlainText()
 
-  copy() {
-    const attribution = this.fullPlainText()
-
-    navigator.clipboard.writeText(attribution)
+    return `${authors}\n\n${attribution}`
   }
 }

@@ -1,6 +1,7 @@
 /**
  * @typedef {import('./CharacterGenerator').default} CharacterGenerator
  */
+import AssetCategory from './AssetCategory.js'
 
 export default class OptionManager {
   /**
@@ -14,74 +15,57 @@ export default class OptionManager {
   get spritesheetManager() { return this.characterGenerator.spritesheetManager }
   get attributionManager() { return this.characterGenerator.attributionManager }
   get sheetDefinitions() { return this.characterGenerator.sheetDefinitions }
-  get colorManager() { return this.characterGenerator.colorManager }
+  get paletteDefinitions() { return this.characterGenerator.paletteDefinitions }
+
+  update() {
+    const sidebar = document.querySelector('.sidebar')
+    sidebar.innerHTML = ''
+
+    this.buildOptionsHTML()
+  }
 
   setupOptionButtons() {
+    const categoryNames = Object.keys(this.sheetDefinitions)
+    this.categories = categoryNames.map(categoryName => {
+      const categoryData = this.sheetDefinitions[categoryName]
+      const urlParameterSelectedOption = this.urlParameterManager.getParameterValue(categoryName)
+
+      return new AssetCategory(this, categoryName, categoryData,urlParameterSelectedOption)
+    })
+
     this.buildOptionsHTML()
   }
 
   buildOptionsHTML() {
     const sidebar = document.querySelector('.sidebar')
 
-    this.optionCategories().forEach(categoryName => {
-      const category = this.buildCategory(categoryName)
-      sidebar.appendChild(category)
+    this.categories.forEach(category => {
+      sidebar.appendChild(category.html())
     })
-  }
-
-  buildCategory(category) {
-    const categoryContainer = document.createElement('fieldset')
-    categoryContainer.id = `${category}-options`
-    const categoryLabel = document.createElement('legend')
-    categoryLabel.textContent = category
-    categoryContainer.appendChild(categoryLabel)
-
-    const radioButton = this.buildRadioButton(category, 'none', true)
-    categoryContainer.appendChild(radioButton)
-
-    const sheetDefinitions = this.sheetDefinitions
-
-    const options = Object.keys(sheetDefinitions[category])
-    options.forEach(option => {
-      const isDefault = sheetDefinitions[category][option]['default']
-      const radioButton = this.buildRadioButton(category, option, isDefault)
-      categoryContainer.appendChild(radioButton)
-    })
-
-    return categoryContainer
-  }
-
-  buildRadioButton(category, option, checked = false) {
-    const radioButton = document.createElement('input')
-    radioButton.setAttribute('type', 'radio')
-    radioButton.setAttribute('name', category)
-    radioButton.setAttribute('value', option)
-    radioButton.addEventListener('click', this.selectOption.bind(this))
-
-    radioButton.checked = checked
-
-    const radioButtonContainer = document.createElement('label')
-    radioButtonContainer.textContent = option
-    radioButtonContainer.appendChild(radioButton)
-
-    return radioButtonContainer
-  }
-
-  selectOption(event) {
-    const option = event.target
-
-    this.urlParameterManager.setURLParameters(option)
-    this.colorManager.update(option.name)
-    this.spritesheetManager.update()
-    this.attributionManager.update()
   }
 
   getSelectedOption(categoryName) {
-    const selectedButton = document.querySelector(`.sidebar input[type=radio][name=${categoryName}]:checked`)
-    return selectedButton.value
+    const category = this.lookupCategoryByName(categoryName)
+    return category.selectedOption
   }
 
-  optionCategories() {
-    return Object.keys(this.sheetDefinitions)
+  selectedOptions() {
+    return this.categories.map(category => category.selectedOption)
+  }
+
+  selectedTags() {
+    const tags = this.categories.flatMap(category => category.tags())
+    const uniqueTags = new Set(tags)
+
+    return [...uniqueTags]
+  }
+
+  lookupCategoryByName(categoryName) {
+    return this.categories.find(category => category.name === categoryName)
+  }
+
+  colorChanged(palette) {
+    this.urlParameterManager.setURLParameters({ name: palette.urlParameterKey(), value: palette.indexOfSelectedColorRamp() })
+    this.spritesheetManager.applyRecolor()
   }
 }

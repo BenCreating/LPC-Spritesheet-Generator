@@ -28,15 +28,9 @@ export default class CharacterGenerator {
     const copyAttributionButton = document.querySelector('#copy-attribution-button')
     copyAttributionButton.addEventListener('click', this.attributionManager.copy.bind(this.attributionManager))
 
-    // URL parameters have to be applied twice because colors are dependent on
-    // which options are selected. If the option isn't selected yet the color
-    // options won't exist.
     this.optionManager.setupOptionButtons()
-    this.applyURLParameters()
-    this.colorManager.setupColorButtons()
-    this.applyURLParameters()
-
     await this.spritesheetManager.update()
+    this.attributionManager.update()
 
     const preview = document.querySelector('animation-preview')
     preview.source = this.spritesheetManager.canvas
@@ -70,18 +64,5 @@ export default class CharacterGenerator {
     link.click()
 
     setTimeout(() => URL.revokeObjectURL(url), 100)
-  }
-
-  applyURLParameters() {
-    const urlParameters = this.urlParameterManager.getURLParameters()
-    const optionNames = [...urlParameters.keys()]
-
-    optionNames.forEach(name => {
-      const value = urlParameters.get(name)
-      const radioButton = document.querySelector(`.sidebar input[type=radio][name="${name}"][value="${value}"]`)
-      if (radioButton) radioButton.checked = true
-    })
-
-    this.attributionManager.update()
   }
 }

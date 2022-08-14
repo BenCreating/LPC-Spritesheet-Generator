@@ -34,6 +34,7 @@ button:active {
   background-color: white;
   border-bottom: 1px solid #292439;
   padding: 0.5em;
+  z-index: 1;
 }
 
 animation-preview {
@@ -76,6 +77,7 @@ legend {
 .item-color-options fieldset {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .item-color-options legend {

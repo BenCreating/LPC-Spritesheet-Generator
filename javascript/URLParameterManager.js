@@ -4,9 +4,9 @@ export default class URLParameterManager {
     return new URLSearchParams(queryString)
   }
 
-  setURLParameters(option) {
+  setURLParameters(parameter) {
     const url = new URL(window.location)
-    url.searchParams.set(option.name, option.value)
+    url.searchParams.set(parameter.name, parameter.value)
 
     window.history.pushState({}, undefined, url)
   }

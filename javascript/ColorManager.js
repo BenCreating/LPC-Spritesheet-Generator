@@ -2,6 +2,8 @@
  * @typedef {import('./CharacterGenerator').default} CharacterGenerator
  */
 
+import Palette from './Palette.js'
+
 export default class ColorManager {
   /**
    * @param {CharacterGenerator} characterGenerator
@@ -16,12 +18,16 @@ export default class ColorManager {
   get sheetDefinitions() { return this.characterGenerator.sheetDefinitions }
   get paletteDefinitions() { return this.characterGenerator.paletteDefinitions }
 
-  update(category) {
+  update(categoryName) {
+    const category = this.optionManager.lookupCategoryByName(categoryName)
+
     this.buildCategoryColors(category)
   }
 
   buildCategoryColors(category) {
-    const colorsContatinerID = `${category}-colors`
+    const categoryName = category.name
+
+    const colorsContatinerID = `${categoryName}-colors`
     const previousColors = document.getElementById(colorsContatinerID)
     if (previousColors) previousColors.remove()
 
@@ -29,10 +35,10 @@ export default class ColorManager {
     colorsContainer.id = colorsContatinerID
     colorsContainer.className = 'item-color-options'
 
-    const categoryContainer = document.getElementById(`${category}-options`)
+    const categoryContainer = document.getElementById(`${categoryName}-options`)
     categoryContainer.prepend(colorsContainer)
 
-    const palettes = this.palettesForCategory(category)
+    const palettes = category.selectedPalettes()
 
     palettes.forEach(palette => {
       const paletteContainer = document.createElement('fieldset')
@@ -42,13 +48,13 @@ export default class ColorManager {
 
       const paletteColorRamps = this.paletteDefinitions[palette]
 
-      const urlParameterName = this.urlParameterName(category, palette)
+      const urlParameterName = this.urlParameterName(categoryName, palette)
       const parameterValue = this.urlParameterManager.getParameterValue(urlParameterName)
       const selectedRamp = Number(parameterValue) || 0
 
       paletteColorRamps.forEach((ramp, index) => {
         const checked = index === selectedRamp
-        const radioButton = this.buildRadioButton(category, palette, ramp, index, checked)
+        const radioButton = this.buildRadioButton(categoryName, palette, ramp, index, checked)
         paletteContainer.appendChild(radioButton)
       })
 
@@ -59,10 +65,10 @@ export default class ColorManager {
     return categoryContainer
   }
 
-  buildRadioButton(category, palette, ramp, rampIndex, checked = false) {
+  buildRadioButton(categoryName, palette, ramp, rampIndex, checked = false) {
     const radioButton = document.createElement('input')
     radioButton.setAttribute('type', 'radio')
-    radioButton.setAttribute('name', this.urlParameterName(category, palette))
+    radioButton.setAttribute('name', this.urlParameterName(categoryName, palette))
     radioButton.setAttribute('value', rampIndex)
     radioButton.addEventListener('click', this.selectColor.bind(this))
 
@@ -75,8 +81,8 @@ export default class ColorManager {
     return radioButton
   }
 
-  urlParameterName(category, palette) {
-    return `${category}-color-${palette}`
+  urlParameterName(categoryName, palette) {
+    return `${categoryName}-color-${palette}`
   }
 
   selectColor(event) {
@@ -87,35 +93,28 @@ export default class ColorManager {
   }
 
   setupColorButtons() {
-    const categories = this.optionManager.optionCategories()
+    const categories = this.optionManager.categories
 
     categories.forEach(category => {
       this.buildCategoryColors(category)
     })
   }
 
-  palettesForCategory(category) {
-    const sheetDefinitions = this.sheetDefinitions
-    const selectedOption = this.optionManager.getSelectedOption(category)
-
-    if (selectedOption === 'none') return []
-
-    return sheetDefinitions[category][selectedOption].palettes
-  }
-
-  getSelectedRampIndex(category, palette) {
-    const inputName = this.urlParameterName(category, palette)
+  getSelectedRampIndex(categoryName, palette) {
+    const inputName = this.urlParameterName(categoryName, palette)
     const radioButton = document.querySelector(`input[type=radio][name="${inputName}"]:checked`)
     return parseInt(radioButton.value, 10)
   }
 
-  getRecolor(category) {
-    const paletteNames = this.palettesForCategory(category)
+  getRecolor(categoryName) {
+    const category = this.optionManager.lookupCategoryByName(categoryName)
+
+    const paletteNames = category.palettes()
     const recolor = {}
 
     paletteNames.forEach(palette => {
       const paletteColorRamps = this.paletteDefinitions[palette]
-      const selectedRampIndex = this.getSelectedRampIndex(category, palette)
+      const selectedRampIndex = this.getSelectedRampIndex(categoryName, palette)
       if (selectedRampIndex === 0) return // no recolor
 
       const originalRamp = paletteColorRamps[0]

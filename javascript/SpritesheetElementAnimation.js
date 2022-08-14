@@ -3,21 +3,21 @@
  * a spritesheet
  */
 export default class SpritesheetElementAnimation {
-  constructor(category, variant, spritesheetDefinition, animationDefintion) {
-    this.category = category
+  constructor(categoryName, variant, spritesheetDefinition, animationDefinition) {
+    this.categoryName = categoryName
     this.variant = variant
     this.spritesheetDefinition = spritesheetDefinition
-    this.animationDefintion = animationDefintion
+    this.animationDefinition = animationDefinition
     this.canvas = document.createElement('canvas')
     this.context = this.canvas.getContext('2d')
   }
 
   async load() {
-    const category = this.category
-    const animation = this.animationDefintion
+    const categoryName = this.categoryName
+    const animation = this.animationDefinition
     const variant = this.variant
     const image = new Image()
-    image.src = `resources/spritesheets/${category}/${animation.name}/${variant}.png`
+    image.src = `resources/spritesheets/${categoryName}/${animation.name}/${variant}.png`
     await image.decode()
     animation.width = image.width
 
@@ -50,6 +50,6 @@ export default class SpritesheetElementAnimation {
   }
 
   draw(ctx) {
-    ctx.drawImage(this.canvas, this.animationDefintion.x, this.animationDefintion.y)
+    ctx.drawImage(this.canvas, this.animationDefinition.x, this.animationDefinition.y)
   }
 }
