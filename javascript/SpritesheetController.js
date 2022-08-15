@@ -4,7 +4,7 @@
 import animations from "./animations.js"
 import SpritesheetElement from "./SpritesheetElement.js"
 
-export default class SpritesheetManager {
+export default class SpritesheetController {
   /**
    * @param {CharacterGenerator} characterGenerator
    */
@@ -14,14 +14,14 @@ export default class SpritesheetManager {
   }
 
   get sheetDefinitions() { return this.characterGenerator.sheetDefinitions }
-  get optionManager() { return this.characterGenerator.optionManager }
+  get optionController() { return this.characterGenerator.optionController }
 
   async update() {
     // TODO: set width and height dynamically based on the animations displayed
     this.canvas.width = 832
     this.canvas.height = 1344
 
-    const categories = this.optionManager.categories
+    const categories = this.optionController.categories
 
     this.spritesheetElements = categories.map((category, layer) => {
       const selectedOption = category.selectedOption
@@ -42,7 +42,7 @@ export default class SpritesheetManager {
 
   applyRecolor() {
     this.spritesheetElements.forEach(element => {
-      const category = this.optionManager.lookupCategoryByName(element.categoryName)
+      const category = this.optionController.lookupCategoryByName(element.categoryName)
       const mapping = category.getRecolor()
       element.recolor(mapping)
     })

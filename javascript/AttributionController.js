@@ -2,7 +2,7 @@
  * @typedef {import('./CharacterGenerator').default} CharacterGenerator
  */
 
-export default class AttributionManager {
+export default class AttributionController {
   /**
    * @param {CharacterGenerator} characterGenerator
    */
@@ -10,7 +10,7 @@ export default class AttributionManager {
     this.characterGenerator = characterGenerator
   }
 
-  get optionManager() { return this.characterGenerator.optionManager }
+  get optionController() { return this.characterGenerator.optionController }
 
   update() {
     const attributionContainer = document.querySelector('.attribution-content')
@@ -27,7 +27,7 @@ export default class AttributionManager {
   }
 
   selectedOptions() {
-    return this.optionManager.selectedOptions().filter(option => option.name !== 'none')
+    return this.optionController.selectedOptions().filter(option => option.name !== 'none')
   }
 
   authors() {

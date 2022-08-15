@@ -3,7 +3,7 @@
  */
 import AssetCategory from './AssetCategory.js'
 
-export default class OptionManager {
+export default class OptionController {
   /**
    * @param {CharacterGenerator} characterGenerator
    */
@@ -11,9 +11,9 @@ export default class OptionManager {
     this.characterGenerator = characterGenerator
   }
 
-  get urlParameterManager() { return this.characterGenerator.urlParameterManager }
-  get spritesheetManager() { return this.characterGenerator.spritesheetManager }
-  get attributionManager() { return this.characterGenerator.attributionManager }
+  get urlParameterController() { return this.characterGenerator.urlParameterController }
+  get spritesheetController() { return this.characterGenerator.spritesheetController }
+  get attributionController() { return this.characterGenerator.attributionController }
   get sheetDefinitions() { return this.characterGenerator.sheetDefinitions }
   get paletteDefinitions() { return this.characterGenerator.paletteDefinitions }
 
@@ -28,7 +28,7 @@ export default class OptionManager {
     const categoryNames = Object.keys(this.sheetDefinitions)
     this.categories = categoryNames.map(categoryName => {
       const categoryData = this.sheetDefinitions[categoryName]
-      const urlParameterSelectedOption = this.urlParameterManager.getParameterValue(categoryName)
+      const urlParameterSelectedOption = this.urlParameterController.getParameterValue(categoryName)
 
       return new AssetCategory(this, categoryName, categoryData,urlParameterSelectedOption)
     })
@@ -65,7 +65,7 @@ export default class OptionManager {
   }
 
   colorChanged(palette) {
-    this.urlParameterManager.setURLParameters({ name: palette.urlParameterKey(), value: palette.indexOfSelectedColorRamp() })
-    this.spritesheetManager.applyRecolor()
+    this.urlParameterController.setURLParameters({ name: palette.urlParameterKey(), value: palette.indexOfSelectedColorRamp() })
+    this.spritesheetController.applyRecolor()
   }
 }

@@ -1,4 +1,4 @@
-export default class URLParameterManager {
+export default class URLParameterController {
   getURLParameters() {
     const queryString = window.location.search
     return new URLSearchParams(queryString)

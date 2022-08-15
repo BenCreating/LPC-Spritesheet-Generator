@@ -3,13 +3,13 @@ import ColorRamp from './ColorRamp.js'
 export default class Palette {
   constructor(category, name, colorRamps) {
     this.categoryName = category.name
-    this.optionManager = category.optionManager
+    this.optionController = category.optionController
 
     this.name = name
     this.colorRamps = colorRamps.map(colorRamp => new ColorRamp(this, colorRamp))
 
-    const urlParameterManager = this.optionManager.urlParameterManager
-    const preselectedColorRampIndex = urlParameterManager.getParameterValue(this.urlParameterKey())
+    const urlParameterController = this.optionController.urlParameterController
+    const preselectedColorRampIndex = urlParameterController.getParameterValue(this.urlParameterKey())
     this.selectedColorRamp = this.colorRamps[preselectedColorRampIndex] ?? this.colorRamps[0]
   }
 
@@ -31,7 +31,7 @@ export default class Palette {
 
   setSelectedColorRamp(colorRamp) {
     this.selectedColorRamp = colorRamp
-    this.optionManager.colorChanged(this)
+    this.optionController.colorChanged(this)
   }
 
   urlParameterKey() {

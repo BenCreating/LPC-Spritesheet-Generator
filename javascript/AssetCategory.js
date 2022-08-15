@@ -2,8 +2,8 @@ import AssetOption from './AssetOption.js'
 import Palette from './Palette.js'
 
 export default class AssetCategory {
-  constructor(optionManager, categoryName, categoryData, preselectedOptionName) {
-    this.optionManager = optionManager
+  constructor(optionController, categoryName, categoryData, preselectedOptionName) {
+    this.optionController = optionController
     this.name = categoryName
 
     const optionNames = Object.keys(categoryData)
@@ -19,17 +19,17 @@ export default class AssetCategory {
     this.palettes = this.createPalettes()
   }
 
-  get urlParameterManager() { return this.optionManager.urlParameterManager }
-  get spritesheetManager() { return this.optionManager.spritesheetManager }
-  get attributionManager() { return this.optionManager.attributionManager }
-  get paletteDefinitions() { return this.optionManager.paletteDefinitions }
+  get urlParameterController() { return this.optionController.urlParameterController }
+  get spritesheetController() { return this.optionController.spritesheetController }
+  get attributionController() { return this.optionController.attributionController }
+  get paletteDefinitions() { return this.optionController.paletteDefinitions }
 
   tags() {
     return this.selectedOption.tags
   }
 
   allCategoryTags() {
-    return this.optionManager.selectedTags()
+    return this.optionController.selectedTags()
   }
 
   authors() {
@@ -43,11 +43,11 @@ export default class AssetCategory {
 
   setSelectedOption(option) {
     this.selectedOption = option
-    this.urlParameterManager.setURLParameters({ name: this.name, value: option.name })
+    this.urlParameterController.setURLParameters({ name: this.name, value: option.name })
 
-    this.optionManager.update()
-    this.spritesheetManager.update()
-    this.attributionManager.update()
+    this.optionController.update()
+    this.spritesheetController.update()
+    this.attributionController.update()
   }
 
   defaultOption() {

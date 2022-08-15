@@ -4,7 +4,7 @@
 
 - [x] Add attribution
 - [x] Allow changing colors
-- [ ] Filter options by body type
+- [x] Filter options by body type
 - [ ] Match color to another item (e.g. ears match body skin color)
 - [ ] Add preview icons to options
 - [ ] Random button
