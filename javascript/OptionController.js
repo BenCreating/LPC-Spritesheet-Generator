@@ -24,7 +24,7 @@ export default class OptionController {
     this.buildOptionsHTML()
   }
 
-  setupOptionButtons() {
+  async setupOptionButtons() {
     const categoryNames = Object.keys(this.sheetDefinitions)
     this.categories = categoryNames.map(categoryName => {
       const categoryData = this.sheetDefinitions[categoryName]
@@ -33,7 +33,17 @@ export default class OptionController {
       return new AssetCategory(this, categoryName, categoryData,urlParameterSelectedOption)
     })
 
+    await this.loadIcons()
+
     this.buildOptionsHTML()
+  }
+
+  async loadIcons() {
+    const options = this.categories.flatMap(category => category.options)
+
+    await Promise.all(options.map(option => {
+      return option.loadIcon()
+    }))
   }
 
   buildOptionsHTML() {

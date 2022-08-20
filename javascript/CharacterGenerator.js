@@ -26,7 +26,7 @@ export default class CharacterGenerator {
     const copyAttributionButton = document.querySelector('#copy-attribution-button')
     copyAttributionButton.addEventListener('click', this.attributionController.copy.bind(this.attributionController))
 
-    this.optionController.setupOptionButtons()
+    await this.optionController.setupOptionButtons()
     await this.spritesheetController.update()
     this.attributionController.update()
 

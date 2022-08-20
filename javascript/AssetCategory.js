@@ -70,9 +70,13 @@ export default class AssetCategory {
 
     container.appendChild(this.colorsHTML())
 
+    const optionsContainer = document.createElement('div')
+    optionsContainer.className = 'category-item-options'
+    container.appendChild(optionsContainer)
+
     const options = this.availableOptions()
     options.forEach(option => {
-      container.appendChild(option.html())
+      optionsContainer.appendChild(option.html())
     })
 
     return container
