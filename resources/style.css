@@ -1,13 +1,41 @@
+:root {
+  --color-contrast: #292439;
+  --color-btn-backgound: #d2d8ef;
+  --color-btn-backgound-active: #dfe4f8;
+  --color-shadow: rgba(50, 33, 37, 0.60);
+  --color-page-background: white;
+  --color-link: #0d3ea0;
+  --color-selected: #9dbed7;
+  --selected: 0 0 1px 2px var(--color-selected);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-contrast: #e0dce9;
+    --color-btn-backgound: #d2d8ef;
+    --color-btn-backgound-active: #dfe4f8;
+    --color-shadow: rgba(50, 33, 37, 0.60);
+    --color-page-background: #27262c;
+    --color-link: #94b8ff;
+  }
+}
+
+a {
+  color: var(--color-link);
+}
+
 body {
   margin: 0;
+  background-color: var(--color-page-background);
+  color: var(--color-contrast);
 }
 
 button {
   border-radius: 4px;
-  border: 1px solid #292439;
-  background-color: #d2d8ef;
-  box-shadow: 1px 1px 8px -4px rgba(50, 33, 37, 0.60);
-  color: #292439;
+  border: 1px solid var(--color-contrast);
+  background-color: var(--color-btn-background);
+  box-shadow: 1px 1px 8px -4px var(--color-shadow);
+  color: var(--color-contrast);
   cursor: pointer;
   height: 100%;
   padding: 8px 12px;
@@ -16,12 +44,12 @@ button {
 }
 
 button:hover, button:focus {
-  box-shadow: 1px 1px 10px -2px rgba(50, 33, 37, 0.60);
+  box-shadow: 1px 1px 10px -2px var(--color-shadow);
 }
 
 button:active {
-  background-color: #dfe4f8;
-  box-shadow: 1px 1px 8px -4px rgba(50, 33, 37, 0.60);
+  background-color: var(--color-btn-background-active);
+  box-shadow: 1px 1px 8px -4px var(--color-shadow);
 }
 
 .header {
@@ -31,8 +59,8 @@ button:active {
   align-items: center;
   position: sticky;
   top: 0;
-  background-color: white;
-  border-bottom: 1px solid #292439;
+  background-color: var(--color-page-background);
+  border-bottom: 1px solid var(--color-contrast);
   padding: 0.5em;
   z-index: 1;
 }
@@ -56,7 +84,7 @@ animation-preview {
 .sidebar {
   flex: 0 0 256px;
   padding: 0.5em;
-  border-right: 1px solid #292439;
+  border-right: 1px solid var(--color-contrast);
 }
 
 fieldset {
@@ -67,7 +95,7 @@ fieldset {
 
 legend {
   padding: 0;
-  border-bottom: 1px solid #292439;
+  border-bottom: 1px solid var(--color-contrast);
   width: 100%;
   font-size: 1em;
   text-transform: capitalize;
@@ -99,25 +127,40 @@ legend {
   margin-right: 5px;
   margin-bottom: 0.25em;
   cursor: pointer;
-  transition: 120ms transform ease-in-out;
+  transition: 60ms transform ease-in-out;
+
+  display: grid;
+  place-content: center;
 }
 
 .color-option:hover {
-  box-shadow: 1px 1px 8px -2px rgba(50, 33, 37, 0.60);
-  transform: translate(0, -5px) scale(1.2);
+  box-shadow: 1px 1px 8px -2px var(--color-shadow);
+  transform: translate(0, -2px) scale(1.1);
 }
 
 .color-option:checked {
-  box-shadow: 1px 1px 8px -2px rgba(50, 33, 37, 0.60);
-  transform: scale(1.2);
+  box-shadow: 1px 1px 8px -2px var(--color-shadow), var(--selected);
+  z-index: 1;
 }
 
-.color-option:checked:hover {
-  transform: translate(0, -5px) scale(1.2);
+.color-option::before {
+  content: "";
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  transform: scale(0);
+  transform-origin: center;
+  transition: 120ms transform ease-in-out;
+  backdrop-filter: invert(1);
+  opacity: 60%;
+}
+
+.color-option:checked::before {
+  transform: scale(1);
 }
 
 .attribution {
-  border-top: 1px solid #292439;
+  border-top: 1px solid var(--color-contrast);
   padding: 0.5em;
 }
 
@@ -142,8 +185,8 @@ legend {
 .item-button label {
   display: block;
   cursor: pointer;
-  background-color: #fff;
-  transition: 120ms transform ease-in-out;
+  background-color: var(--color-page-background);
+  transition: 60ms transform ease-in-out;
 }
 
 .item-button label span {
@@ -152,15 +195,14 @@ legend {
 }
 
 .item-button input[type=radio]:hover + label {
-  box-shadow: 1px 1px 8px -2px rgba(50, 33, 37, 0.60);
-  transform: translate(0, -5px) scale(1.2);
+  box-shadow: 1px 1px 8px -2px var(--color-shadow);
+  transform: translate(0, -2px) scale(1.05);
 }
 
 .item-button input[type=radio]:checked + label {
-  box-shadow: 1px 1px 8px -2px rgba(50, 33, 37, 0.60);
-  border: 1px solid rgba(50, 33, 37, 0.60);
+  box-shadow: 1px 1px 8px -2px var(--color-shadow), var(--selected) inset;
 }
 
 .item-button input[type=radio]:checked:hover + label {
-  transform: translate(0, -5px) scale(1.2);
+  transform: translate(0, -2px) scale(1.05);
 }
