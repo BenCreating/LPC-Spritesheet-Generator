@@ -16,6 +16,9 @@ export default class SpritesheetController {
   get sheetDefinitions() { return this.characterGenerator.sheetDefinitions }
   get optionController() { return this.characterGenerator.optionController }
 
+  /**
+   * Updates the generated spritesheet
+   */
   async update() {
     // TODO: set width and height dynamically based on the animations displayed
     this.canvas.width = 832
@@ -40,6 +43,9 @@ export default class SpritesheetController {
     this.applyRecolor()
   }
 
+  /**
+   * Recolors the spritesheet
+   */
   applyRecolor() {
     this.spritesheetElements.forEach(element => {
       const category = this.optionController.lookupCategoryByName(element.categoryName)
@@ -49,18 +55,31 @@ export default class SpritesheetController {
     this.draw()
   }
 
+  /**
+   * Draws every selected option into the spritesheet
+   */
   draw() {
     const context = this.canvas.getContext('2d')
     context.clearRect(0, 0, this.canvas.width, this.canvas.height)
     this.spritesheetElements.forEach(element => element.draw(context))
   }
 
+  /**
+   * Retrieve the image data from the canvas
+   *
+   * @returns {Promise}
+   */
   getCanvasBlob() {
     return new Promise(resolve => {
       this.canvas.toBlob(resolve, 'image/png')
     })
   }
 
+  /**
+   * Converts the spritesheet into a png for the download
+   *
+   * @returns {Uint8Array}
+   */
   async getPNG() {
     const blob = await this.getCanvasBlob()
 

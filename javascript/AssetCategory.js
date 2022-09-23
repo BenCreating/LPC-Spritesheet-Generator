@@ -1,7 +1,16 @@
 import AssetOption from './AssetOption.js'
 import Palette from './Palette.js'
 
+/**
+ * A category (Body, Hair, etc.) containing many options
+ */
 export default class AssetCategory {
+  /**
+   * @param {OptionController} optionController
+   * @param {string} categoryName
+   * @param {Object} categoryData the sheet definition data for this category
+   * @param {string} preselectedOptionName the option selected on page load
+   */
   constructor(optionController, categoryName, categoryData, preselectedOptionName) {
     this.optionController = optionController
     this.name = categoryName
@@ -24,23 +33,48 @@ export default class AssetCategory {
   get attributionController() { return this.optionController.attributionController }
   get paletteDefinitions() { return this.optionController.paletteDefinitions }
 
+  /**
+   * Returns the tags for the selected option
+   *
+   * @returns {string[]}
+   */
   tags() {
     return this.selectedOption.tags
   }
 
+  /**
+   * Returns the tags for the selected options of all categories
+   *
+   * @returns {string[]}
+   */
   allCategoryTags() {
     return this.optionController.selectedTags()
   }
 
+  /**
+   * Returns an array of authors who created of the selected option
+   * @returns {string[]}
+   */
   authors() {
     return this.selectedOption.authors()
   }
 
+  /**
+   * Returns an array of all options that have not been excluded by the active
+   * tags
+   *
+   * @returns {AssetOption[]}
+   */
   availableOptions() {
     const tags = this.allCategoryTags()
     return this.options.filter(option => option.isAvailable(tags))
   }
 
+  /**
+   * Called when the user selects an option belonging to this category
+   *
+   * @param {AssetOption} option
+   */
   setSelectedOption(option) {
     this.selectedOption = option
     this.urlParameterController.setURLParameters({ name: this.name, value: option.name })
@@ -50,14 +84,30 @@ export default class AssetCategory {
     this.attributionController.update()
   }
 
+  /**
+   * Gets the option marked as the default (if there is one). If there is more
+   * than one option marked as default, it will return the first.
+   *
+   * @returns {AssetOption|undefined}
+   */
   defaultOption() {
     return this.options.find(option => option.default)
   }
 
+  /**
+   * Returns the palettes of the selected option
+   *
+   * @returns {Palette[]}
+   */
   selectedPaletteNames() {
     return this.selectedOption.palettes
   }
 
+  /**
+   * Returns the HTML to display this category
+   *
+   * @returns {HTMLElement}
+   */
   html() {
     const name = this.name
 
@@ -82,6 +132,11 @@ export default class AssetCategory {
     return container
   }
 
+  /**
+   * Returns the HTML for this category's color options
+   *
+   * @returns {HTMLElement}
+   */
   colorsHTML() {
     const colorsContatinerID = `${this.name}-colors`
     const previousColors = document.getElementById(colorsContatinerID)
@@ -99,6 +154,11 @@ export default class AssetCategory {
     return container
   }
 
+  /**
+   * Generates all palettes for the options in the category
+   *
+   * @returns {Palette[]}
+   */
   createPalettes() {
     const palettes = {}
 

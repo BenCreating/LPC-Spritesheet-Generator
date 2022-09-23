@@ -1,5 +1,8 @@
 import ColorRamp from './ColorRamp.js'
 
+/**
+ * A collection of color ramps
+ */
 export default class Palette {
   constructor(category, name, colorRamps) {
     this.categoryName = category.name

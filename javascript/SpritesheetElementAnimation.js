@@ -12,6 +12,9 @@ export default class SpritesheetElementAnimation {
     this.context = this.canvas.getContext('2d')
   }
 
+  /**
+   * Loads the image for this element's animation
+   */
   async load() {
     const categoryName = this.categoryName
     const animation = this.animationDefinition
@@ -29,6 +32,11 @@ export default class SpritesheetElementAnimation {
     this.recoloredImageData = new ImageData(this.originalImageData.width, this.originalImageData.height)
   }
 
+  /**
+   * Recolors the image
+   *
+   * @param {*} mapping
+   */
   recolor(mapping) {
     this.recoloredImageData.data.set(this.originalImageData.data)
     const view = new DataView(this.originalImageData.data.buffer)
@@ -45,10 +53,11 @@ export default class SpritesheetElementAnimation {
     this.context.putImageData(this.recoloredImageData, 0, 0)
   }
 
-  rgbToHex(rgbArray) {
-    return `#${[...rgbArray].map(i => i.toString(16).padStart(2, '0')).join('')}`.toLowerCase()
-  }
-
+  /**
+   * Adds the animation for this element to the spritesheet
+   *
+   * @param {*} ctx
+   */
   draw(ctx) {
     ctx.drawImage(this.canvas, this.animationDefinition.x, this.animationDefinition.y)
   }

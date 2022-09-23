@@ -34,10 +34,20 @@ export default class SpritesheetElement {
     await Promise.all(this.animations.map(animation => animation.load()))
   }
 
+  /**
+   * Recolors the images that make up this element
+   *
+   * @param {*} mapping
+   */
   recolor(mapping) {
     this.animations.forEach(animation => animation.recolor(mapping))
   }
 
+  /**
+   * Adds this element to the spritesheet
+   *
+   * @param {*} ctx
+   */
   draw(ctx) {
     this.animations.forEach(animation => animation.draw(ctx))
   }

@@ -1,9 +1,25 @@
+/**
+ * @typedef {import('./Palette.js').default} Palette
+ */
+
+/**
+ * A set of colors used to recolor an asset
+ */
 export default class ColorRamp {
+  /**
+   * @param {Palette} palette the palette this color ramp is part of
+   * @param {string[]} colors an array of colors in hexcode format
+   */
   constructor(palette, colors) {
     this.palette = palette
     this.colors = colors
   }
 
+  /**
+   * The HTML for this color option
+   *
+   * @returns {HTMLElement}
+   */
   html() {
     const checked = this === this.palette.selectedColorRamp
 
@@ -22,6 +38,11 @@ export default class ColorRamp {
     return radioButton
   }
 
+  /**
+   * Called when the user clicks on a color to select it
+   *
+   * @param {Event} _event
+   */
   selectColor(_event) {
     this.palette.setSelectedColorRamp(this)
   }

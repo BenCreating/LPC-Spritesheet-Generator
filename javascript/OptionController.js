@@ -54,15 +54,31 @@ export default class OptionController {
     })
   }
 
+  /**
+   * Returns the selected option for a category
+   *
+   * @param {string} categoryName
+   * @returns {AssetOption} the selected option
+   */
   getSelectedOption(categoryName) {
     const category = this.lookupCategoryByName(categoryName)
     return category.selectedOption
   }
 
+  /**
+   * Returns an array of all selected options
+   *
+   * @returns {AssetOption[]}
+   */
   selectedOptions() {
     return this.categories.map(category => category.selectedOption)
   }
 
+  /**
+   * Returns an array of all tags for the selected options
+   *
+   * @returns {string[]}
+   */
   selectedTags() {
     const tags = this.categories.flatMap(category => category.tags())
     const uniqueTags = new Set(tags)
@@ -70,10 +86,21 @@ export default class OptionController {
     return [...uniqueTags]
   }
 
+  /**
+   * Finds the AssetCategory matching the category name
+   *
+   * @param {string} categoryName
+   * @returns {AssetCategory}
+   */
   lookupCategoryByName(categoryName) {
     return this.categories.find(category => category.name === categoryName)
   }
 
+  /**
+   * Called whenever a new color is selected
+   *
+   * @param {Palette} palette the palette that the selected color belongs to
+   */
   colorChanged(palette) {
     this.urlParameterController.setURLParameters({ name: palette.urlParameterKey(), value: palette.indexOfSelectedColorRamp() })
     this.spritesheetController.applyRecolor()

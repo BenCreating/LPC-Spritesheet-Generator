@@ -4,18 +4,19 @@ import OptionController from './OptionController.js'
 import SpritesheetController from './SpritesheetController.js'
 import URLParameterController from './URLParameterController.js'
 
+/**
+ * Sets up the page, loads and stores the definition files, and manages the
+ * download
+ */
 export default class CharacterGenerator {
   urlParameterController = new URLParameterController()
   spritesheetController = new SpritesheetController(this)
   optionController = new OptionController(this)
   attributionController = new AttributionController(this)
 
-  constructor() {
-    window.addEventListener('popstate', () => {
-      this.setOptions(this.urlParameterController.getURLParameters())
-    })
-  }
-
+  /**
+   * Loads the resources and sets up the page
+   */
   async setup() {
     this.sheetDefinitions = await this.loadDefinitions('sheet')
     this.paletteDefinitions = await this.loadDefinitions('palette')
@@ -35,6 +36,12 @@ export default class CharacterGenerator {
     preview.start()
   }
 
+  /**
+   * Loads a definition file
+   *
+   * @param {string} type the kind of definition to load (palette, sheet, etc.)
+   * @returns {Object}
+   */
   async loadDefinitions(type) {
     const response = await fetch(`resources/${type}-definitions.json`)
     if (!response.ok) throw new Error(`HTTP error: ${response.status}`)
@@ -42,6 +49,10 @@ export default class CharacterGenerator {
     return await response.json()
   }
 
+  /**
+   * Packages the spritesheet and attribution together in a zip file and starts
+   * a download
+   */
   download = async () => {
     const spritesheet = await this.spritesheetController.getPNG()
     const attribution = this.attributionController.fullPlainText()
