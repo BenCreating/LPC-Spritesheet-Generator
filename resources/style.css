@@ -206,3 +206,41 @@ legend {
 .item-button input[type=radio]:checked:hover + label {
   transform: translate(0, -2px) scale(1.05);
 }
+
+/* Animation Preview */
+
+animation-preview::part(select-base) {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+animation-preview::part(animation-select) {
+  border-radius: 4px;
+  border: 1px solid var(--color-contrast);
+  background-color: var(--color-btn-background);
+  box-shadow: 1px 1px 8px -4px var(--color-shadow);
+  color: var(--color-contrast);
+  cursor: pointer;
+  padding: 8px 24px 8px 12px;
+  height: fit-content;
+  transition: box-shadow 150ms cubic-bezier(0.61, 1, 0.88, 1);
+
+  /* Arrow */
+  appearance: none;
+  background-repeat: no-repeat;
+  /* SVG from Material Symbols https://fonts.google.com/icons */
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iNDgiIHdpZHRoPSI0OCIgZmlsbD0iIzI5MjQzOSI+PHBhdGggZD0ibTI0IDMwLjc1LTEyLTEyIDIuMTUtMi4xNUwyNCAyNi41bDkuODUtOS44NUwzNiAxOC44WiIvPjwvc3ZnPg==);
+  background-position: right 4px top calc(50% + 1px);
+  background-size: 18px auto;
+}
+
+@media (prefers-color-scheme: dark) {
+  animation-preview::part(animation-select) {
+    /*
+    SVG from Material Symbols https://fonts.google.com/icons
+    Same as the light mode version, just a different color
+    */
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iNDgiIHdpZHRoPSI0OCIgZmlsbD0iI2UwZGNlOSI+PHBhdGggZD0ibTI0IDMwLjc1LTEyLTEyIDIuMTUtMi4xNUwyNCAyNi41bDkuODUtOS44NUwzNiAxOC44WiIvPjwvc3ZnPg==);
+  }
+}
