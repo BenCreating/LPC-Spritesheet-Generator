@@ -26,12 +26,33 @@ export default class SpritesheetElement {
     this.animationDefinitions = animationDefinitions
   }
 
+  /**
+   * Loads the images for this element
+   */
   async load() {
-    this.animations = this.animationDefinitions.map(animationDefinition => (
-      new SpritesheetElementAnimation(this.categoryName, this.variant, this.definition, animationDefinition)
-    ))
+    const animations = await Promise.all(this.animationDefinitions.map(async animationDefinition => {
+      const animationImagePath = `resources/spritesheets/${this.categoryName}/${animationDefinition.name}/${this.variant}.png`
+      const animationExists = await this.animationExists(animationImagePath)
+
+      if (!animationExists) return
+
+      return new SpritesheetElementAnimation(this.categoryName, this.variant, this.definition, animationDefinition)
+    }))
+
+    // Filter out animations that don't exist
+    this.animations = animations.filter(animation => animation)
 
     await Promise.all(this.animations.map(animation => animation.load()))
+  }
+
+  /**
+   * Checks if an image exists for an animation
+   * @param {string} animationPath
+   * @returns {boolean}
+   */
+  async animationExists(animationPath) {
+    const response = await fetch(animationPath)
+    return response.ok
   }
 
   /**

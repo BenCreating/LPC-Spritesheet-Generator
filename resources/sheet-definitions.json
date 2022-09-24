@@ -48,6 +48,32 @@
         "https://opengameart.org/content/lpc-medieval-fantasy-character-sprites",
         "https://opengameart.org/content/lpc-ladies"
       ]
+    },
+    "child": {
+      "tags": [
+        "child"
+      ],
+      "excluded-by": [],
+      "palettes": [
+        "skin"
+      ],
+      "authors": [
+        "Stephen Challener (Redshrike)",
+        "kheftel",
+        "Nila122",
+        "Benjamin K. Smith (BenCreating)",
+        "bluecarrot16"
+      ],
+      "licenses": [
+        "CC-BY-SA 3.0",
+        "GPL 3.0"
+      ],
+      "links": [
+        "https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles",
+        "https://opengameart.org/content/lpc-child-standing-template",
+        "https://opengameart.org/content/lpc-children-walk-animation",
+        "https://opengameart.org/content/lpc-character-bases"
+      ]
     }
   },
 
