@@ -8,12 +8,18 @@
       ],
       "excluded-by": [],
       "palettes": [
-        "skin",
-        "eyes"
+        "skin"
       ],
       "authors": [
         "Stephen Challener (Redshrike)",
-        "Johannes Sjölund (wulax)"
+        "Johannes Sjölund (wulax)",
+        "Durrani",
+        "MuffinElZangano",
+        "Benjamin K. Smith (BenCreating)",
+        "Eliza Wyatt (ElizaWy)",
+        "bluecarrot16",
+        "Wolthera van Hövell tot Westerflier (TheraHedwig)",
+        "Evert"
       ],
       "licenses": [
         "CC-BY-SA 3.0",
@@ -21,7 +27,52 @@
       ],
       "links": [
         "https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles",
-        "https://opengameart.org/content/lpc-medieval-fantasy-character-sprites"
+        "https://opengameart.org/content/lpc-medieval-fantasy-character-sprites",
+        "https://opengameart.org/content/lpc-male-jumping-animation-by-durrani",
+        "https://opengameart.org/content/lpc-jump-expanded",
+        "https://opengameart.org/content/lpc-character-bases",
+        "https://opengameart.org/content/lpc-runcycle-and-diagonal-walkcycle",
+        "https://opengameart.org/content/lpc-runcycle-for-male-muscular-and-pregnant-character-bases-with-modular-heads"
+      ]
+    },
+    "male-muscular": {
+      "tags": [
+        "male",
+        "adult",
+        "muscular"
+      ],
+      "excluded-by": [],
+      "palettes": [
+        "skin"
+      ],
+      "authors": [
+        "Stephen Challener (Redshrike)",
+        "Johannes Sjölund (wulax)",
+        "dalonedrau",
+        "Eliza Wyatt (ElizaWy)",
+        "Benjamin K. Smith (BenCreating)",
+        "castelonia",
+        "Durrani",
+        "MuffinElZangano",
+        "bluecarrot16",
+        "Wolthera van Hövell tot Westerflier (TheraHedwig)",
+        "Evert"
+      ],
+      "licenses": [
+        "CC-BY-SA 3.0",
+        "GPL 3.0"
+      ],
+      "links": [
+        "https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles",
+        "https://opengameart.org/content/lpc-medieval-fantasy-character-sprites",
+        "https://opengameart.org/content/lpc-barbarian-sprite-base",
+        "https://opengameart.org/content/lpc-muscular-swing-animation",
+        "https://opengameart.org/content/lpc-muscular-hurt-animation",
+        "https://opengameart.org/content/lpc-male-jumping-animation-by-durrani",
+        "https://opengameart.org/content/lpc-jump-expanded",
+        "https://opengameart.org/content/lpc-character-bases",
+        "https://opengameart.org/content/lpc-runcycle-and-diagonal-walkcycle",
+        "https://opengameart.org/content/lpc-runcycle-for-male-muscular-and-pregnant-character-bases-with-modular-heads"
       ]
     },
     "female": {
@@ -31,13 +82,20 @@
       ],
       "excluded-by": [],
       "palettes": [
-        "skin",
-        "eyes"
+        "skin"
       ],
       "authors": [
         "Stephen Challener (Redshrike)",
         "Johannes Sjölund (wulax)",
-        "Matthew Krohn (makrohn)"
+        "Matthew Krohn (makrohn)",
+        "Eliza Wyatt (ElizaWy)",
+        "Pierre Vigier (pvigier)",
+        "Durrani",
+        "MuffinElZangano",
+        "Benjamin K. Smith (BenCreating)",
+        "bluecarrot16",
+        "Wolthera van Hövell tot Westerflier (TheraHedwig)",
+        "Evert"
       ],
       "licenses": [
         "CC-BY-SA 3.0",
@@ -46,7 +104,95 @@
       "links": [
         "https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles",
         "https://opengameart.org/content/lpc-medieval-fantasy-character-sprites",
-        "https://opengameart.org/content/lpc-ladies"
+        "https://opengameart.org/content/lpc-ladies",
+        "https://opengameart.org/content/lpc-7-womens-shirts",
+        "https://opengameart.org/content/lpc-jump-expanded",
+        "https://gitlab.com/vagabondgame/lpc-characters",
+        "https://opengameart.org/content/lpc-male-jumping-animation-by-durrani",
+        "https://opengameart.org/content/lpc-character-bases",
+        "https://opengameart.org/content/lpc-runcycle-and-diagonal-walkcycle",
+        "https://opengameart.org/content/lpc-runcycle-for-male-muscular-and-pregnant-character-bases-with-modular-heads"
+      ]
+    },
+    "pregnant": {
+      "tags": [
+        "female",
+        "pregnant",
+        "adult"
+      ],
+      "excluded-by": [],
+      "palettes": [
+        "skin"
+      ],
+      "authors": [
+        "Stephen Challener (Redshrike)",
+        "Johannes Sjölund (wulax)",
+        "Matthew Krohn (makrohn)",
+        "Eliza Wyatt (ElizaWy)",
+        "Pierre Vigier (pvigier)",
+        "Benjamin K. Smith (BenCreating)",
+        "Durrani",
+        "MuffinElZangano",
+        "bluecarrot16",
+        "Wolthera van Hövell tot Westerflier (TheraHedwig)",
+        "Evert"
+      ],
+      "licenses": [
+        "CC-BY-SA 3.0",
+        "GPL 3.0"
+      ],
+      "links": [
+        "https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles",
+        "https://opengameart.org/content/lpc-medieval-fantasy-character-sprites",
+        "https://opengameart.org/content/lpc-ladies",
+        "https://opengameart.org/content/lpc-pregnancy-bases-maternity-wear",
+        "https://opengameart.org/content/lpc-7-womens-shirts",
+        "https://opengameart.org/content/lpc-jump-expanded",
+        "https://gitlab.com/vagabondgame/lpc-characters",
+        "https://opengameart.org/content/lpc-character-bases",
+        "https://opengameart.org/content/lpc-male-jumping-animation-by-durrani",
+        "https://opengameart.org/content/lpc-runcycle-and-diagonal-walkcycle",
+        "https://opengameart.org/content/lpc-runcycle-for-male-muscular-and-pregnant-character-bases-with-modular-heads"
+      ]
+    },
+    "teen": {
+      "tags": [
+        "teen",
+        "adult"
+      ],
+      "excluded-by": [],
+      "palettes": [
+        "skin"
+      ],
+      "authors": [
+        "Stephen Challener (Redshrike)",
+        "Johannes Sjölund (wulax)",
+        "Matthew Krohn (makrohn)",
+        "Eliza Wyatt (ElizaWy)",
+        "Pierre Vigier (pvigier)",
+        "Durrani",
+        "MuffinElZangano",
+        "Benjamin K. Smith (BenCreating)",
+        "bluecarrot16",
+        "Wolthera van Hövell tot Westerflier (TheraHedwig)",
+        "Evert"
+      ],
+      "licenses": [
+        "CC-BY-SA 3.0",
+        "GPL 3.0"
+      ],
+      "links": [
+        "https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles",
+        "https://opengameart.org/content/lpc-medieval-fantasy-character-sprites",
+        "https://opengameart.org/content/lpc-ladies",
+        "https://opengameart.org/content/lpc-teen-unisex-base-clothes",
+        "https://opengameart.org/content/lpc-jump-expanded",
+        "https://gitlab.com/vagabondgame/lpc-characters",
+        "https://opengameart.org/content/lpc-male-jumping-animation-by-durrani",
+        "https://opengameart.org/content/lpc-jump-expanded",
+        "https://opengameart.org/content/lpc-character-bases",
+        "https://opengameart.org/content/lpc-runcycle-and-diagonal-walkcycle",
+        "https://opengameart.org/content/lpc-runcycle-for-male-muscular-and-pregnant-character-bases-with-modular-heads"
       ]
     },
     "child": {
@@ -77,10 +223,167 @@
     }
   },
 
+  "head": {
+    "male": {
+      "default": true,
+      "excluded-by": [
+        "child"
+      ],
+      "palettes": [
+        "skin",
+        "eyes"
+      ],
+      "authors": [
+        "Stephen Challener (Redshrike)",
+        "Johannes Sjölund (wulax)",
+        "Eliza Wyatt (ElizaWy)",
+        "Durrani",
+        "MuffinElZangano",
+        "Benjamin K. Smith (BenCreating)",
+        "bluecarrot16"
+      ],
+      "licenses": [
+        "CC-BY-SA 3.0",
+        "GPL 3.0"
+      ],
+      "links": [
+        "https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles",
+        "https://opengameart.org/content/lpc-medieval-fantasy-character-sprites",
+        "https://opengameart.org/content/lpc-male-jumping-animation-by-durrani",
+        "https://opengameart.org/content/lpc-jump-expanded",
+        "https://opengameart.org/content/lpc-character-bases"
+      ]
+    },
+    "female": {
+      "excluded-by": [
+        "child"
+      ],
+      "palettes": [
+        "skin",
+        "eyes"
+      ],
+      "authors": [
+        "Stephen Challener (Redshrike)",
+        "Johannes Sjölund (wulax)",
+        "Matthew Krohn (makrohn)",
+        "Eliza Wyatt (ElizaWy)",
+        "Pierre Vigier (pvigier)",
+        "Durrani",
+        "MuffinElZangano",
+        "Benjamin K. Smith (BenCreating)",
+        "bluecarrot16"
+      ],
+      "licenses": [
+        "CC-BY-SA 3.0",
+        "GPL 3.0"
+      ],
+      "links": [
+        "https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles",
+        "https://opengameart.org/content/lpc-medieval-fantasy-character-sprites",
+        "https://opengameart.org/content/lpc-ladies",
+        "https://opengameart.org/content/lpc-7-womens-shirts",
+        "https://opengameart.org/content/lpc-jump-expanded",
+        "https://gitlab.com/vagabondgame/lpc-characters",
+        "https://opengameart.org/content/lpc-male-jumping-animation-by-durrani",
+        "https://opengameart.org/content/lpc-character-bases"
+      ]
+    },
+    "child": {
+      "excluded-by": [
+        "adult"
+      ],
+      "palettes": [
+        "skin",
+        "eyes"
+      ],
+      "authors": [
+        "Stephen Challener (Redshrike)",
+        "kheftel",
+        "bluecarrot16"
+      ],
+      "licenses": [
+        "CC-BY-SA 3.0",
+        "GPL 3.0"
+      ],
+      "links": [
+        "https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles",
+        "https://opengameart.org/content/lpc-child-standing-template",
+        "https://opengameart.org/content/lpc-character-bases"
+      ]
+    },
+    "male-elderly": {
+      "excluded-by": [
+        "child"
+      ],
+      "palettes": [
+        "skin",
+        "eyes"
+      ],
+      "authors": [
+        "Stephen Challener (Redshrike)",
+        "Johannes Sjölund (wulax)",
+        "Eliza Wyatt (ElizaWy)",
+        "Durrani",
+        "MuffinElZangano",
+        "Benjamin K. Smith (BenCreating)",
+        "bluecarrot16"
+      ],
+      "licenses": [
+        "CC-BY-SA 3.0",
+        "OGA-BY 3.0"
+      ],
+      "links": [
+        "https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles",
+        "https://opengameart.org/content/lpc-medieval-fantasy-character-sprites",
+        "https://opengameart.org/content/lpc-revised-elders",
+        "https://opengameart.org/content/lpc-male-jumping-animation-by-durrani",
+        "https://opengameart.org/content/lpc-jump-expanded",
+        "https://opengameart.org/content/lpc-character-bases"
+      ]
+    },
+    "female-elderly": {
+      "excluded-by": [
+        "child"
+      ],
+      "palettes": [
+        "skin",
+        "eyes"
+      ],
+      "authors": [
+        "Stephen Challener (Redshrike)",
+        "Johannes Sjölund (wulax)",
+        "Matthew Krohn (makrohn)",
+        "Eliza Wyatt (ElizaWy)",
+        "Pierre Vigier (pvigier)",
+        "Durrani",
+        "MuffinElZangano",
+        "Benjamin K. Smith (BenCreating)",
+        "bluecarrot16"
+      ],
+      "licenses": [
+        "CC-BY-SA 3.0",
+        "OGA-BY 3.0"
+      ],
+      "links": [
+        "https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles",
+        "https://opengameart.org/content/lpc-medieval-fantasy-character-sprites",
+        "https://opengameart.org/content/lpc-ladies",
+        "https://opengameart.org/content/lpc-7-womens-shirts",
+        "https://opengameart.org/content/lpc-revised-elders",
+        "https://opengameart.org/content/lpc-jump-expanded",
+        "https://gitlab.com/vagabondgame/lpc-characters",
+        "https://opengameart.org/content/lpc-male-jumping-animation-by-durrani",
+        "https://opengameart.org/content/lpc-character-bases"
+      ]
+    }
+  },
+
   "hair": {
     "afro": {
       "tags": [],
-      "excluded-by": [],
+      "excluded-by": [
+        "child"
+      ],
       "palettes": [
         "hair"
       ],
@@ -96,7 +399,9 @@
     },
     "bangs": {
       "tags": [],
-      "excluded-by": [],
+      "excluded-by": [
+        "child"
+      ],
       "palettes": [
         "hair"
       ],
@@ -113,7 +418,9 @@
     },
     "buzzcut": {
       "tags": [],
-      "excluded-by": [],
+      "excluded-by": [
+        "child"
+      ],
       "palettes": [
         "hair"
       ],
@@ -133,7 +440,10 @@
     "pants-male": {
       "tags": [],
       "excluded-by": [
-        "female"
+        "female",
+        "child",
+        "muscular",
+        "teen"
       ],
       "palettes": [
         "cloth"
@@ -153,7 +463,8 @@
     "pants-female": {
       "tags": [],
       "excluded-by": [
-        "male"
+        "male",
+        "child"
       ],
       "palettes": [
         "cloth"

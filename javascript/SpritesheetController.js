@@ -22,7 +22,7 @@ export default class SpritesheetController {
   async update() {
     // TODO: set width and height dynamically based on the animations displayed
     this.canvas.width = 832
-    this.canvas.height = 1344
+    this.canvas.height = 2112
 
     const categories = this.optionController.categories
 
