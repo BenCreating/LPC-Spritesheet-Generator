@@ -18,8 +18,11 @@ export default class AssetCategory {
     const optionNames = Object.keys(categoryData)
     this.options = optionNames.map(name => {
       const optionData = categoryData[name]
+
+      if (!this.optionHasAttribution(name, optionData)) return
+
       return new AssetOption(name, this, optionData)
-    })
+    }).filter(option => option)
     this.options.unshift(new AssetOption('none', this))
 
     const preselectedOption = this.options.find(option => option.name === preselectedOptionName)
@@ -101,6 +104,35 @@ export default class AssetCategory {
    */
   selectedPaletteNames() {
     return this.selectedOption.palettes
+  }
+
+  /**
+   * Checks if an option has all the required attribution data and reports if it
+   * does not
+   *
+   * @param {Object} optionData
+   */
+  optionHasAttribution(optionName, optionData) {
+    const authors = optionData['authors'] ?? []
+    const licenses = optionData['licenses'] ?? []
+    const links = optionData['links'] ?? []
+
+    const missingAuthors = authors.length === 0
+    const missingLicenses = licenses.length === 0
+    const missingLinks = links.length === 0
+
+    const missingAttributionWarnings = []
+    if (authors.length === 0) missingAttributionWarnings.push('authors')
+    if (licenses.length === 0) missingAttributionWarnings.push('licenses')
+    if (links.length === 0) missingAttributionWarnings.push('links')
+
+    if (missingAttributionWarnings.length > 0) {
+      console.warn(`${this.name}: ${optionName} is missing required data: ${missingAttributionWarnings.join(', ')}`)
+
+      return false
+    }
+
+    return true
   }
 
   /**
