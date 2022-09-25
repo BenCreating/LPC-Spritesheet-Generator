@@ -32,9 +32,15 @@ export default class Palette {
     return container
   }
 
-  setSelectedColorRamp(colorRamp) {
+  /**
+   * Sets the selected color ramp
+   *
+   * @param {ColorRamp} colorRamp
+   * @param {Boolean} applyRecolor controls if a recolor will be triggered. Defaults to true
+   */
+  setSelectedColorRamp(colorRamp, applyRecolor = true) {
     this.selectedColorRamp = colorRamp
-    this.optionController.colorChanged(this)
+    this.optionController.colorChanged(this, applyRecolor)
   }
 
   urlParameterKey() {
@@ -47,5 +53,16 @@ export default class Palette {
 
   indexOfSelectedColorRamp() {
     return this.indexOfColorRamp(this.selectedColorRamp)
+  }
+
+  /**
+   * Randomly picks a color ramp
+   */
+  randomize() {
+    const colorRamps = this.colorRamps
+    const chosenColorRampIndex = Math.floor(Math.random() * colorRamps.length)
+    const colorRamp = colorRamps[chosenColorRampIndex]
+
+    this.setSelectedColorRamp(colorRamp, false)
   }
 }

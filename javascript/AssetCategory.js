@@ -77,14 +77,17 @@ export default class AssetCategory {
    * Called when the user selects an option belonging to this category
    *
    * @param {AssetOption} option
+   * @param {Boolean} redrawSpritesheet controls if a redraw will be triggered. Defaults to true
    */
-  setSelectedOption(option) {
+  setSelectedOption(option, redrawSpritesheet = true) {
     this.selectedOption = option
     this.urlParameterController.setURLParameters({ name: this.name, value: option.name })
 
-    this.optionController.update()
-    this.spritesheetController.update()
-    this.attributionController.update()
+    if (redrawSpritesheet) {
+      this.optionController.update()
+      this.spritesheetController.update()
+      this.attributionController.update()
+    }
   }
 
   /**
@@ -98,12 +101,29 @@ export default class AssetCategory {
   }
 
   /**
+   * Returns the names of the palettes of the selected option
+   *
+   * @returns {string[]}
+   */
+  selectedPaletteNames() {
+    return this.selectedOption.palettes
+  }
+
+  /**
    * Returns the palettes of the selected option
    *
    * @returns {Palette[]}
    */
-  selectedPaletteNames() {
-    return this.selectedOption.palettes
+  selectedPalettes() {
+    const selectedPaletteNames = this.selectedPaletteNames()
+
+    const palettes = []
+    selectedPaletteNames.forEach(name => {
+      const palette = this.palettes[name]
+      if (palette) palettes.push(palette)
+    })
+
+    return palettes
   }
 
   /**
@@ -187,9 +207,10 @@ export default class AssetCategory {
   }
 
   /**
-   * Generates all palettes for the options in the category
+   * Generates all palettes for the options in the category and returns
+   * key-value list of names and the corresponding palette
    *
-   * @returns {Palette[]}
+   * @returns {Object}
    */
   createPalettes() {
     const palettes = {}
@@ -205,8 +226,28 @@ export default class AssetCategory {
     return palettes
   }
 
+  /**
+   * Randomly picks options and colors for the category
+   */
+   randomize() {
+    const options = this.availableOptions()
+
+    // Removes the "none" option for the body and the head. If we ever want to
+    // prevent more categories from randomly returning "none" then we should
+    // create a category-definitions file to control that
+    if (this.name === 'body' || this.name === 'head') options.shift()
+
+    const chosenOptionIndex = Math.floor(Math.random() * options.length)
+    const option = options[chosenOptionIndex]
+
+    this.setSelectedOption(option, false)
+
+    const palettes = this.selectedPalettes()
+    palettes.forEach(palette => palette.randomize())
+  }
+
   getRecolor() {
-    const palettes = Object.values(this.palettes)
+    const palettes = this.selectedPalettes()
     const recolor = {}
 
     palettes.forEach(palette => {

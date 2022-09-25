@@ -464,7 +464,8 @@
       "tags": [],
       "excluded-by": [
         "male",
-        "child"
+        "child",
+        "pregnant"
       ],
       "palettes": [
         "cloth"

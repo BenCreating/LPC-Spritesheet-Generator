@@ -24,6 +24,9 @@ export default class CharacterGenerator {
     const downloadButton = document.querySelector('#download-button')
     downloadButton.addEventListener('click', this.download)
 
+    const randomButton = document.querySelector('#random-button')
+    randomButton.addEventListener('click', this.optionController.randomize.bind(this.optionController))
+
     const copyAttributionButton = document.querySelector('#copy-attribution-button')
     copyAttributionButton.addEventListener('click', this.attributionController.copy.bind(this.attributionController))
 

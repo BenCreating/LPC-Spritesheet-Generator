@@ -69,7 +69,11 @@ animation-preview {
   grid-column: 2;
 }
 
-.header button {
+.justify-self-start {
+  justify-self: start;
+}
+
+.justify-self-end {
   justify-self: end;
 }
 

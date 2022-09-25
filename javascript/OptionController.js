@@ -101,8 +101,19 @@ export default class OptionController {
    *
    * @param {Palette} palette the palette that the selected color belongs to
    */
-  colorChanged(palette) {
+  colorChanged(palette, applyRecolor = true) {
     this.urlParameterController.setURLParameters({ name: palette.urlParameterKey(), value: palette.indexOfSelectedColorRamp() })
-    this.spritesheetController.applyRecolor()
+    if (applyRecolor) this.spritesheetController.applyRecolor()
+  }
+
+  /**
+   * Randomly picks options and colors for the spritesheet
+   */
+   randomize() {
+    this.categories.forEach(category => category.randomize())
+
+    this.update()
+    this.spritesheetController.update()
+    this.attributionController.update()
   }
 }
