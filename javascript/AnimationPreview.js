@@ -7,11 +7,17 @@ class AnimationPreview extends HTMLElement {
     this.attachShadow({ mode: 'open' })
 
     const wrapper = document.createElement('div')
+    wrapper.part = 'base'
+
     const selectAnimationWrapper = document.createElement('div')
+    selectAnimationWrapper.part = 'select-base'
+
     const label = document.createElement('span')
     label.textContent = 'Preview'
+    label.part = 'select-label'
 
     const select = document.createElement('select')
+    select.part = 'animation-select'
 
     animations.forEach(animation => {
       const option = document.createElement('option')
@@ -25,6 +31,7 @@ class AnimationPreview extends HTMLElement {
 
     selectAnimationWrapper.append(label, select)
     wrapper.append(selectAnimationWrapper, this.#canvas)
+    this.#canvas.part = 'animation'
 
     this.shadowRoot.append(wrapper)
   }
