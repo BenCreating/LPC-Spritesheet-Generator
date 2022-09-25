@@ -140,7 +140,6 @@ legend {
 
 .color-option:checked {
   box-shadow: 1px 1px 8px -2px var(--color-shadow), var(--selected);
-  z-index: 1;
 }
 
 .color-option::before {
