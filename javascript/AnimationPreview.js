@@ -87,7 +87,8 @@ class AnimationPreview extends HTMLElement {
     this.#animationLoopId = requestAnimationFrame(this.#animate)
 
     const timeSinceStart = timestamp - this.#animationStart
-    const nextFrameIndex = Math.floor(timeSinceStart / 1000 * this.#framesPerSecond) % this.animationLength
+    const framePerSecond = this.animation.framesPerSecond ?? this.#framesPerSecond
+    const nextFrameIndex = Math.floor(timeSinceStart / 1000 * framePerSecond) % this.animationLength
 
     if (nextFrameIndex === this.#currentFrameIndex) return
 
