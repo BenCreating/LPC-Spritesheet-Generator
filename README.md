@@ -2,6 +2,12 @@
 
 A browser app for generating spritesheets for [Liberated Pixel Cup](https://lpc.opengameart.org) characters.
 
+## Licensing and Attribution
+
+The code is available under the [MIT license](LICENSE).
+
+Specific license details for each image varies, but all images are licensed under at least one of: [CC-BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/), [CC-BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), [OGA-BY 3.0](https://opengameart.org/content/oga-by-30-faq), [GPL 3.0](https://www.gnu.org/licenses/gpl-3.0.en.html), or a more permissive license. Licensing details for each item are in `sheet-definitions.json`.
+
 ## Adding items to the generator
 
 ### Spritesheets
