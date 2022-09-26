@@ -1,4 +1,4 @@
-import SpritesheetElementAnimation from "./SpritesheetElementAnimation.js"
+import SpritesheetElementAnimation from './SpritesheetElementAnimation.js'
 
 /**
  * A single element of a spritesheet (body, hair, etc.)

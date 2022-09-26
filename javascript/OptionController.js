@@ -30,7 +30,7 @@ export default class OptionController {
       const categoryData = this.sheetDefinitions[categoryName]
       const urlParameterSelectedOption = this.urlParameterController.getParameterValue(categoryName)
 
-      return new AssetCategory(this, categoryName, categoryData,urlParameterSelectedOption)
+      return new AssetCategory(this, categoryName, categoryData, urlParameterSelectedOption)
     })
 
     await this.loadIcons()
@@ -109,7 +109,7 @@ export default class OptionController {
   /**
    * Randomly picks options and colors for the spritesheet
    */
-   randomize() {
+  randomize() {
     this.categories.forEach(category => category.randomize())
 
     this.update()

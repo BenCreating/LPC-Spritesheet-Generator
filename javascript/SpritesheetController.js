@@ -1,8 +1,8 @@
 /**
  * @typedef {import('./CharacterGenerator').default} CharacterGenerator
  */
-import animations from "./animations.js"
-import SpritesheetElement from "./SpritesheetElement.js"
+import animations from './animations.js'
+import SpritesheetElement from './SpritesheetElement.js'
 
 export default class SpritesheetController {
   /**
@@ -28,7 +28,7 @@ export default class SpritesheetController {
 
     this.spritesheetElements = categories.map((category, layer) => {
       const selectedOption = category.selectedOption
-      if (selectedOption.name === 'none') return
+      if (selectedOption.name === 'none') return undefined
 
       const definition = this.sheetDefinitions[category.name][selectedOption.name]
 

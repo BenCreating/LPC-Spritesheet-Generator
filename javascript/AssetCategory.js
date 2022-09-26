@@ -19,7 +19,7 @@ export default class AssetCategory {
     this.options = optionNames.map(name => {
       const optionData = categoryData[name]
 
-      if (!this.optionHasAttribution(name, optionData)) return
+      if (!this.optionHasAttribution(name, optionData)) return undefined
 
       return new AssetOption(name, this, optionData)
     }).filter(option => option)
@@ -133,13 +133,9 @@ export default class AssetCategory {
    * @param {Object} optionData
    */
   optionHasAttribution(optionName, optionData) {
-    const authors = optionData['authors'] ?? []
-    const licenses = optionData['licenses'] ?? []
-    const links = optionData['links'] ?? []
-
-    const missingAuthors = authors.length === 0
-    const missingLicenses = licenses.length === 0
-    const missingLinks = links.length === 0
+    const authors = optionData.authors ?? []
+    const licenses = optionData.licenses ?? []
+    const links = optionData.links ?? []
 
     const missingAttributionWarnings = []
     if (authors.length === 0) missingAttributionWarnings.push('authors')
@@ -229,7 +225,7 @@ export default class AssetCategory {
   /**
    * Randomly picks options and colors for the category
    */
-   randomize() {
+  randomize() {
     const options = this.availableOptions()
 
     // Removes the "none" option for the body and the head. If we ever want to
@@ -273,7 +269,7 @@ export default class AssetCategory {
     const colorOffsets = [
       [1, 3], // r
       [3, 5], // g
-      [5, 7], // b
+      [5, 7] // b
     ]
 
     return colorOffsets.map(([start, end]) => parseInt(hexCode.slice(start, end), 16))

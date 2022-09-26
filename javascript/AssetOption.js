@@ -13,10 +13,10 @@ export default class AssetOption {
     this.name = name
     this.category = category
 
-    this.default = optionData['default'] ?? false
-    this.tags = optionData['tags'] ?? []
+    this.default = optionData.default ?? false
+    this.tags = optionData.tags ?? []
     this.excludedBy = optionData['excluded-by'] ?? []
-    this.palettes = optionData['palettes'] ?? []
+    this.palettes = optionData.palettes ?? []
 
     this.attribution = new Attribution(this, optionData)
   }
@@ -116,7 +116,7 @@ export default class AssetOption {
     let frameOffsetY = 0
 
     if (this.name === 'none') {
-      image.src = `resources/none.png`
+      image.src = 'resources/none.png'
     } else {
       const categoryName = this.category.name
       image.src = `resources/spritesheets/${categoryName}/idle/${this.name}.png`

@@ -10,9 +10,9 @@ export default class Attribution {
   constructor(asset, assetData) {
     this.assetName = asset.name
     this.categoryName = asset.category.name
-    this.authors = assetData['authors'] ?? []
-    this.licenses = assetData['licenses'] ?? []
-    this.links = assetData['links'] ?? []
+    this.authors = assetData.authors ?? []
+    this.licenses = assetData.licenses ?? []
+    this.links = assetData.links ?? []
   }
 
   /**

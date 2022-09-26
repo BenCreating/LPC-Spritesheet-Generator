@@ -1,4 +1,4 @@
-import animations from "./animations.js"
+import animations from './animations.js'
 
 /**
  * Custom element to preview an animation. Insert into the page with:

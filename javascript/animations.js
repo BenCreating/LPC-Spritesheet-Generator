@@ -8,5 +8,5 @@ export default [
   { name: 'slash', x: 0, y: 1280 },
   { name: 'jump', x: 0, y: 1536 },
   { name: 'sit', x: 0, y: 1792 },
-  { name: 'hurt', x: 0, y: 2048 },
+  { name: 'hurt', x: 0, y: 2048 }
 ]
