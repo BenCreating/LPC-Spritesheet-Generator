@@ -1,0 +1,29 @@
+{
+  "name": "lpc-spritesheet-generator",
+  "version": "1.0.0",
+  "description": "A browser app for generating spritesheets for [Liberated Pixel Cup](https://lpc.opengameart.org) characters.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint javascript/**/*.js index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BenCreating/LPC-Generator.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/BenCreating/LPC-Generator/issues"
+  },
+  "homepage": "https://github.com/BenCreating/LPC-Generator#readme",
+  "devDependencies": {
+    "eslint": "^8.24.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-compat": "^4.0.2",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-n": "^15.3.0",
+    "eslint-plugin-promise": "^6.0.1"
+  }
+}
