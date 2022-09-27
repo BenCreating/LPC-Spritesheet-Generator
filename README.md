@@ -2,6 +2,8 @@
 
 A browser app for generating spritesheets for [Liberated Pixel Cup](https://lpc.opengameart.org) characters.
 
+[Try it out here.](https://bencreating.github.io/LPC-Spritesheet-Generator/)
+
 ## Licensing and Attribution
 
 The code is available under the [MIT license](LICENSE).
