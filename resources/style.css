@@ -154,6 +154,7 @@ legend {
   transform: scale(0);
   transform-origin: center;
   transition: 120ms transform ease-in-out;
+  -webkit-backdrop-filter: invert(1);
   backdrop-filter: invert(1);
   opacity: 60%;
 }
