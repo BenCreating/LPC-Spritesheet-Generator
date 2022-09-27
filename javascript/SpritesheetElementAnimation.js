@@ -22,7 +22,7 @@ export default class SpritesheetElementAnimation {
     const image = new Image()
     image.src = `resources/spritesheets/${categoryName}/${animation.name}/${variant}.png`
     await image.decode()
-    animation.width = image.width
+    if (animation.width === undefined || image.width > animation.width) animation.width = image.width
 
     this.canvas.width = image.width
     this.canvas.height = image.height
