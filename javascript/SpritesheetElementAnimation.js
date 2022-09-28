@@ -3,9 +3,9 @@
  * a spritesheet
  */
 export default class SpritesheetElementAnimation {
-  constructor(categoryName, variant, spritesheetDefinition, animationDefinition) {
+  constructor(categoryName, asset, spritesheetDefinition, animationDefinition) {
     this.categoryName = categoryName
-    this.variant = variant
+    this.asset = asset
     this.spritesheetDefinition = spritesheetDefinition
     this.animationDefinition = animationDefinition
     this.canvas = document.createElement('canvas')
@@ -16,12 +16,12 @@ export default class SpritesheetElementAnimation {
    * Loads the image for this element's animation
    */
   async load() {
-    const categoryName = this.categoryName
-    const animation = this.animationDefinition
-    const variant = this.variant
     const image = new Image()
-    image.src = `resources/spritesheets/${categoryName}/${animation.name}/${variant}.png`
+    const animation = this.animationDefinition
+    image.src = `${this.asset.imageFolderPath()}/${animation.name}.png`
+
     await image.decode()
+
     if (animation.width === undefined || image.width > animation.width) animation.width = image.width
 
     this.canvas.width = image.width

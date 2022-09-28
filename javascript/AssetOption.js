@@ -118,8 +118,7 @@ export default class AssetOption {
     if (this.name === 'none') {
       image.src = 'resources/none.png'
     } else {
-      const categoryName = this.category.name
-      image.src = `resources/spritesheets/${categoryName}/idle/${this.name}.png`
+      image.src = `${this.imageFolderPath()}/idle.png`
       frameOffsetY = -128
     }
 
@@ -129,5 +128,11 @@ export default class AssetOption {
     ctx.drawImage(image, 0, frameOffsetY)
 
     this.icon = canvas
+  }
+
+  imageFolderPath() {
+    const categoryName = this.category.name
+
+    return `resources/spritesheets/${categoryName}/${this.name}`
   }
 }

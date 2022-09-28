@@ -13,14 +13,14 @@ export default class SpritesheetElement {
 
   /**
    * @param {string} categoryName
-   * @param {string} variant
+   * @param {AssetOption} asset
    * @param {object} definition
    * @param {number} layer
    * @param {object} animationDefinitions
    */
-  constructor(categoryName, variant, definition, layer, animationDefinitions) {
+  constructor(categoryName, asset, definition, layer, animationDefinitions) {
     this.categoryName = categoryName
-    this.variant = variant
+    this.asset = asset
     this.definition = definition
     this.layer = layer
     this.animationDefinitions = animationDefinitions
@@ -31,12 +31,12 @@ export default class SpritesheetElement {
    */
   async load() {
     const animations = await Promise.all(this.animationDefinitions.map(async animationDefinition => {
-      const animationImagePath = `resources/spritesheets/${this.categoryName}/${animationDefinition.name}/${this.variant}.png`
+      const animationImagePath = `${this.asset.imageFolderPath()}/${animationDefinition.name}.png`
       const animationExists = await this.animationExists(animationImagePath)
 
-      if (!animationExists) return
+      if (!animationExists) return undefined
 
-      return new SpritesheetElementAnimation(this.categoryName, this.variant, this.definition, animationDefinition)
+      return new SpritesheetElementAnimation(this.categoryName, this.asset, this.definition, animationDefinition)
     }))
 
     // Filter out animations that don't exist

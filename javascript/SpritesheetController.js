@@ -32,7 +32,7 @@ export default class SpritesheetController {
 
       const definition = this.sheetDefinitions[category.name][selectedOption.name]
 
-      return new SpritesheetElement(category.name, selectedOption.name, definition, layer, animations)
+      return new SpritesheetElement(category.name, selectedOption, definition, layer, animations)
     }).filter(item => item)
 
     await Promise.all(this.spritesheetElements.map(element => {
