@@ -112,3 +112,20 @@ A truncated example of the palette definitions:
   ]
 }
 ```
+
+## Running locally
+
+This should work with any recent version of Node, but has been tested on the version specified by the [.node-version file](/.node-version).
+
+```
+npm install
+npm start
+```
+
+You should then be able to visit http://localhost:8080.
+
+To run the server on a different port:
+
+```
+npm start -- --port 4000
+```
