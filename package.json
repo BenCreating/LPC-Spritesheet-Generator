@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint javascript/**/*.js index.js"
+    "lint": "eslint javascript/**/*.js local-server.js",
+    "start": "static --headers \\{\\\"Cache-Control\\\":\\\"no-cache\\\"\\}"
   },
   "repository": {
     "type": "git",
@@ -24,6 +25,7 @@
     "eslint-plugin-compat": "^4.0.2",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-n": "^15.3.0",
-    "eslint-plugin-promise": "^6.0.1"
+    "eslint-plugin-promise": "^6.0.1",
+    "node-static": "^0.7.11"
   }
 }
