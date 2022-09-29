@@ -16,14 +16,12 @@ Specific license details for each image varies, but all images are licensed unde
 
 #### Folder Structure and Naming
 
-Each spritesheet should be split into individual animations (walk, cast, idle, etc.) and should be stored in `./resources/spritesheets/category/animation/item.png`
+Each spritesheet should be split into individual animations (walk, cast, idle, etc.) and should be stored in `./resources/spritesheets/category/item/animation.png`
 
-For example, the male character base is in the category `body`, so the paths to the `walk`, `cast`, and `idle` animations would be:  
-`./resources/spritesheets/body/walk/male.png`  
-`./resources/spritesheets/body/cast/male.png`  
-`./resources/spritesheets/body/idle/male.png`  
-
-Notice that each image has the same name `male.png`.
+For example, the male character base is in the category `body`, so the paths to the `walk`, `cast`, and `idle` animations would be:
+`./resources/spritesheets/body/male/walk.png`
+`./resources/spritesheets/body/male/cast.png`
+`./resources/spritesheets/body/male/idle.png`
 
 #### Sheet Definitions
 
@@ -31,22 +29,20 @@ Every new item must also be added to the file `./resources/sheet-definitions.jso
 
 The sheet definitions is structured as nested JSON objects, following the pattern `category` > `item` > `item options`.
 
-**The name of the item must match the file name of the images.** So the for the male character base the images are named `male.png` so the key must be `male`.
-
 ```json
 {
   "body": {
     "male": {},
     "female": {}
   },
-  
+
   "category2": {
-  
+
   }
 }
 ```
 
-The options for the male character base (for brevity, limited to the cast, thrust, walk, slash, shoot, and hurt animations) would look like this:
+The options for the male character base (for brevity, the authors and licenses are limited to those for the cast, thrust, walk, slash, shoot, and hurt animations) would look like this:
 
 ```json
 {
