@@ -42,7 +42,7 @@ The sheet definitions is structured as nested JSON objects, following the patter
 }
 ```
 
-The options for the male character base (for brevity, the authors and licenses are limited to those for the cast, thrust, walk, slash, shoot, and hurt animations) would look like this:
+The options for the male character base would look like this:
 
 ```json
 {
@@ -56,6 +56,7 @@ The options for the male character base (for brevity, the authors and licenses a
     "skin",
     "eyes"
   ],
+  "z_position": 25,
   "authors": [
     "Stephen Challener (Redshrike)",
     "Johannes Sjölund (wulax)"
@@ -75,6 +76,7 @@ The options for the male character base (for brevity, the authors and licenses a
 - `tags` (optional) used with excluded-by to hide incompatible items
 - `excluded-by` (optional) a list of tags. If it includes any tags on selected items then this item will not appear as an option
 - `palettes` (optional) the palette-definitions key for each palette used by the image. If it is left blank then the item will not be recolorable. List multiple palettes if the item has multiple recolorable pieces (a shirt with stripes, helmet with a feather, etc.)
+- `z_position` (optional) overrides the category's default z position
 - `authors` (required) a list of everyone who contributed to creating this item
 - `licenses` (required) a list of every license the authors applied to the item
 - `links` (required) a list of links to the item's source. It should include at least a link to the item's Open Game Art page

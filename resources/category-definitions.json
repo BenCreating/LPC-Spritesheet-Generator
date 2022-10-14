@@ -1,0 +1,17 @@
+{
+  "body": {
+    "z_position": 10
+  },
+  "head": {
+    "z_position": 100
+  },
+  "hair": {
+    "z_position": 120
+  },
+  "pants": {
+    "z_position": 20
+  },
+  "cape": {
+    "z_position": 85
+  }
+}

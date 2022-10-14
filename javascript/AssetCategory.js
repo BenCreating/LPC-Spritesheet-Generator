@@ -14,6 +14,7 @@ export default class AssetCategory {
   constructor(optionController, categoryName, categoryData, preselectedOptionName) {
     this.optionController = optionController
     this.name = categoryName
+    this.zPosition = this.categoryDefinitions[categoryName].z_position ?? 15
 
     const optionNames = Object.keys(categoryData)
     this.options = optionNames.map(name => {
@@ -35,6 +36,7 @@ export default class AssetCategory {
   get spritesheetController() { return this.optionController.spritesheetController }
   get attributionController() { return this.optionController.attributionController }
   get paletteDefinitions() { return this.optionController.paletteDefinitions }
+  get categoryDefinitions() { return this.optionController.categoryDefinitions }
 
   /**
    * Returns the tags for the selected option
@@ -230,7 +232,7 @@ export default class AssetCategory {
 
     // Removes the "none" option for the body and the head. If we ever want to
     // prevent more categories from randomly returning "none" then we should
-    // create a category-definitions file to control that
+    // add a parameter to the category-definitions file to control that
     if (this.name === 'body' || this.name === 'head') options.shift()
 
     const chosenOptionIndex = Math.floor(Math.random() * options.length)

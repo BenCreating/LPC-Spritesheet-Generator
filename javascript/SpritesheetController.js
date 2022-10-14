@@ -26,13 +26,22 @@ export default class SpritesheetController {
 
     const categories = this.optionController.categories
 
-    this.spritesheetElements = categories.map((category, layer) => {
+    this.spritesheetElements = categories.flatMap(category => {
       const selectedOption = category.selectedOption
       if (selectedOption.name === 'none') return undefined
 
-      const definition = this.sheetDefinitions[category.name][selectedOption.name]
+      const mainFilePath = selectedOption.imageFolderPath()
+      const mainElement = new SpritesheetElement(category.name, mainFilePath, selectedOption.zPosition, animations)
 
-      return new SpritesheetElement(category.name, selectedOption, definition, layer, animations)
+      const subLayers = selectedOption.sublayers
+      const sublayerElements = subLayers.map(sublayer => (
+        new SpritesheetElement(category.name, `${mainFilePath}/${sublayer.name}`, sublayer.z_position, animations)
+      ))
+
+      return [
+        mainElement,
+        ...sublayerElements
+      ]
     }).filter(item => item)
 
     await Promise.all(this.spritesheetElements.map(element => {
