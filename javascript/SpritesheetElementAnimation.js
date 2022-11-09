@@ -3,10 +3,9 @@
  * a spritesheet
  */
 export default class SpritesheetElementAnimation {
-  constructor(categoryName, asset, spritesheetDefinition, animationDefinition) {
+  constructor(categoryName, imagePath, animationDefinition) {
     this.categoryName = categoryName
-    this.asset = asset
-    this.spritesheetDefinition = spritesheetDefinition
+    this.imagePath = imagePath
     this.animationDefinition = animationDefinition
     this.canvas = document.createElement('canvas')
     this.context = this.canvas.getContext('2d')
@@ -18,7 +17,7 @@ export default class SpritesheetElementAnimation {
   async load() {
     const image = new Image()
     const animation = this.animationDefinition
-    image.src = `${this.asset.imageFolderPath()}/${animation.name}.png`
+    image.src = this.imagePath
 
     await image.decode()
 

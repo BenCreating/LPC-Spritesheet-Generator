@@ -16,6 +16,7 @@ export default class OptionController {
   get attributionController() { return this.characterGenerator.attributionController }
   get sheetDefinitions() { return this.characterGenerator.sheetDefinitions }
   get paletteDefinitions() { return this.characterGenerator.paletteDefinitions }
+  get categoryDefinitions() { return this.characterGenerator.categoryDefinitions }
 
   update() {
     const sidebar = document.querySelector('.sidebar')

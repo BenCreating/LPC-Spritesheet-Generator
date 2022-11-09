@@ -17,6 +17,8 @@ export default class AssetOption {
     this.tags = optionData.tags ?? []
     this.excludedBy = optionData['excluded-by'] ?? []
     this.palettes = optionData.palettes ?? []
+    this.sublayers = optionData.sublayers ?? []
+    this.zPosition = optionData.z_position ?? category.zPosition
 
     this.attribution = new Attribution(this, optionData)
   }

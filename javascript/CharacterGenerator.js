@@ -20,6 +20,7 @@ export default class CharacterGenerator {
   async setup() {
     this.sheetDefinitions = await this.loadDefinitions('sheet')
     this.paletteDefinitions = await this.loadDefinitions('palette')
+    this.categoryDefinitions = await this.loadDefinitions('category')
 
     const downloadButton = document.querySelector('#download-button')
     downloadButton.addEventListener('click', this.download)
