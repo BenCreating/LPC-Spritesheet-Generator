@@ -13,5 +13,8 @@
   },
   "cape": {
     "z_position": 85
+  },
+  "weapon": {
+    "z_position": 140
   }
 }
