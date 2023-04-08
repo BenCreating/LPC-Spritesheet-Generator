@@ -1,7 +1,6 @@
 /**
  * @typedef {import('./CharacterGenerator').default} CharacterGenerator
  */
-import animations from './animations.js'
 import SpritesheetElement from './SpritesheetElement.js'
 
 export default class SpritesheetController {
@@ -15,34 +14,14 @@ export default class SpritesheetController {
 
   get sheetDefinitions() { return this.characterGenerator.sheetDefinitions }
   get optionController() { return this.characterGenerator.optionController }
+  get animationDefinitions() { return this.characterGenerator.animationDefinitions }
 
   /**
    * Updates the generated spritesheet
    */
   async update() {
-    // TODO: set width and height dynamically based on the animations displayed
-    this.canvas.width = 832
-    this.canvas.height = 2112
-
-    const categories = this.optionController.categories
-
-    this.spritesheetElements = categories.flatMap(category => {
-      const selectedOption = category.selectedOption
-      if (selectedOption.name === 'none') return undefined
-
-      const mainFilePath = selectedOption.imageFolderPath()
-      const mainElement = new SpritesheetElement(category.name, mainFilePath, selectedOption.zPosition, animations)
-
-      const subLayers = selectedOption.sublayers
-      const sublayerElements = subLayers.map(sublayer => (
-        new SpritesheetElement(category.name, `${mainFilePath}/${sublayer.name}`, sublayer.z_position, animations)
-      ))
-
-      return [
-        mainElement,
-        ...sublayerElements
-      ]
-    }).filter(item => item)
+    this.buildSpritesheetElements()
+    this.setCanvasSize()
 
     await Promise.all(this.spritesheetElements.map(element => {
       return element.load()
@@ -50,6 +29,36 @@ export default class SpritesheetController {
 
     this.spritesheetElements.sort(SpritesheetElement.layerComparitor)
     this.applyRecolor()
+  }
+
+  buildSpritesheetElements() {
+    const categories = this.optionController.categories
+    const animationDefinitions = this.animationDefinitions
+
+    this.spritesheetElements = categories.flatMap(category => {
+      const selectedOption = category.selectedOption
+      if (selectedOption.name === 'none') return undefined
+
+      const mainFilePath = selectedOption.imageFolderPath()
+      const mainElement = new SpritesheetElement(category.name, mainFilePath, selectedOption.zPosition, animationDefinitions)
+
+      const subLayers = selectedOption.sublayers
+      const sublayerElements = subLayers.map(sublayer => {
+        const subLayerFilePath = `${mainFilePath}/${sublayer.name}`
+        return new SpritesheetElement(category.name, subLayerFilePath, sublayer.z_position, animationDefinitions)
+      })
+
+      return [
+        mainElement,
+        ...sublayerElements
+      ]
+    }).filter(item => item)
+  }
+
+  setCanvasSize() {
+    // TODO: set width and height dynamically based on the animations displayed
+    this.canvas.width = 832
+    this.canvas.height = 2112
   }
 
   /**

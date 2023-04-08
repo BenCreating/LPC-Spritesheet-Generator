@@ -28,8 +28,11 @@ export default class SpritesheetElement {
    * Loads the images for this element
    */
   async load() {
-    const animations = await Promise.all(this.animationDefinitions.map(async animationDefinition => {
-      const animationImagePath = `${this.folderPath}/${animationDefinition.name}.png`
+    const animationNames = Object.keys(this.animationDefinitions)
+
+    const animations = await Promise.all(animationNames.map(async animationName => {
+      const animationDefinition = this.animationDefinitions[animationName]
+      const animationImagePath = `${this.folderPath}/${animationName}.png`
       const animationExists = await this.animationExists(animationImagePath)
 
       if (!animationExists) return undefined
@@ -68,6 +71,18 @@ export default class SpritesheetElement {
    * @param {*} ctx
    */
   draw(ctx) {
-    this.animations.forEach(animation => animation.draw(ctx))
+    let x = 0
+    let y = 0
+
+    this.animations.forEach((animation, index) => {
+      animation.draw(ctx, x, y)
+
+      // TODO: make this handle cases where the element is missing an animation
+      const nextAnimation = this.animations[index + 1]
+      if (nextAnimation) {
+        if (!nextAnimation.inline) y += animation.height
+        x = nextAnimation.inline ? x + animation.width : 0
+      }
+    })
   }
 }
