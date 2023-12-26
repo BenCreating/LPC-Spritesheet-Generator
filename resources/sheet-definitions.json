@@ -554,6 +554,7 @@
       "excluded-by": [],
       "palettes": [],
       "frame-sizes": {
+        "thrust": 192,
         "slash": 192
       },
       "authors": [

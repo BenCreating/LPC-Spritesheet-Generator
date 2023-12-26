@@ -3,17 +3,18 @@
  * a spritesheet
  */
 export default class SpritesheetElementAnimation {
-  constructor(categoryName, imagePath, animationDefinition) {
+  constructor(categoryName, animationName, imagePath, animationDefinition, frameSize = 64) {
     this.categoryName = categoryName
+    this.name = animationName
     this.imagePath = imagePath
     this.animationDefinition = animationDefinition
+    this.frameSize = frameSize
     this.canvas = document.createElement('canvas')
     this.context = this.canvas.getContext('2d')
   }
 
-  get frameSize() { return 64 }
-  get width() { return this.animationDefinition.columns * this.frameSize }
-  get height() { return this.animationDefinition.rows * this.frameSize }
+  width(frameSize) { return this.animationDefinition.columns * frameSize }
+  height(frameSize) { return this.animationDefinition.rows * frameSize }
   get inline() { return this.animationDefinition.inline }
 
   /**
@@ -59,10 +60,21 @@ export default class SpritesheetElementAnimation {
 
   /**
    * Adds the animation for this element to the spritesheet
-   *
-   * @param {*} ctx
    */
-  draw(ctx, x = 0, y = 0) {
+  draw(ctx, x = 0, y = 0, frameSize) {
+    if (frameSize === this.frameSize) {
+      ctx.drawImage(this.canvas, x, y)
+    } else {
+      this.drawWithDifferentFrameSize(ctx, x, y, frameSize)
+    }
+  }
+
+  /**
+   * Splits the image into individual frames and adds them to the spritesheet at
+   * with different frame size than the source image
+   */
+  drawWithDifferentFrameSize(ctx, x = 0, y = 0, frameSize) {
+    // TODO: draw each frame individually with the correct frame size
     ctx.drawImage(this.canvas, x, y)
   }
 }

@@ -39,13 +39,16 @@ export default class SpritesheetController {
       const selectedOption = category.selectedOption
       if (selectedOption.name === 'none') return undefined
 
+      const sheetDefinition = this.sheetDefinitions[category.name][selectedOption.name]
+      const frameSizes = sheetDefinition['frame-sizes']
+
       const mainFilePath = selectedOption.imageFolderPath()
-      const mainElement = new SpritesheetElement(category.name, mainFilePath, selectedOption.zPosition, animationDefinitions)
+      const mainElement = new SpritesheetElement(category.name, mainFilePath, selectedOption.zPosition, animationDefinitions, frameSizes)
 
       const subLayers = selectedOption.sublayers
       const sublayerElements = subLayers.map(sublayer => {
         const subLayerFilePath = `${mainFilePath}/${sublayer.name}`
-        return new SpritesheetElement(category.name, subLayerFilePath, sublayer.z_position, animationDefinitions)
+        return new SpritesheetElement(category.name, subLayerFilePath, sublayer.z_position, animationDefinitions, frameSizes)
       })
 
       return [
@@ -74,12 +77,33 @@ export default class SpritesheetController {
   }
 
   /**
+   * Gets the frame size for the animations from all SpritesheetElements and
+   * returns the largest size for each
+   *
+   * @returns {Object}
+   */
+  largestAnimationFrameSizes() {
+    const animationNames = Object.keys(this.animationDefinitions)
+    const frameSizes = {}
+
+    this.spritesheetElements.forEach(spritesheetElement => {
+      animationNames.forEach(animationName => {
+        const frameSize = spritesheetElement.frameSizeForAnimation(animationName)
+        const largestFrameSize = frameSizes[animationName] ?? 0
+        if (frameSize > largestFrameSize) frameSizes[animationName] = frameSize
+      })
+    })
+
+    return frameSizes
+  }
+
+  /**
    * Draws every selected option into the spritesheet
    */
   draw() {
     const context = this.canvas.getContext('2d')
     context.clearRect(0, 0, this.canvas.width, this.canvas.height)
-    this.spritesheetElements.forEach(element => element.draw(context))
+    this.spritesheetElements.forEach(element => element.draw(context, this.largestAnimationFrameSizes()))
   }
 
   /**

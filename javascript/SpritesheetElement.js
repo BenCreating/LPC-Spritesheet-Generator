@@ -17,12 +17,14 @@ export default class SpritesheetElement {
    * @param {string} folderPath
    * @param {number} layer
    * @param {object} animationDefinitions
+   * @param {object} frameSizes
    */
-  constructor(categoryName, folderPath, layer, animationDefinitions) {
+  constructor(categoryName, folderPath, layer, animationDefinitions, frameSizes = {}) {
     this.categoryName = categoryName
     this.folderPath = folderPath
     this.layer = layer
     this.animationDefinitions = animationDefinitions
+    this.frameSizes = frameSizes
   }
 
   /**
@@ -35,10 +37,11 @@ export default class SpritesheetElement {
       const animationDefinition = this.animationDefinitions[animationName]
       const animationImagePath = `${this.folderPath}/${animationName}.png`
       const animationExists = await this.animationExists(animationImagePath)
+      const frameSize = this.frameSizes[animationName]
 
-      if (!animationExists) return new SpritesheetElementMissingAnimation(this.categoryName, animationImagePath, animationDefinition)
+      if (!animationExists) return new SpritesheetElementMissingAnimation(this.categoryName, animationName, animationImagePath, animationDefinition, frameSize)
 
-      return new SpritesheetElementAnimation(this.categoryName, animationImagePath, animationDefinition)
+      return new SpritesheetElementAnimation(this.categoryName, animationName, animationImagePath, animationDefinition, frameSize)
     }))
 
     // Filter out animations that don't exist
@@ -71,18 +74,24 @@ export default class SpritesheetElement {
    *
    * @param {*} ctx
    */
-  draw(ctx) {
+  draw(ctx, largestAnimationFrameSizes) {
     let x = 0
     let y = 0
 
     this.animations.forEach((animation, index) => {
-      animation.draw(ctx, x, y)
+      const frameSize = largestAnimationFrameSizes[animation.name]
+      animation.draw(ctx, x, y, frameSize)
 
       const nextAnimation = this.animations[index + 1]
       if (nextAnimation) {
-        if (!nextAnimation.inline) y += animation.height
-        x = nextAnimation.inline ? x + animation.width : 0
+        if (!nextAnimation.inline) y += animation.height(frameSize)
+        x = nextAnimation.inline ? x + animation.width(frameSize) : 0
       }
     })
+  }
+
+  frameSizeForAnimation(animationName) {
+    const animation = this.animations.find(animation => animation.name === animationName)
+    return animation.frameSize
   }
 }
