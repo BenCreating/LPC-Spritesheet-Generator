@@ -21,12 +21,12 @@ export default class SpritesheetController {
    */
   async update() {
     this.buildSpritesheetElements()
-    this.setCanvasSize()
 
     await Promise.all(this.spritesheetElements.map(element => {
       return element.load()
     }))
 
+    this.setCanvasSize()
     this.spritesheetElements.sort(SpritesheetElement.layerComparitor)
     this.applyRecolor()
   }
@@ -59,9 +59,53 @@ export default class SpritesheetController {
   }
 
   setCanvasSize() {
-    // TODO: set width and height dynamically based on the animations displayed
-    this.canvas.width = 832
-    this.canvas.height = 2112
+    this.canvas.width = this.canvasWidth()
+    this.canvas.height = this.canvasHeight()
+  }
+
+  canvasWidth() {
+    const frameSizes = this.largestAnimationFrameSizes()
+    const animationDefinitions = this.animationDefinitions
+    const animationNames = Object.keys(animationDefinitions)
+
+    const animationWidths = []
+    animationNames.forEach(name => {
+      const frameSize = frameSizes[name]
+      const animationDefinition = animationDefinitions[name]
+      const width = frameSize * animationDefinition.columns
+
+      if (animationDefinition.inline) {
+        const inlineIndex = animationWidths.length - 1
+        animationWidths[inlineIndex] += width
+      } else {
+        animationWidths.push(width)
+      }
+    })
+
+    return Math.max(...animationWidths)
+  }
+
+  canvasHeight() {
+    const frameSizes = this.largestAnimationFrameSizes()
+    const animationDefinitions = this.animationDefinitions
+    const animationNames = Object.keys(animationDefinitions)
+
+    const animationHeights = []
+    animationNames.forEach(name => {
+      const frameSize = frameSizes[name]
+      const animationDefinition = animationDefinitions[name]
+      const height = frameSize * animationDefinition.rows
+
+      if (animationDefinition.inline) {
+        const inlineIndex = animationHeights.length - 1
+        const inlineHeight = animationHeights[inlineIndex]
+        animationHeights[inlineIndex] = Math.max(inlineHeight, height)
+      } else {
+        animationHeights.push(height)
+      }
+    })
+
+    return animationHeights.reduce((total, height) => total + height)
   }
 
   /**
@@ -86,6 +130,7 @@ export default class SpritesheetController {
     const animationNames = Object.keys(this.animationDefinitions)
     const frameSizes = {}
 
+    // TODO: apply the largest frame size in a row to inline animations
     this.spritesheetElements.forEach(spritesheetElement => {
       animationNames.forEach(animationName => {
         const frameSize = spritesheetElement.frameSizeForAnimation(animationName)
