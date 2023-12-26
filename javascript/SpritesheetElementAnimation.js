@@ -13,9 +13,12 @@ export default class SpritesheetElementAnimation {
     this.context = this.canvas.getContext('2d')
   }
 
-  width(frameSize) { return this.animationDefinition.columns * frameSize }
-  height(frameSize) { return this.animationDefinition.rows * frameSize }
   get inline() { return this.animationDefinition.inline }
+  get columns() { return this.animationDefinition.columns }
+  get rows() { return this.animationDefinition.rows }
+
+  width(frameSize) { return this.columns * frameSize }
+  height(frameSize) { return this.rows * frameSize }
 
   /**
    * Loads the image for this element's animation
@@ -73,8 +76,32 @@ export default class SpritesheetElementAnimation {
    * Splits the image into individual frames and adds them to the spritesheet at
    * with different frame size than the source image
    */
-  drawWithDifferentFrameSize(ctx, x = 0, y = 0, frameSize) {
-    // TODO: draw each frame individually with the correct frame size
-    ctx.drawImage(this.canvas, x, y)
+  drawWithDifferentFrameSize(ctx, x = 0, y = 0, targetFrameSize) {
+    const sourceFrameSize = this.frameSize
+    const columns = this.columns
+    const rows = this.rows
+
+    const centerOffset = Math.ceil(Math.abs(targetFrameSize - sourceFrameSize) / 2)
+
+    for (let row = 0; row < rows; row++) {
+      for (let column = 0; column < columns; column++) {
+        const targetFrameX = x + (targetFrameSize * column) + centerOffset
+        const targetFrameY = y + (targetFrameSize * row) + centerOffset
+        const sourceFrameX = sourceFrameSize * column
+        const sourceFrameY = sourceFrameSize * row
+
+        ctx.drawImage(
+          this.canvas,
+          sourceFrameX,
+          sourceFrameY,
+          sourceFrameSize,
+          sourceFrameSize,
+          targetFrameX,
+          targetFrameY,
+          sourceFrameSize,
+          sourceFrameSize
+        )
+      }
+    }
   }
 }
