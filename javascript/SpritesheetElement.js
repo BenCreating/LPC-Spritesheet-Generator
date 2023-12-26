@@ -1,4 +1,5 @@
 import SpritesheetElementAnimation from './SpritesheetElementAnimation.js'
+import SpritesheetElementMissingAnimation from './SpritesheetElementMissingAnimation.js'
 
 /**
  * A single element of a spritesheet (body, hair, etc.)
@@ -35,7 +36,7 @@ export default class SpritesheetElement {
       const animationImagePath = `${this.folderPath}/${animationName}.png`
       const animationExists = await this.animationExists(animationImagePath)
 
-      if (!animationExists) return undefined
+      if (!animationExists) return new SpritesheetElementMissingAnimation(this.categoryName, animationImagePath, animationDefinition)
 
       return new SpritesheetElementAnimation(this.categoryName, animationImagePath, animationDefinition)
     }))
@@ -77,7 +78,6 @@ export default class SpritesheetElement {
     this.animations.forEach((animation, index) => {
       animation.draw(ctx, x, y)
 
-      // TODO: make this handle cases where the element is missing an animation
       const nextAnimation = this.animations[index + 1]
       if (nextAnimation) {
         if (!nextAnimation.inline) y += animation.height
