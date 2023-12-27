@@ -3,13 +3,22 @@
  * a spritesheet
  */
 export default class SpritesheetElementAnimation {
-  constructor(categoryName, imagePath, animationDefinition) {
+  constructor(categoryName, animationName, imagePath, animationDefinition, frameSize = 64) {
     this.categoryName = categoryName
+    this.name = animationName
     this.imagePath = imagePath
     this.animationDefinition = animationDefinition
+    this.frameSize = frameSize
     this.canvas = document.createElement('canvas')
     this.context = this.canvas.getContext('2d')
   }
+
+  get inline() { return this.animationDefinition.inline }
+  get columns() { return this.animationDefinition.columns }
+  get rows() { return this.animationDefinition.rows }
+
+  width(frameSize) { return this.columns * frameSize }
+  height(frameSize) { return this.rows * frameSize }
 
   /**
    * Loads the image for this element's animation
@@ -54,10 +63,45 @@ export default class SpritesheetElementAnimation {
 
   /**
    * Adds the animation for this element to the spritesheet
-   *
-   * @param {*} ctx
    */
-  draw(ctx) {
-    ctx.drawImage(this.canvas, this.animationDefinition.x, this.animationDefinition.y)
+  draw(ctx, x = 0, y = 0, frameSize) {
+    if (frameSize === this.frameSize) {
+      ctx.drawImage(this.canvas, x, y)
+    } else {
+      this.drawWithDifferentFrameSize(ctx, x, y, frameSize)
+    }
+  }
+
+  /**
+   * Splits the image into individual frames and adds them to the spritesheet at
+   * with different frame size than the source image
+   */
+  drawWithDifferentFrameSize(ctx, x = 0, y = 0, targetFrameSize) {
+    const sourceFrameSize = this.frameSize
+    const columns = this.columns
+    const rows = this.rows
+
+    const centerOffset = Math.ceil(Math.abs(targetFrameSize - sourceFrameSize) / 2)
+
+    for (let row = 0; row < rows; row++) {
+      for (let column = 0; column < columns; column++) {
+        const targetFrameX = x + (targetFrameSize * column) + centerOffset
+        const targetFrameY = y + (targetFrameSize * row) + centerOffset
+        const sourceFrameX = sourceFrameSize * column
+        const sourceFrameY = sourceFrameSize * row
+
+        ctx.drawImage(
+          this.canvas,
+          sourceFrameX,
+          sourceFrameY,
+          sourceFrameSize,
+          sourceFrameSize,
+          targetFrameX,
+          targetFrameY,
+          sourceFrameSize,
+          sourceFrameSize
+        )
+      }
+    }
   }
 }

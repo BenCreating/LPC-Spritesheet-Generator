@@ -546,5 +546,29 @@
         { "name": "solid_behind", "z_position": 5 }
       ]
     }
+  },
+
+  "weapon": {
+    "halberd": {
+      "tags": [],
+      "excluded-by": [],
+      "palettes": [],
+      "frame-sizes": {
+        "thrust": 192,
+        "slash": 192
+      },
+      "authors": [
+        "Benjamin K. Smith (BenCreating)",
+        "bluecarrot16",
+        "Sander Frenken (castelonia)"
+      ],
+      "licenses": [
+        "CC-BY-SA 3.0",
+        "GPL 3.0"
+      ],
+      "links": [
+        "https://opengameart.org/content/lpc-medieval-weapons"
+      ]
+    }
   }
 }

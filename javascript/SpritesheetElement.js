@@ -1,4 +1,5 @@
 import SpritesheetElementAnimation from './SpritesheetElementAnimation.js'
+import SpritesheetElementMissingAnimation from './SpritesheetElementMissingAnimation.js'
 
 /**
  * A single element of a spritesheet (body, hair, etc.)
@@ -16,25 +17,31 @@ export default class SpritesheetElement {
    * @param {string} folderPath
    * @param {number} layer
    * @param {object} animationDefinitions
+   * @param {object} frameSizes
    */
-  constructor(categoryName, folderPath, layer, animationDefinitions) {
+  constructor(categoryName, folderPath, layer, animationDefinitions, frameSizes = {}) {
     this.categoryName = categoryName
     this.folderPath = folderPath
     this.layer = layer
     this.animationDefinitions = animationDefinitions
+    this.frameSizes = frameSizes
   }
 
   /**
    * Loads the images for this element
    */
   async load() {
-    const animations = await Promise.all(this.animationDefinitions.map(async animationDefinition => {
-      const animationImagePath = `${this.folderPath}/${animationDefinition.name}.png`
+    const animationNames = Object.keys(this.animationDefinitions)
+
+    const animations = await Promise.all(animationNames.map(async animationName => {
+      const animationDefinition = this.animationDefinitions[animationName]
+      const animationImagePath = `${this.folderPath}/${animationName}.png`
       const animationExists = await this.animationExists(animationImagePath)
+      const frameSize = this.frameSizes[animationName]
 
-      if (!animationExists) return undefined
+      if (!animationExists) return new SpritesheetElementMissingAnimation(this.categoryName, animationName, animationImagePath, animationDefinition, frameSize)
 
-      return new SpritesheetElementAnimation(this.categoryName, animationImagePath, animationDefinition)
+      return new SpritesheetElementAnimation(this.categoryName, animationName, animationImagePath, animationDefinition, frameSize)
     }))
 
     // Filter out animations that don't exist
@@ -67,7 +74,24 @@ export default class SpritesheetElement {
    *
    * @param {*} ctx
    */
-  draw(ctx) {
-    this.animations.forEach(animation => animation.draw(ctx))
+  draw(ctx, largestAnimationFrameSizes) {
+    let x = 0
+    let y = 0
+
+    this.animations.forEach((animation, index) => {
+      const frameSize = largestAnimationFrameSizes[animation.name]
+      animation.draw(ctx, x, y, frameSize)
+
+      const nextAnimation = this.animations[index + 1]
+      if (nextAnimation) {
+        if (!nextAnimation.inline) y += animation.height(frameSize)
+        x = nextAnimation.inline ? x + animation.width(frameSize) : 0
+      }
+    })
+  }
+
+  frameSizeForAnimation(animationName) {
+    const animation = this.animations.find(animation => animation.name === animationName)
+    return animation.frameSize
   }
 }

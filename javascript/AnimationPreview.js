@@ -1,4 +1,6 @@
-import animations from './animations.js'
+/**
+ * @typedef {import('./SpritesheetController').default} SpritesheetController
+ */
 
 /**
  * Custom element to preview an animation. Insert into the page with:
@@ -24,16 +26,8 @@ class AnimationPreview extends HTMLElement {
     label.textContent = 'Preview'
 
     const select = document.createElement('select')
-
-    animations.forEach(animation => {
-      const option = document.createElement('option')
-      option.value = animation.name
-      option.textContent = animation.name
-      option.selected = animation.name === this.#selectedAnimation
-      select.options.add(option)
-    })
-
     select.addEventListener('change', this.#updateSelectedAnimation)
+    this.selectorElement = select
 
     selectAnimationWrapper.append(label, select)
     wrapper.append(selectAnimationWrapper, this.#canvas)
@@ -74,32 +68,65 @@ class AnimationPreview extends HTMLElement {
   #animationStart = undefined
 
   /**
-   * The image or canvas element for the full spritesheet. Set this before
-   * calling start().
+   * The object storing the information for building the spritesheet. Set this
+   * before calling start().
    *
-   * @type {CanvasImageSource}
+   * @type {SpritesheetController}
    */
-  source = undefined
+  spritesheetController = undefined
+
+  /**
+   * The image or canvas element for the full spritesheet
+   *
+   * @returns {CanvasImageSource}
+   */
+  get source() { return this.spritesheetController.canvas }
 
   #currentFrameIndex = 0 // The index of the currently displayed frame
   #framesPerSecond = 8 // Default value, individual animations can set a different frame rate
   #numberOfDirections = 4 // The number of directions a character can face in
 
   animationLength = 0 // This is calculated from the selected animation
-  frameSize = 64 // Public variable to allow for future support of oversized animations
+
+  get animations() {
+    if (!this.spritesheetController) return {}
+    return this.spritesheetController.animationDefinitions
+  }
 
   /**
    * @return {object} The currently selected animation
    */
   get animation() {
-    return animations.find(animation => animation.name === this.#selectedAnimation)
+    const animationNames = this.spritesheetController.animationNames
+    return animationNames.find(animation => animation === this.#selectedAnimation)
+  }
+
+  /**
+   * Adds an option to the select menu for each animation. Call this before
+   * calling start().
+   */
+  setupAnimationOptions() {
+    const select = this.selectorElement
+    const animationNames = this.spritesheetController.animationNames
+
+    animationNames.forEach(animation => {
+      const option = document.createElement('option')
+      option.value = animation
+      option.textContent = animation
+      option.selected = animation === this.#selectedAnimation
+      select.options.add(option)
+    })
   }
 
   /**
    * Start the animation
    */
   start() {
-    this.animationLength = this.animation.width / this.frameSize
+    const animationName = this.#selectedAnimation
+    const frameSizes = this.spritesheetController.largestAnimationFrameSizes()
+    this.frameSize = frameSizes[animationName]
+
+    this.animationLength = this.animations[animationName].columns
     this.#canvas.width = this.frameSize * this.#numberOfDirections
     this.#canvas.height = this.frameSize
 
@@ -152,9 +179,12 @@ class AnimationPreview extends HTMLElement {
   #draw(frameIndex) {
     this.#ctx.clearRect(0, 0, this.#canvas.width, this.#canvas.height)
 
+    const startX = this.spritesheetController.animationStartX(this.#selectedAnimation)
+    const startY = this.spritesheetController.animationStartY(this.#selectedAnimation)
+
     for (let direction = 0; direction < this.#numberOfDirections; direction++) {
-      const sx = this.animation.x + frameIndex * this.frameSize
-      const sy = this.animation.y + direction * this.frameSize
+      const sx = startX + frameIndex * this.frameSize
+      const sy = startY + direction * this.frameSize
       const dx = direction * this.frameSize
       const dy = 0 // Draw each direction in a horizontal row
 
