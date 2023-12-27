@@ -14,7 +14,7 @@ export default class AssetOption {
     this.category = category
 
     this.default = optionData.default ?? false
-    this.label = optionData.label
+    this.label = optionData.label ?? name
     this.tags = optionData.tags ?? []
     this.excludedBy = optionData['excluded-by'] ?? []
     this.palettes = optionData.palettes ?? []

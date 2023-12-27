@@ -9,7 +9,7 @@ export default class Attribution {
    */
   constructor(asset, assetData) {
     this.assetName = asset.name
-    this.assetLabel = asset.label ?? asset.name
+    this.assetLabel = asset.label
     this.categoryName = asset.category.name
     this.authors = assetData.authors ?? []
     this.licenses = assetData.licenses ?? []
