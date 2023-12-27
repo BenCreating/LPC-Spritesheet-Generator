@@ -15,6 +15,7 @@ export default class SpritesheetController {
   get sheetDefinitions() { return this.characterGenerator.sheetDefinitions }
   get optionController() { return this.characterGenerator.optionController }
   get animationDefinitions() { return this.characterGenerator.animationDefinitions }
+  get animationNames() { return Object.keys(this.animationDefinitions) }
 
   /**
    * Updates the generated spritesheet
@@ -65,13 +66,11 @@ export default class SpritesheetController {
 
   canvasWidth() {
     const frameSizes = this.largestAnimationFrameSizes()
-    const animationDefinitions = this.animationDefinitions
-    const animationNames = Object.keys(animationDefinitions)
 
     const animationWidths = []
-    animationNames.forEach(name => {
+    this.animationNames.forEach(name => {
       const frameSize = frameSizes[name]
-      const animationDefinition = animationDefinitions[name]
+      const animationDefinition = this.animationDefinitions[name]
       const width = frameSize * animationDefinition.columns
 
       if (animationDefinition.inline) {
@@ -87,13 +86,11 @@ export default class SpritesheetController {
 
   canvasHeight() {
     const frameSizes = this.largestAnimationFrameSizes()
-    const animationDefinitions = this.animationDefinitions
-    const animationNames = Object.keys(animationDefinitions)
 
     const animationHeights = []
-    animationNames.forEach(name => {
+    this.animationNames.forEach(name => {
       const frameSize = frameSizes[name]
-      const animationDefinition = animationDefinitions[name]
+      const animationDefinition = this.animationDefinitions[name]
       const height = frameSize * animationDefinition.rows
 
       if (animationDefinition.inline) {
@@ -127,7 +124,7 @@ export default class SpritesheetController {
    * @returns {Object}
    */
   largestAnimationFrameSizes() {
-    const animationNames = Object.keys(this.animationDefinitions)
+    const animationNames = this.animationNames
     const frameSizes = {}
 
     // TODO: apply the largest frame size in a row to inline animations
@@ -140,6 +137,77 @@ export default class SpritesheetController {
     })
 
     return frameSizes
+  }
+
+  animationStartX(animationName) {
+    const animationsInlineWith = this.animationsInlineWith(animationName)
+
+    if (animationsInlineWith.length === 0) return 0
+
+    const animationNames = this.animationNames
+    const animationIndex = animationNames.findIndex(name => name === animationName)
+    const animationsBefore = animationNames.slice(0, animationIndex)
+    const frameSizes = this.largestAnimationFrameSizes()
+
+    const inlineAnimationsBefore = animationsInlineWith.filter(animation => animationsBefore.includes(animation))
+
+    return inlineAnimationsBefore.reduce((startX, name) => {
+      const definition = this.animationDefinitions[name]
+      const columns = definition.columns
+      const frameSize = frameSizes[name]
+
+      return startX + columns * frameSize
+    }, 0)
+  }
+
+  animationStartY(animationName) {
+    const animationNames = this.animationNames
+    const animationIndex = animationNames.findIndex(name => name === animationName)
+    const animationsBefore = animationNames.slice(0, animationIndex)
+    const animationsInlineWith = this.animationsInlineWith(animationName)
+    const frameSizes = this.largestAnimationFrameSizes()
+
+    const animationsAccountedFor = []
+    return animationsBefore.reduce((startY, name) => {
+      if (animationsInlineWith.includes(name)) return startY
+      if (animationsAccountedFor.includes(name)) return startY
+
+      animationsAccountedFor.push(name, ...this.animationsInlineWith(name))
+
+      const definition = this.animationDefinitions[name]
+      const rows = definition.rows
+      const frameSize = frameSizes[name]
+
+      return startY + rows * frameSize
+    }, 0)
+  }
+
+  animationsInlineWith(animationName) {
+    const animationDefinitions = this.animationDefinitions
+    const animationNames = this.animationNames
+    const animationIndex = animationNames.findIndex(name => name === animationName)
+
+    const animationAfter = animationNames[animationIndex + 1]
+    const inline = animationDefinitions[animationName].inline
+
+    if (!animationAfter && !inline) return []
+    if (!inline && !animationDefinitions[animationAfter].inline) return []
+
+    let inlineStartIndex = animationIndex
+    for (let index = animationIndex; index > 0; index--) {
+      inlineStartIndex = index
+      const previousAnimationName = this.animationNames[index]
+      if (!animationDefinitions[previousAnimationName].inline) break
+    }
+
+    let inlineEndIndex = animationIndex
+    for (let index = animationIndex + 1; index > 0; index++) {
+      const nextAnimationName = this.animationNames[index]
+      if (!animationDefinitions[nextAnimationName].inline) break
+      inlineEndIndex = index
+    }
+
+    return animationNames.slice(inlineStartIndex, inlineEndIndex + 1)
   }
 
   /**

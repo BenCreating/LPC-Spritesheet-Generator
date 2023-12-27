@@ -37,7 +37,8 @@ export default class CharacterGenerator {
     this.attributionController.update()
 
     const preview = document.querySelector('animation-preview')
-    preview.source = this.spritesheetController.canvas
+    preview.spritesheetController = this.spritesheetController
+    preview.setupAnimationOptions()
     preview.start()
   }
 
