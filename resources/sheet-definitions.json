@@ -492,6 +492,7 @@
 
   "cape": {
     "solid-male": {
+      "label": "cape",
       "tags": [],
       "excluded-by": [
         "child",
@@ -521,6 +522,7 @@
       ]
     },
     "solid-female": {
+      "label": "cape",
       "tags": [],
       "excluded-by": [
         "child",
