@@ -438,6 +438,7 @@
 
   "pants": {
     "male": {
+      "label": "basic",
       "tags": [],
       "excluded-by": [
         "female",
@@ -461,6 +462,7 @@
       ]
     },
     "female": {
+      "label": "basic",
       "tags": [],
       "excluded-by": [
         "male",
@@ -490,6 +492,7 @@
 
   "cape": {
     "solid-male": {
+      "label": "cape",
       "tags": [],
       "excluded-by": [
         "child",
@@ -519,6 +522,7 @@
       ]
     },
     "solid-female": {
+      "label": "cape",
       "tags": [],
       "excluded-by": [
         "child",

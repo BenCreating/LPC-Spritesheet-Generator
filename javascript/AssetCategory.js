@@ -86,6 +86,7 @@ export default class AssetCategory {
     this.urlParameterController.setURLParameters({ name: this.name, value: option.name })
 
     if (redrawSpritesheet) {
+      this.optionController.fixExcludedOptions(this)
       this.optionController.update()
       this.spritesheetController.update()
       this.attributionController.update()
@@ -275,5 +276,24 @@ export default class AssetCategory {
     ]
 
     return colorOffsets.map(([start, end]) => parseInt(hexCode.slice(start, end), 16))
+  }
+
+  /**
+   * Finds and sets a valid option if the selection is invalid. This will pick
+   * an option with the same label as the previous selection if one is
+   * available, otherwise it will use the first valid option ("none" in most
+   * cases).
+   */
+  fixExcludedOptions() {
+    const tags = this.allCategoryTags()
+    const selectedOption = this.selectedOption
+
+    if (selectedOption.isAvailable(tags)) return
+
+    const label = selectedOption.label
+    const availableOptions = this.availableOptions()
+    const newOption = availableOptions.find(option => option.label === label) ?? availableOptions[0]
+
+    this.setSelectedOption(newOption, false)
   }
 }

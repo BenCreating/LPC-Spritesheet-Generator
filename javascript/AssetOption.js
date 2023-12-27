@@ -14,6 +14,7 @@ export default class AssetOption {
     this.category = category
 
     this.default = optionData.default ?? false
+    this.label = optionData.label ?? name
     this.tags = optionData.tags ?? []
     this.excludedBy = optionData['excluded-by'] ?? []
     this.palettes = optionData.palettes ?? []
@@ -64,7 +65,7 @@ export default class AssetOption {
     if (this.icon) label.appendChild(this.icon)
 
     const labelText = document.createElement('span')
-    labelText.textContent = name
+    labelText.textContent = this.label ?? name
     label.appendChild(labelText)
 
     return buttonContainer

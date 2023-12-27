@@ -117,4 +117,18 @@ export default class OptionController {
     this.spritesheetController.update()
     this.attributionController.update()
   }
+
+  /**
+   * Attempts to find valid equivilent options for any that have been excluded
+   * by other selections. This is called when an option is selected.
+   *
+   * @param {AssetCategory} changedCategory the category that just updated
+   */
+  fixExcludedOptions(changedCategory) {
+    this.categories.forEach(category => {
+      if (category === changedCategory) return
+
+      category.fixExcludedOptions()
+    })
+  }
 }

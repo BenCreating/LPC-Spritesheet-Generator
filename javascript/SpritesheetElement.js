@@ -91,6 +91,8 @@ export default class SpritesheetElement {
   }
 
   frameSizeForAnimation(animationName) {
+    if (!this.animations) return 64
+
     const animation = this.animations.find(animation => animation.name === animationName)
     return animation.frameSize
   }

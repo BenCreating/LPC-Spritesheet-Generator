@@ -77,6 +77,7 @@ The options for the male character base would look like this:
 - `excluded-by` (optional) a list of tags. If it includes any tags on selected items then this item will not appear as an option
 - `palettes` (optional) the palette-definitions key for each palette used by the image. If it is left blank then the item will not be recolorable. List multiple palettes if the item has multiple recolorable pieces (a shirt with stripes, helmet with a feather, etc.)
 - `z_position` (optional) overrides the category's default z position
+- `label` (optional) the label for the item in the option picker. Defaults to the name of the item. If a selection is made incompatible with the spritesheet (e.g. by switching from the male to female body) a compatible item with the same label will automatically activate if one is available in the same category. Both the label and item name will be included in the attribution.
 - `authors` (required) a list of everyone who contributed to creating this item
 - `licenses` (required) a list of every license the authors applied to the item
 - `links` (required) a list of links to the item's source. It should include at least a link to the item's Open Game Art page

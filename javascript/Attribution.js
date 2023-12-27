@@ -9,6 +9,7 @@ export default class Attribution {
    */
   constructor(asset, assetData) {
     this.assetName = asset.name
+    this.assetLabel = asset.label
     this.categoryName = asset.category.name
     this.authors = assetData.authors ?? []
     this.licenses = assetData.licenses ?? []
@@ -51,7 +52,9 @@ export default class Attribution {
     const authorList = this.authors.join(', ')
     const licenseList = this.licenses.join(', ')
 
-    return `${this.categoryName}: ${this.assetName} by ${authorList}. Licenses: ${licenseList}.`
+    const labelAndName = this.assetLabel === this.assetName ? this.assetLabel : `${this.assetLabel} (${this.assetName})`
+
+    return `${this.categoryName}: ${labelAndName} by ${authorList}. Licenses: ${licenseList}.`
   }
 
   /**
