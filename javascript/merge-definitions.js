@@ -3,9 +3,17 @@ import fs from 'fs'
 
 // This is run automatically when the site is deployed to GitHub Pages
 try {
+  mergeDefinitions(['palette', 'animation', 'category'])
   mergeSheetDefinitions()
 } catch (error) {
   core.setFailed(error.message)
+}
+
+function mergeDefinitions(types) {
+  types.forEach(type => {
+    const merged = mergeFilesInDirectory(`./resources/${type}-definitions`)
+    fs.writeFileSync(`./resources/${type}-definitions.json`, JSON.stringify(merged))
+  })
 }
 
 function mergeSheetDefinitions() {
