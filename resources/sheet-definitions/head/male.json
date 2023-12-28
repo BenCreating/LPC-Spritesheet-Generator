@@ -1,5 +1,4 @@
 {
-  "category": "head",
   "default": true,
   "excluded-by": [
     "child"

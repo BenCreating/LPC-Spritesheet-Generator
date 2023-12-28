@@ -1,17 +1,19 @@
 {
-  "category": "pants",
   "label": "basic",
   "tags": [],
   "excluded-by": [
-    "female",
+    "male",
     "child",
-    "muscular",
-    "teen"
+    "pregnant"
   ],
   "palettes": [
     "cloth"
   ],
   "authors": [
+    "bluecarrot16",
+    "David Conway Jr. (JaidynReiman)",
+    "Joe White",
+    "Matthew Krohn (makrohn)",
     "Johannes Sjölund (wulax)"
   ],
   "licenses": [

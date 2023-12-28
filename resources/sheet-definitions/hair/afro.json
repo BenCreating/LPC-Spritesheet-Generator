@@ -1,5 +1,4 @@
 {
-  "category": "hair",
   "tags": [],
   "excluded-by": [
     "child"
@@ -8,10 +7,10 @@
     "hair"
   ],
   "authors": [
-    "ElizaWy"
+    "bluecarrot16"
   ],
   "licenses": [
-    "OGA-BY 3.0"
+    "CC0"
   ],
   "links": [
     "https://opengameart.org/content/lpc-hair"

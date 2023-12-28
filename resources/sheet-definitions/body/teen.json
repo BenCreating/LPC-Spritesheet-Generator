@@ -1,9 +1,7 @@
 {
-  "category": "body",
   "tags": [
-    "male",
-    "adult",
-    "muscular"
+    "teen",
+    "adult"
   ],
   "excluded-by": [],
   "palettes": [
@@ -12,12 +10,12 @@
   "authors": [
     "Stephen Challener (Redshrike)",
     "Johannes Sjölund (wulax)",
-    "dalonedrau",
+    "Matthew Krohn (makrohn)",
     "Eliza Wyatt (ElizaWy)",
-    "Benjamin K. Smith (BenCreating)",
-    "castelonia",
+    "Pierre Vigier (pvigier)",
     "Durrani",
     "MuffinElZangano",
+    "Benjamin K. Smith (BenCreating)",
     "bluecarrot16",
     "Wolthera van Hövell tot Westerflier (TheraHedwig)",
     "Evert"
@@ -29,9 +27,10 @@
   "links": [
     "https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles",
     "https://opengameart.org/content/lpc-medieval-fantasy-character-sprites",
-    "https://opengameart.org/content/lpc-barbarian-sprite-base",
-    "https://opengameart.org/content/lpc-muscular-swing-animation",
-    "https://opengameart.org/content/lpc-muscular-hurt-animation",
+    "https://opengameart.org/content/lpc-ladies",
+    "https://opengameart.org/content/lpc-teen-unisex-base-clothes",
+    "https://opengameart.org/content/lpc-jump-expanded",
+    "https://gitlab.com/vagabondgame/lpc-characters",
     "https://opengameart.org/content/lpc-male-jumping-animation-by-durrani",
     "https://opengameart.org/content/lpc-jump-expanded",
     "https://opengameart.org/content/lpc-character-bases",
