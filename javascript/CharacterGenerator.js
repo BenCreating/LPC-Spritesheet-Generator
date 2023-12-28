@@ -23,6 +23,8 @@ export default class CharacterGenerator {
     this.categoryDefinitions = await this.loadDefinitions('category')
     this.animationDefinitions = await this.loadDefinitions('animation')
 
+    this.sortAnimationDefinitions()
+
     const downloadButton = document.querySelector('#download-button')
     downloadButton.addEventListener('click', this.download)
 
@@ -53,6 +55,29 @@ export default class CharacterGenerator {
     if (!response.ok) throw new Error(`HTTP error: ${response.status}`)
 
     return await response.json()
+  }
+
+  /**
+   * Sorts the animation definitions so the animations will be drawn in the
+   * correct order
+   */
+  sortAnimationDefinitions() {
+    const definitions = this.animationDefinitions
+    const keys = Object.keys(definitions)
+    const sortedKeys = keys.sort((a, b) => {
+      const orderA = definitions[a]['sort-order']
+      const orderB = definitions[b]['sort-order']
+
+      if (orderA && orderB) return orderA - orderB
+      if (orderA) return -1
+      if (orderB) return 1
+      return 0
+    })
+
+    this.animationDefinitions = sortedKeys.reduce((sortedDefinitions, key) => {
+      sortedDefinitions[key] = definitions[key]
+      return sortedDefinitions
+    }, {})
   }
 
   /**

@@ -1,5 +1,6 @@
 {
   "rows": 4,
   "columns": 8,
-  "inline": true
+  "inline": true,
+  "sort-order": 4
 }
