@@ -1,1 +1,5 @@
 node_modules/
+resources/animation-definitions.json
+resources/category-definitions.json
+resources/palette-definitions.json
+resources/sheet-definitions.json

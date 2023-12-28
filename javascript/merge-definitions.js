@@ -3,7 +3,7 @@ import fs from 'fs'
 
 // This is run automatically when the site is deployed to GitHub Pages
 try {
-  mergeDefinitions(['palette', 'animation', 'category'])
+  mergeDefinitions(['animation', 'category', 'palette'])
   mergeSheetDefinitions()
 } catch (error) {
   core.setFailed(error.message)
