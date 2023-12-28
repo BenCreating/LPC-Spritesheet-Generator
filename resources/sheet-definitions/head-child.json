@@ -1,0 +1,24 @@
+{
+  "category": "head",
+  "excluded-by": [
+    "adult"
+  ],
+  "palettes": [
+    "skin",
+    "eyes"
+  ],
+  "authors": [
+    "Stephen Challener (Redshrike)",
+    "kheftel",
+    "bluecarrot16"
+  ],
+  "licenses": [
+    "CC-BY-SA 3.0",
+    "GPL 3.0"
+  ],
+  "links": [
+    "https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles",
+    "https://opengameart.org/content/lpc-child-standing-template",
+    "https://opengameart.org/content/lpc-character-bases"
+  ]
+}

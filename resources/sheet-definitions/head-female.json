@@ -1,0 +1,35 @@
+{
+  "category": "head",
+  "excluded-by": [
+    "child"
+  ],
+  "palettes": [
+    "skin",
+    "eyes"
+  ],
+  "authors": [
+    "Stephen Challener (Redshrike)",
+    "Johannes Sjölund (wulax)",
+    "Matthew Krohn (makrohn)",
+    "Eliza Wyatt (ElizaWy)",
+    "Pierre Vigier (pvigier)",
+    "Durrani",
+    "MuffinElZangano",
+    "Benjamin K. Smith (BenCreating)",
+    "bluecarrot16"
+  ],
+  "licenses": [
+    "CC-BY-SA 3.0",
+    "GPL 3.0"
+  ],
+  "links": [
+    "https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles",
+    "https://opengameart.org/content/lpc-medieval-fantasy-character-sprites",
+    "https://opengameart.org/content/lpc-ladies",
+    "https://opengameart.org/content/lpc-7-womens-shirts",
+    "https://opengameart.org/content/lpc-jump-expanded",
+    "https://gitlab.com/vagabondgame/lpc-characters",
+    "https://opengameart.org/content/lpc-male-jumping-animation-by-durrani",
+    "https://opengameart.org/content/lpc-character-bases"
+  ]
+}

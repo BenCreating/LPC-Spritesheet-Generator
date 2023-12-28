@@ -1,0 +1,31 @@
+{
+  "category": "head",
+  "default": true,
+  "excluded-by": [
+    "child"
+  ],
+  "palettes": [
+    "skin",
+    "eyes"
+  ],
+  "authors": [
+    "Stephen Challener (Redshrike)",
+    "Johannes Sjölund (wulax)",
+    "Eliza Wyatt (ElizaWy)",
+    "Durrani",
+    "MuffinElZangano",
+    "Benjamin K. Smith (BenCreating)",
+    "bluecarrot16"
+  ],
+  "licenses": [
+    "CC-BY-SA 3.0",
+    "GPL 3.0"
+  ],
+  "links": [
+    "https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles",
+    "https://opengameart.org/content/lpc-medieval-fantasy-character-sprites",
+    "https://opengameart.org/content/lpc-male-jumping-animation-by-durrani",
+    "https://opengameart.org/content/lpc-jump-expanded",
+    "https://opengameart.org/content/lpc-character-bases"
+  ]
+}

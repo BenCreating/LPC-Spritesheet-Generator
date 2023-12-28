@@ -1,0 +1,36 @@
+{
+  "category": "body",
+  "default": true,
+  "tags": [
+    "male",
+    "adult"
+  ],
+  "excluded-by": [],
+  "palettes": [
+    "skin"
+  ],
+  "authors": [
+    "Stephen Challener (Redshrike)",
+    "Johannes Sjölund (wulax)",
+    "Durrani",
+    "MuffinElZangano",
+    "Benjamin K. Smith (BenCreating)",
+    "Eliza Wyatt (ElizaWy)",
+    "bluecarrot16",
+    "Wolthera van Hövell tot Westerflier (TheraHedwig)",
+    "Evert"
+  ],
+  "licenses": [
+    "CC-BY-SA 3.0",
+    "GPL 3.0"
+  ],
+  "links": [
+    "https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles",
+    "https://opengameart.org/content/lpc-medieval-fantasy-character-sprites",
+    "https://opengameart.org/content/lpc-male-jumping-animation-by-durrani",
+    "https://opengameart.org/content/lpc-jump-expanded",
+    "https://opengameart.org/content/lpc-character-bases",
+    "https://opengameart.org/content/lpc-runcycle-and-diagonal-walkcycle",
+    "https://opengameart.org/content/lpc-runcycle-for-male-muscular-and-pregnant-character-bases-with-modular-heads"
+  ]
+}
