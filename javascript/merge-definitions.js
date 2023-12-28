@@ -1,6 +1,7 @@
 import core from '@actions/core'
 import fs from 'fs'
 
+// This is run automatically when the site is deployed to GitHub Pages
 try {
   mergeSheetDefinitions()
 } catch (error) {
