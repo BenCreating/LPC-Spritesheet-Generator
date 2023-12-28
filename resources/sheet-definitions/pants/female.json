@@ -1,0 +1,27 @@
+{
+  "label": "basic",
+  "tags": [],
+  "excluded-by": [
+    "male",
+    "child",
+    "pregnant"
+  ],
+  "palettes": [
+    "cloth"
+  ],
+  "authors": [
+    "bluecarrot16",
+    "David Conway Jr. (JaidynReiman)",
+    "Joe White",
+    "Matthew Krohn (makrohn)",
+    "Johannes Sjölund (wulax)"
+  ],
+  "licenses": [
+    "CC-BY-SA 3.0",
+    "GPL 3.0"
+  ],
+  "links": [
+    "https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles",
+    "https://opengameart.org/content/lpc-medieval-fantasy-character-sprites"
+  ]
+}

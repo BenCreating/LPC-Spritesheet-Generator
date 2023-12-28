@@ -1,0 +1,30 @@
+{
+  "label": "solid",
+  "tags": [],
+  "excluded-by": [
+    "child",
+    "muscular",
+    "female",
+    "teen"
+  ],
+  "palettes": [
+    "cloth"
+  ],
+  "authors": [
+    "bluecarrot16",
+    "David Conway Jr. (JaidynReiman)",
+    "Nila122"
+  ],
+  "licenses": [
+    "CC-BY-SA 3.0",
+    "GPL 3.0"
+  ],
+  "links": [
+    "https://opengameart.org/content/lpc-curly-hair-elven-ears-white-cape-with-blue-trim-and-more",
+    "https://opengameart.org/content/lpc-roman-armor",
+    "http://opengameart.org/content/lpc-clothing-updates"
+  ],
+  "sublayers": [
+    { "name": "solid_behind", "z_position": 5 }
+  ]
+}

@@ -203,7 +203,7 @@ export default class SpritesheetController {
     let inlineEndIndex = animationIndex
     for (let index = animationIndex + 1; index > 0; index++) {
       const nextAnimationName = this.animationNames[index]
-      if (!animationDefinitions[nextAnimationName].inline) break
+      if (!animationDefinitions[nextAnimationName]?.inline) break
       inlineEndIndex = index
     }
 

@@ -25,24 +25,9 @@ For example, the male character base is in the category `body`, so the paths to 
 
 #### Sheet Definitions
 
-Every new item must also be added to the file `./resources/sheet-definitions.json`.
+Every new item must also have a definition file which should be stored in `./resources/sheet-definitions/category/item.json`. The path to the definition for the male character base is `./resources/sheet-definitions/body/male.json`.
 
-The sheet definitions is structured as nested JSON objects, following the pattern `category` > `item` > `item options`.
-
-```json
-{
-  "body": {
-    "male": {},
-    "female": {}
-  },
-
-  "category2": {
-
-  }
-}
-```
-
-The options for the male character base would look like this:
+The definitions are structured as JSON data. For the male character base they would look like this:
 
 ```json
 {
@@ -84,30 +69,22 @@ The options for the male character base would look like this:
 
 ### Color Palettes
 
-Color options should be added to `./resources/palette-definitions.json`
+Color palettes also have definition files, which should be added to `./resources/palette-definitions`.
 
-The key for each palette should be the name of the palette. The value is an array of color ramps.
+The file should be a JSON file named for the palette. The content is an array of color ramps.
 
 Each color ramp is an array of color hexcodes. The first color will be the fill color for the button in the UI, and the second will be the border. The first color ramp is the default for that palette.
 
-Images should be use the first color ramp of any palette they use. The do not need to include *all* the colors, but **only colors listed in the first color ramp will be recolored.**
+Images should use the first color ramp of any palette they use. The do not need to include *all* the colors, but **only colors listed in the first color ramp will be recolored.**
 
-A truncated example of the palette definitions:
+A truncated example of a palette definition:
 
 ```json
 {
-  "skin": [
+  [
     ["#faece7", "#f9d5ba", "#e4a47c", "#cc8665", "#99423c", "#271920"],
     ["#deac9b", "#d68c61", "#a96b4c", "#895b4a", "#593636", "#2a1722"],
     ["#714535", "#603429", "#442725", "#2e1f1c", "#1a1213", "#050606"]
-  ],
-  "hair": [
-    ["#ff8a00", "#e55600", "#bf4000", "#a42600", "#6a1108", "#260d14"],
-    ["#714535", "#603429", "#442725", "#2e1f1c", "#1a1213", "#050606"]
-  ],
-  "cloth": [
-    ["#ffffff", "#e5e6ca", "#c2b5a1", "#928181", "#25171e"],
-    ["#70d0de", "#57abbf", "#408295", "#244d6f", "#25171e"]
   ]
 }
 ```
@@ -127,4 +104,10 @@ To run the server on a different port:
 
 ```
 npm start -- --port 4000
+```
+
+If you add or modify a definition file you can recompile the merged definitions without restarting the server by running:
+
+```
+npm run merge-definitions
 ```
