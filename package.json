@@ -7,7 +7,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint javascript/**/*.js local-server.js",
-    "start": "static --headers \\{\\\"Cache-Control\\\":\\\"no-cache\\\"\\}"
+    "merge-definitions": "node javascript/merge-definitions.js",
+    "start-server": "static --headers \\{\\\"Cache-Control\\\":\\\"no-cache\\\"\\}",
+    "start": "npm run merge-definitions && npm run start-server"
   },
   "repository": {
     "type": "git",
