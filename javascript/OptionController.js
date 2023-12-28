@@ -131,4 +131,8 @@ export default class OptionController {
       category.fixExcludedOptions()
     })
   }
+
+  updatePreviewFrameSize() {
+    this.characterGenerator.updatePreviewFrameSize()
+  }
 }
