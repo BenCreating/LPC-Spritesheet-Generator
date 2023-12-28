@@ -80,4 +80,9 @@ export default class CharacterGenerator {
 
     setTimeout(() => URL.revokeObjectURL(url), 100)
   }
+
+  updatePreviewFrameSize() {
+    const preview = document.querySelector('animation-preview')
+    preview.updateFrameSize()
+  }
 }

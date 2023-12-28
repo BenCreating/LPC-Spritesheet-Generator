@@ -81,15 +81,16 @@ export default class AssetCategory {
    * @param {AssetOption} option
    * @param {Boolean} redrawSpritesheet controls if a redraw will be triggered. Defaults to true
    */
-  setSelectedOption(option, redrawSpritesheet = true) {
+  async setSelectedOption(option, redrawSpritesheet = true) {
     this.selectedOption = option
     this.urlParameterController.setURLParameters({ name: this.name, value: option.name })
 
     if (redrawSpritesheet) {
       this.optionController.fixExcludedOptions(this)
       this.optionController.update()
-      this.spritesheetController.update()
+      await this.spritesheetController.update()
       this.attributionController.update()
+      this.optionController.updatePreviewFrameSize()
     }
   }
 

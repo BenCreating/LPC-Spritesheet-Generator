@@ -122,14 +122,7 @@ class AnimationPreview extends HTMLElement {
    * Start the animation
    */
   start() {
-    const animationName = this.#selectedAnimation
-    const frameSizes = this.spritesheetController.largestAnimationFrameSizes()
-    this.frameSize = frameSizes[animationName]
-
-    this.animationLength = this.animations[animationName].columns
-    this.#canvas.width = this.frameSize * this.#numberOfDirections
-    this.#canvas.height = this.frameSize
-
+    this.updateFrameSize()
     this.#animationStart = performance.now()
     this.#animationLoopId = requestAnimationFrame(this.#animate)
   }
@@ -148,6 +141,20 @@ class AnimationPreview extends HTMLElement {
   restart() {
     this.stop()
     this.start()
+  }
+
+  /**
+   * Loads the frame size for the current animation. Called from start(), and
+   * whenever the user selects an asset.
+   */
+  updateFrameSize() {
+    const animationName = this.#selectedAnimation
+    const frameSizes = this.spritesheetController.largestAnimationFrameSizes()
+    this.frameSize = frameSizes[animationName]
+
+    this.animationLength = this.animations[animationName].columns
+    this.#canvas.width = this.frameSize * this.#numberOfDirections
+    this.#canvas.height = this.frameSize
   }
 
   /**
