@@ -15,6 +15,7 @@ export default class AssetCategory {
     this.optionController = optionController
     this.name = categoryName
     this.zPosition = this.categoryDefinitions[categoryName].z_position ?? 15
+    this.paletteMatch = this.categoryDefinitions[categoryName]['palette-match'] ?? {}
 
     const optionNames = Object.keys(categoryData)
     this.options = optionNames.map(name => {
@@ -220,7 +221,8 @@ export default class AssetCategory {
 
     uniquePaletteNames.forEach(paletteName => {
       const colorRamps = this.paletteDefinitions[paletteName]
-      palettes[paletteName] = new Palette(this, paletteName, colorRamps)
+      const matchCategory = this.paletteMatch[paletteName]
+      palettes[paletteName] = new Palette(this, paletteName, colorRamps, matchCategory)
     })
 
     return palettes
@@ -252,7 +254,7 @@ export default class AssetCategory {
 
     palettes.forEach(palette => {
       const targetColorRamp = palette.selectedColorRamp
-      const originalRamp = palette.colorRamps[0]
+      const originalRamp = palette.originalColorRamp
 
       if (targetColorRamp === originalRamp) return // no recolor
 

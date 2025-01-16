@@ -1,3 +1,6 @@
 {
-  "z_position": 100
+  "z_position": 100,
+  "palette-match": {
+    "skin": "body"
+  }
 }

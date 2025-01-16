@@ -1,15 +1,21 @@
 import ColorRamp from './ColorRamp.js'
+import PaletteMatchRamp from './PaletteMatchRamp.js'
 
 /**
  * A collection of color ramps
  */
 export default class Palette {
-  constructor(category, name, colorRamps) {
+  constructor(category, name, colorRamps, matchCategory) {
     this.categoryName = category.name
     this.optionController = category.optionController
 
     this.name = name
     this.colorRamps = colorRamps.map(colorRamp => new ColorRamp(this, colorRamp))
+    this.originalColorRamp = this.colorRamps[0]
+
+    if (matchCategory) {
+      this.colorRamps.unshift(new PaletteMatchRamp(this, matchCategory))
+    }
 
     const urlParameterController = this.optionController.urlParameterController
     const preselectedColorRampIndex = urlParameterController.getParameterValue(this.urlParameterKey())
