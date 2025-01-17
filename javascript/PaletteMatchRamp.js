@@ -12,6 +12,7 @@ export default class PaletteMatchRamp {
    */
   constructor(palette, matchCategoryName) {
     this.palette = palette
+    this.name = `match-${matchCategoryName}`
     this.matchCategoryName = matchCategoryName
   }
 
@@ -41,7 +42,7 @@ export default class PaletteMatchRamp {
     const radioButton = document.createElement('input')
     radioButton.setAttribute('type', 'radio')
     radioButton.setAttribute('name', this.palette.urlParameterKey())
-    radioButton.setAttribute('value', this.palette.indexOfColorRamp(this))
+    radioButton.setAttribute('value', this.name)
     radioButton.addEventListener('click', this.selectColor.bind(this))
 
     radioButton.checked = checked

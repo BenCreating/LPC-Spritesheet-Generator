@@ -8,9 +8,15 @@ export default class Palette {
   constructor(category, name, colorRamps, matchCategory) {
     this.categoryName = category.name
     this.optionController = category.optionController
-
     this.name = name
-    this.colorRamps = colorRamps.map(colorRamp => new ColorRamp(this, colorRamp))
+
+    const colorRampNames = Object.keys(colorRamps)
+    this.colorRamps = colorRampNames.map(rampName => {
+      const colorRamp = colorRamps[rampName]
+      return new ColorRamp(this, rampName, colorRamp)
+    })
+
+    // This is the palette we expect the images to use
     this.originalColorRamp = this.colorRamps[0]
 
     if (matchCategory) {
@@ -18,8 +24,9 @@ export default class Palette {
     }
 
     const urlParameterController = this.optionController.urlParameterController
-    const preselectedColorRampIndex = urlParameterController.getParameterValue(this.urlParameterKey())
-    this.selectedColorRamp = this.colorRamps[preselectedColorRampIndex] ?? this.colorRamps[0]
+    const preselectedColorRampName = urlParameterController.getParameterValue(this.urlParameterKey())
+    const preselectedColorRamp = this.colorRamps.find(ramp => ramp.name === preselectedColorRampName)
+    this.selectedColorRamp = preselectedColorRamp ?? this.colorRamps[0]
   }
 
   html() {
@@ -51,14 +58,6 @@ export default class Palette {
 
   urlParameterKey() {
     return `${this.categoryName}-color-${this.name}`
-  }
-
-  indexOfColorRamp(colorRamp) {
-    return this.colorRamps.findIndex(ramp => ramp === colorRamp)
-  }
-
-  indexOfSelectedColorRamp() {
-    return this.indexOfColorRamp(this.selectedColorRamp)
   }
 
   /**
