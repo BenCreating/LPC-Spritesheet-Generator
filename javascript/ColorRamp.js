@@ -8,10 +8,12 @@
 export default class ColorRamp {
   /**
    * @param {Palette} palette the palette this color ramp is part of
+   * @param {string} name the name of the color ramp
    * @param {string[]} colors an array of colors in hexcode format
    */
-  constructor(palette, colors) {
+  constructor(palette, name, colors) {
     this.palette = palette
+    this.name = name
     this.colors = colors
   }
 
@@ -26,7 +28,7 @@ export default class ColorRamp {
     const radioButton = document.createElement('input')
     radioButton.setAttribute('type', 'radio')
     radioButton.setAttribute('name', this.palette.urlParameterKey())
-    radioButton.setAttribute('value', this.palette.indexOfColorRamp(this))
+    radioButton.setAttribute('value', this.name)
     radioButton.addEventListener('click', this.selectColor.bind(this))
 
     radioButton.checked = checked

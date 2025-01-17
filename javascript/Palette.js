@@ -8,9 +8,13 @@ export default class Palette {
   constructor(category, name, colorRamps, matchCategory) {
     this.categoryName = category.name
     this.optionController = category.optionController
-
     this.name = name
-    this.colorRamps = colorRamps.map(colorRamp => new ColorRamp(this, colorRamp))
+
+    this.colorRamps = Object.entries(colorRamps).map(([rampName, colorRamp]) => {
+      return new ColorRamp(this, rampName, colorRamp)
+    })
+
+    // This is the palette we expect the images to use
     this.originalColorRamp = this.colorRamps[0]
 
     if (matchCategory) {
@@ -18,8 +22,9 @@ export default class Palette {
     }
 
     const urlParameterController = this.optionController.urlParameterController
-    const preselectedColorRampIndex = urlParameterController.getParameterValue(this.urlParameterKey())
-    this.selectedColorRamp = this.colorRamps[preselectedColorRampIndex] ?? this.colorRamps[0]
+    const preselectedColorRampName = urlParameterController.getParameterValue(this.urlParameterKey())
+    const preselectedColorRamp = this.colorRamps.find(ramp => ramp.name === preselectedColorRampName)
+    this.selectedColorRamp = preselectedColorRamp ?? this.colorRamps[0]
   }
 
   html() {
@@ -53,21 +58,19 @@ export default class Palette {
     return `${this.categoryName}-color-${this.name}`
   }
 
-  indexOfColorRamp(colorRamp) {
-    return this.colorRamps.findIndex(ramp => ramp === colorRamp)
-  }
-
-  indexOfSelectedColorRamp() {
-    return this.indexOfColorRamp(this.selectedColorRamp)
-  }
-
   /**
    * Randomly picks a color ramp
    */
   randomize() {
+    const firstRamp = this.colorRamps[0]
+    const isFirstRampPaletteMatch = firstRamp.constructor === PaletteMatchRamp
+
     const colorRamps = this.colorRamps
     const chosenColorRampIndex = Math.floor(Math.random() * colorRamps.length)
-    const colorRamp = colorRamps[chosenColorRampIndex]
+
+    // It's nicer to match colors when that is an option. It prevents things
+    // like the head and body being different colors.
+    const colorRamp = isFirstRampPaletteMatch ? firstRamp : colorRamps[chosenColorRampIndex]
 
     this.setSelectedColorRamp(colorRamp, false)
   }

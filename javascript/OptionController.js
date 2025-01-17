@@ -103,7 +103,7 @@ export default class OptionController {
    * @param {Palette} palette the palette that the selected color belongs to
    */
   colorChanged(palette, applyRecolor = true) {
-    this.urlParameterController.setURLParameters({ name: palette.urlParameterKey(), value: palette.indexOfSelectedColorRamp() })
+    this.urlParameterController.setURLParameters({ name: palette.urlParameterKey(), value: palette.selectedColorRamp.name })
     if (applyRecolor) this.spritesheetController.applyRecolor()
   }
 
@@ -119,7 +119,7 @@ export default class OptionController {
   }
 
   /**
-   * Attempts to find valid equivilent options for any that have been excluded
+   * Attempts to find valid equivalent options for any that have been excluded
    * by other selections. This is called when an option is selected.
    *
    * @param {AssetCategory} changedCategory the category that just updated
