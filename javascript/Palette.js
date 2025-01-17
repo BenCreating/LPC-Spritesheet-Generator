@@ -10,9 +10,7 @@ export default class Palette {
     this.optionController = category.optionController
     this.name = name
 
-    const colorRampNames = Object.keys(colorRamps)
-    this.colorRamps = colorRampNames.map(rampName => {
-      const colorRamp = colorRamps[rampName]
+    this.colorRamps = Object.entries(colorRamps).map(([rampName, colorRamp]) => {
       return new ColorRamp(this, rampName, colorRamp)
     })
 
