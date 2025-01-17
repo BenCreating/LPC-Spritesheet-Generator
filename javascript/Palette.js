@@ -64,9 +64,15 @@ export default class Palette {
    * Randomly picks a color ramp
    */
   randomize() {
+    const firstRamp = this.colorRamps[0]
+    const isFirstRampPaletteMatch = firstRamp.constructor === PaletteMatchRamp
+
     const colorRamps = this.colorRamps
     const chosenColorRampIndex = Math.floor(Math.random() * colorRamps.length)
-    const colorRamp = colorRamps[chosenColorRampIndex]
+
+    // It's nicer to match colors when that is an option. It prevents things
+    // like the head and body being different colors.
+    const colorRamp = isFirstRampPaletteMatch ? firstRamp : colorRamps[chosenColorRampIndex]
 
     this.setSelectedColorRamp(colorRamp, false)
   }
