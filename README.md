@@ -103,11 +103,7 @@ You should then be able to visit http://localhost:8080.
 To run the server on a different port:
 
 ```
-npm start -- --port 4000
+PORT=4000 npm start
 ```
 
-If you add or modify a definition file you can recompile the merged definitions without restarting the server by running:
-
-```
-npm run merge-definitions
-```
+The dev server watches for file changes and will automatically recompiles the merged definitions and update the importmap.
