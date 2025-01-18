@@ -38,9 +38,8 @@ export default class CharacterGenerator {
     await this.spritesheetController.update()
     this.attributionController.update()
 
-    const preview = document.querySelector('animation-preview')
+    const preview = document.querySelector('lpc-animation-preview')
     preview.spritesheetController = this.spritesheetController
-    preview.setupAnimationOptions()
     preview.start()
   }
 
@@ -107,7 +106,7 @@ export default class CharacterGenerator {
   }
 
   updatePreviewFrameSize() {
-    const preview = document.querySelector('animation-preview')
+    const preview = document.querySelector('lpc-animation-preview')
     preview.updateFrameSize()
   }
 }

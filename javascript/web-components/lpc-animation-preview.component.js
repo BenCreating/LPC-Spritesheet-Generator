@@ -1,86 +1,54 @@
+import { LitElement, html } from 'lit'
+import { ref, createRef } from 'lit/directives/ref.js'
+
 /**
- * @typedef {import('./SpritesheetController').default} SpritesheetController
+ * @typedef {import('../SpritesheetController').default} SpritesheetController
  */
 
 /**
  * Custom element to preview an animation. Insert into the page with:
  *
- * <animation-preview></animation-preview>
+ * <lpc-animation-preview></lpc-animation-preview>
  *
  * Then, get the element with JavaScript to set a source and call start().
  *
  * This class makes use of private fields (variables starting with a "#") to
  * prevent access to internal state.
  */
-class AnimationPreview extends HTMLElement {
-  constructor() {
-    super()
-
-    this.attachShadow({ mode: 'open' })
-
-    const wrapper = document.createElement('div')
-
-    const selectAnimationWrapper = document.createElement('div')
-
-    const label = document.createElement('span')
-    label.textContent = 'Preview'
-
-    const select = document.createElement('select')
-    select.addEventListener('change', this.#updateSelectedAnimation)
-    this.selectorElement = select
-
-    selectAnimationWrapper.append(label, select)
-    wrapper.append(selectAnimationWrapper, this.#canvas)
-
-    // Normally, global page CSS can't target these elements, because they are
-    // in a shadow root. Setting a "part" allows targeting them with the
-    // ::part() selector. For example:
-    //
-    // animation-preview::part(select-label) {
-    //   background-color: red;
-    // }
-    wrapper.part = 'base'
-    selectAnimationWrapper.part = 'select-base'
-    label.part = 'select-label'
-    select.part = 'animation-select'
-    this.#canvas.part = 'animation'
-
-    this.shadowRoot.append(wrapper)
+export default class LPCAnimationPreview extends LitElement {
+  static properties = {
+    spritesheetController: { type: Object }
   }
 
+  #canvasRef = createRef()
   #selectedAnimation = 'walk'
-  #canvas = document.createElement('canvas')
-  #ctx = this.#canvas.getContext('2d')
+
+  get #canvas() { return this.#canvasRef.value }
+  get #ctx() { return this.#canvas?.getContext('2d') }
 
   /**
    * The pending requestAnimationFrame id. Used by stop() to cancel the
    * animation frame.
    *
-   * @type {number}
+   * @type {number|undefined}
    */
   #animationLoopId = undefined
 
   /**
    * When the animation was started. Used to calculate the current frame.
    *
-   * @type {DOMHighResTimeStamp}
+   * @type {DOMHighResTimeStamp|undefined}
    */
   #animationStart = undefined
 
-  /**
-   * The object storing the information for building the spritesheet. Set this
-   * before calling start().
-   *
-   * @type {SpritesheetController}
-   */
-  spritesheetController = undefined
+  get animationNames() { return this.spritesheetController?.animationNames || [] }
 
   /**
    * The image or canvas element for the full spritesheet
    *
-   * @returns {CanvasImageSource}
+   * @returns {CanvasImageSource|undefined}
    */
-  get source() { return this.spritesheetController.canvas }
+  get source() { return this.spritesheetController?.canvas }
 
   #currentFrameIndex = 0 // The index of the currently displayed frame
   #framesPerSecond = 8 // Default value, individual animations can set a different frame rate
@@ -89,33 +57,14 @@ class AnimationPreview extends HTMLElement {
   animationLength = 0 // This is calculated from the selected animation
 
   get animations() {
-    if (!this.spritesheetController) return {}
-    return this.spritesheetController.animationDefinitions
+    return this.spritesheetController?.animationDefinitions ?? {}
   }
 
   /**
    * @return {object} The currently selected animation
    */
   get animation() {
-    const animationNames = this.spritesheetController.animationNames
-    return animationNames.find(animation => animation === this.#selectedAnimation)
-  }
-
-  /**
-   * Adds an option to the select menu for each animation. Call this before
-   * calling start().
-   */
-  setupAnimationOptions() {
-    const select = this.selectorElement
-    const animationNames = this.spritesheetController.animationNames
-
-    animationNames.forEach(animation => {
-      const option = document.createElement('option')
-      option.value = animation
-      option.textContent = animation
-      option.selected = animation === this.#selectedAnimation
-      select.options.add(option)
-    })
+    return this.animationNames.find(animation => animation === this.#selectedAnimation)
   }
 
   /**
@@ -215,6 +164,20 @@ class AnimationPreview extends HTMLElement {
       this.restart()
     }
   }
+
+  render() {
+    return html`
+      <div part="base">
+        <div part="select-base">
+          <span part="select-label">Preview</span>
+          <select part="animation-select" @change=${this.#updateSelectedAnimation}>
+            ${this.animationNames.map(name => html`<option value=${name} ?selected=${name === this.#selectedAnimation}>${name}</option>`)}
+            </select>
+        </div>
+        <canvas ${ref(this.#canvasRef)} part="animation"></canvas>
+      </div>
+    `
+  }
 }
 
-window.customElements.define('animation-preview', AnimationPreview)
+window.customElements.define('lpc-animation-preview', LPCAnimationPreview)
