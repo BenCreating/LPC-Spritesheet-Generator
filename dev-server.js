@@ -14,15 +14,16 @@ function build() {
 
 chokidar.watch(
   [
-    './javascript/',
-    './resources/',
-    './package.json',
-    './package-lock.json',
-    './index.js',
-    './index.template.html'
+    'javascript/',
+    'resources/',
+    'index.js',
+    'index.template.html',
+    // Watch these files instead of trying to watch the entire node_modules folder
+    'package.json',
+    'package-lock.json'
   ].map(projectRelativePath => path.join(import.meta.dirname, projectRelativePath)),
   {
-    ignored: /-definitions\.json$/,
+    ignored: /-definitions\.json$/, // Ignore the generated combined definition files
     ignoreInitial: true
   }
 ).on('all', () => {
