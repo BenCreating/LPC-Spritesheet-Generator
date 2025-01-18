@@ -1,4 +1,4 @@
-import { zipSync } from 'https://cdn.skypack.dev/pin/fflate@v0.7.3-x0OS7MYd1pAJyCyfqyxe/mode=imports,min/optimized/fflate.js'
+import { zipSync } from 'fflate'
 import AttributionController from './AttributionController.js'
 import OptionController from './OptionController.js'
 import SpritesheetController from './SpritesheetController.js'
