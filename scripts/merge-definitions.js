@@ -1,13 +1,8 @@
-import core from '@actions/core'
 import fs from 'fs'
 
 // This is run automatically when the site is deployed to GitHub Pages
-try {
-  mergeDefinitions(['animation', 'category', 'palette'])
-  mergeSheetDefinitions()
-} catch (error) {
-  core.setFailed(error.message)
-}
+mergeDefinitions(['animation', 'category', 'palette'])
+mergeSheetDefinitions()
 
 function mergeDefinitions(types) {
   types.forEach(type => {
