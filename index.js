@@ -1,4 +1,4 @@
-import './javascript/AnimationPreview.js'
+import './javascript/web-components/lpc-animation-preview.component.js'
 import CharacterGenerator from './javascript/CharacterGenerator.js'
 
 const characterGenerator = new CharacterGenerator()
