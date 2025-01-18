@@ -7,8 +7,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint javascript/**/*.js local-server.js",
-    "start-server": "static --headers \\{\\\"Cache-Control\\\":\\\"no-cache\\\"\\}",
-    "start": "npm run build && npm run start-server",
+    "start": "node dev-server.js",
     "build": "scripts/build.sh"
   },
   "repository": {
@@ -23,13 +22,14 @@
   "homepage": "https://github.com/BenCreating/LPC-Generator#readme",
   "devDependencies": {
     "@jspm/generator": "^2.4.2",
+    "chokidar": "^4.0.3",
     "eslint": "^8.56.0",
     "eslint-config-standard": "^17.1.0",
     "eslint-plugin-compat": "^4.2.0",
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-n": "^16.5.0",
     "eslint-plugin-promise": "^6.1.1",
-    "node-static": "^0.7.11"
+    "express": "^4.21.2"
   },
   "dependencies": {
     "fflate": "^0.8.2",
