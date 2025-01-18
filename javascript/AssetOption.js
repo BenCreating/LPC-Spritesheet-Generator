@@ -36,39 +36,8 @@ export default class AssetOption {
     return !excludedByTags.find(excludedTag => selectedTags.includes(excludedTag))
   }
 
-  /**
-   * The HTML to display this option
-   *
-   * @returns {HTMLElement}
-   */
-  html() {
-    const name = this.name
-    const buttonId = `option-${this.category.name}-${name}`
-
-    const buttonContainer = document.createElement('div')
-    buttonContainer.className = 'item-button'
-
-    const radioButton = document.createElement('input')
-    radioButton.setAttribute('type', 'radio')
-    radioButton.setAttribute('name', this.category.name)
-    radioButton.setAttribute('value', name)
-    radioButton.id = buttonId
-    radioButton.addEventListener('click', this.selectOption.bind(this))
-    buttonContainer.appendChild(radioButton)
-
-    radioButton.checked = this === this.category.selectedOption
-
-    const label = document.createElement('label')
-    label.htmlFor = buttonId
-    buttonContainer.appendChild(label)
-
-    if (this.icon) label.appendChild(this.icon)
-
-    const labelText = document.createElement('span')
-    labelText.textContent = this.label ?? name
-    label.appendChild(labelText)
-
-    return buttonContainer
+  isSelected() {
+    return this === this.category.selectedOption
   }
 
   /**

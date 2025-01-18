@@ -51,7 +51,9 @@ export default class OptionController {
     const sidebar = document.querySelector('.sidebar')
 
     this.categories.forEach(category => {
-      sidebar.appendChild(category.html())
+      const categoryElement = document.createElement('lpc-asset-category')
+      categoryElement.assetCategory = category
+      sidebar.appendChild(categoryElement)
     })
   }
 

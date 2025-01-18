@@ -65,10 +65,6 @@ button:active {
   z-index: 1;
 }
 
-lpc-animation-preview {
-  grid-column: 2;
-}
-
 .justify-self-start {
   justify-self: start;
 }
@@ -106,72 +102,6 @@ legend {
   margin-bottom: 0.25em
 }
 
-.item-color-options fieldset {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-.item-color-options legend {
-  border: none;
-  float: left;
-  width: fit-content;
-  margin-right: 0.5em;
-}
-
-.color-option {
-  -webkit-appearance: none;
-  appearance: none;
-  margin: 0;
-  width: 24px;
-  height: 24px;
-  border-width: 1px;
-  border-style: solid;
-  border-radius: 50%;
-  margin-right: 5px;
-  margin-bottom: 0.25em;
-  cursor: pointer;
-  transition: 60ms transform ease-in-out;
-
-  display: grid;
-  place-content: center;
-}
-
-.color-option:hover {
-  box-shadow: 1px 1px 8px -2px var(--color-shadow);
-  transform: translate(0, -2px) scale(1.1);
-}
-
-.color-option:checked {
-  box-shadow: 1px 1px 8px -2px var(--color-shadow), var(--selected);
-}
-
-.color-option::before {
-  content: "";
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  transform: scale(0);
-  transform-origin: center;
-  transition: 120ms transform ease-in-out;
-  -webkit-backdrop-filter: invert(1);
-  backdrop-filter: invert(1);
-  opacity: 60%;
-}
-
-.color-option:checked::before {
-  transform: scale(1);
-}
-
-.color-option.palette-match-option::after {
-  content: "🔗";
-  position: absolute;
-  width: 24px;
-  height: 24px;
-  text-align: center;
-  line-height: 24px;
-}
-
 .attribution {
   border-top: 1px solid var(--color-contrast);
   padding: 0.5em;
@@ -181,46 +111,11 @@ legend {
   float: right;
 }
 
-.category-item-options {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.item-button {
-  width: 64px;
-}
-
-.item-button input[type=radio] {
-  opacity: 0;
-  position: absolute;
-}
-
-.item-button label {
-  display: block;
-  cursor: pointer;
-  background-color: var(--color-page-background);
-  transition: 60ms transform ease-in-out;
-}
-
-.item-button label span {
-  display: block;
-  text-align: center;
-}
-
-.item-button input[type=radio]:hover + label {
-  box-shadow: 1px 1px 8px -2px var(--color-shadow);
-  transform: translate(0, -2px) scale(1.05);
-}
-
-.item-button input[type=radio]:checked + label {
-  box-shadow: 1px 1px 8px -2px var(--color-shadow), var(--selected) inset;
-}
-
-.item-button input[type=radio]:checked:hover + label {
-  transform: translate(0, -2px) scale(1.05);
-}
-
 /* Animation Preview */
+
+lpc-animation-preview {
+  grid-column: 2;
+}
 
 lpc-animation-preview::part(select-base) {
   display: flex;
