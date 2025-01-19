@@ -81,7 +81,7 @@ button:active {
   overflow: auto;
 }
 
-.sidebar {
+lpc-option-sidebar {
   flex: 0 0 256px;
   padding: 0.5em;
   border-right: 1px solid var(--color-contrast);

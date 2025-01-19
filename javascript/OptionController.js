@@ -18,13 +18,6 @@ export default class OptionController {
   get paletteDefinitions() { return this.characterGenerator.paletteDefinitions }
   get categoryDefinitions() { return this.characterGenerator.categoryDefinitions }
 
-  update() {
-    const sidebar = document.querySelector('.sidebar')
-    sidebar.innerHTML = ''
-
-    this.buildOptionsHTML()
-  }
-
   async setupOptionButtons() {
     const categoryNames = Object.keys(this.sheetDefinitions)
     this.categories = categoryNames.map(categoryName => {
@@ -35,8 +28,6 @@ export default class OptionController {
     })
 
     await this.loadIcons()
-
-    this.buildOptionsHTML()
   }
 
   async loadIcons() {
@@ -45,16 +36,6 @@ export default class OptionController {
     await Promise.all(options.map(option => {
       return option.loadIcon()
     }))
-  }
-
-  buildOptionsHTML() {
-    const sidebar = document.querySelector('.sidebar')
-
-    this.categories.forEach(category => {
-      const categoryElement = document.createElement('lpc-asset-category')
-      categoryElement.assetCategory = category
-      sidebar.appendChild(categoryElement)
-    })
   }
 
   /**

@@ -39,6 +39,10 @@ export default class AssetCategory {
   get paletteDefinitions() { return this.optionController.paletteDefinitions }
   get categoryDefinitions() { return this.optionController.categoryDefinitions }
 
+  categoryId() {
+    return `${this.name}-category`
+  }
+
   /**
    * Returns the tags for the selected option
    *
@@ -88,7 +92,6 @@ export default class AssetCategory {
 
     if (redrawSpritesheet) {
       this.optionController.fixExcludedOptions(this)
-      this.optionController.update()
       await this.spritesheetController.update()
       this.attributionController.update()
       this.optionController.updatePreviewFrameSize()

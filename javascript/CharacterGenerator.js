@@ -41,6 +41,9 @@ export default class CharacterGenerator {
     const preview = document.querySelector('lpc-animation-preview')
     preview.spritesheetController = this.spritesheetController
     preview.start()
+
+    const sidebar = document.querySelector('lpc-option-sidebar')
+    sidebar.optionController = this.optionController
   }
 
   /**

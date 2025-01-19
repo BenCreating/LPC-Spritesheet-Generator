@@ -1,24 +1,20 @@
 import { LitElement, css, html } from 'lit'
 import PaletteMatchRamp from '../PaletteMatchRamp.js'
 
-/**
- * @typedef {import('../AssetOption').default} AssetOption
- */
-
 export default class LPCCategoryPalettesElement extends LitElement {
   static properties = {
-    assetCategory: { type: Object }
+    category: { type: Object },
+    palettes: { type: Array }
   }
 
   render() {
-    if (!this.assetCategory) return
+    if (!this.category) return
 
-    const colorsContainerId = `${this.assetCategory.name}-colors`
-    const selectedPalettes = this.assetCategory.selectedPalettes()
+    const colorsContainerId = `${this.category.name}-colors`
 
     return html`
       <div id=${colorsContainerId}>
-        ${selectedPalettes.map(palette => this.renderPalette(palette))}
+        ${this.palettes.map(palette => this.renderPalette(palette))}
       </div>
     `
   }
