@@ -50,15 +50,6 @@ export default class AssetOption {
   }
 
   /**
-   * Returns the attribution for this asset as HTML
-   *
-   * @returns {HTMLElement}
-   */
-  attributionHTML() {
-    return this.attribution.html()
-  }
-
-  /**
    * Returns the attribution for this asset as plain text
    *
    * @returns {string}

@@ -3,8 +3,7 @@
  */
 
 /**
- * Manages and generates the attribution both as HTML (when shown on the page)
- * and as plain text (when copied to the clipboard or included in the download)
+ * Manages and generates the attribution
  */
 export default class AttributionController {
   /**
@@ -15,18 +14,6 @@ export default class AttributionController {
   }
 
   get optionController() { return this.characterGenerator.optionController }
-
-  /**
-   * Updates the attribution displayed on the page
-   */
-  update() {
-    const attributionContainer = document.querySelector('.attribution-content')
-
-    const authorsHTML = this.authorsHTML()
-    const attributionHTML = this.attributionHTML()
-
-    attributionContainer.replaceChildren(authorsHTML, attributionHTML)
-  }
 
   /**
    * Copies the full plain text attribution to the clipboard
@@ -67,36 +54,6 @@ export default class AttributionController {
    */
   authorsPlainText() {
     return this.authors().join(', ')
-  }
-
-  /**
-   * Returns a list of all authors who contributed to the spritesheet as HTML
-   *
-   * @returns {HTMLElement}
-   */
-  authorsHTML() {
-    const authorsPlainText = this.authorsPlainText()
-
-    const authorsHTML = document.createElement('span')
-    authorsHTML.textContent = authorsPlainText
-
-    return authorsHTML
-  }
-
-  /**
-   * Returns a detailed attribution for each item in the spritesheet as HTML
-   *
-   * @returns {HTMLElement}
-   */
-  attributionHTML() {
-    const attribution = document.createElement('ul')
-
-    this.selectedOptions().forEach(option => {
-      const optionAttribution = option.attributionHTML()
-      attribution.appendChild(optionAttribution)
-    })
-
-    return attribution
   }
 
   /**

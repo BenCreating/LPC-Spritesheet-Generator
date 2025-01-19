@@ -93,7 +93,6 @@ export default class AssetCategory {
     if (redrawSpritesheet) {
       this.optionController.fixExcludedOptions(this)
       await this.spritesheetController.update()
-      this.attributionController.update()
       this.optionController.updatePreviewFrameSize()
     }
   }

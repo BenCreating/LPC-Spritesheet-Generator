@@ -96,9 +96,7 @@ export default class OptionController {
   randomize() {
     this.categories.forEach(category => category.randomize())
 
-    this.update()
     this.spritesheetController.update()
-    this.attributionController.update()
   }
 
   /**
@@ -117,5 +115,10 @@ export default class OptionController {
 
   updatePreviewFrameSize() {
     this.characterGenerator.updatePreviewFrameSize()
+  }
+
+  updateAttribution() {
+    const attributionElement = document.querySelector('lpc-attribution')
+    attributionElement.selectedOptions = this.attributionController.selectedOptions()
   }
 }

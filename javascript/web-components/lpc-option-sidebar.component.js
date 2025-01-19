@@ -10,6 +10,8 @@ export default class LPCOptionSidebarElement extends LitElement {
       const categoryElement = this.shadowRoot.getElementById(category.categoryId())
       categoryElement.availableOptions = category.availableOptions()
     })
+
+    this.optionController.updateAttribution()
   }
 
   render() {

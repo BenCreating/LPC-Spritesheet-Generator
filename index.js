@@ -2,6 +2,7 @@ import './javascript/web-components/lpc-animation-preview.component.js'
 import './javascript/web-components/lpc-asset-category.component.js'
 import './javascript/web-components/lpc-category-palettes.component.js'
 import './javascript/web-components/lpc-option-sidebar.component.js'
+import './javascript/web-components/lpc-attribution.component.js'
 import CharacterGenerator from './javascript/CharacterGenerator.js'
 
 const characterGenerator = new CharacterGenerator()
