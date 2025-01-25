@@ -97,6 +97,8 @@ export default class OptionController {
     this.categories.forEach(category => category.randomize())
 
     this.spritesheetController.update()
+    this.updateSidebarOptions()
+    this.updateAttribution()
   }
 
   /**
@@ -120,5 +122,10 @@ export default class OptionController {
   updateAttribution() {
     const attributionElement = document.querySelector('lpc-attribution')
     attributionElement.selectedOptions = this.attributionController.selectedOptions()
+  }
+
+  updateSidebarOptions() {
+    const sidebar = document.querySelector('lpc-option-sidebar')
+    sidebar.optionChanged()
   }
 }

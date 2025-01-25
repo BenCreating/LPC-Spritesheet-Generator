@@ -37,9 +37,12 @@ export default class LPCAssetCategoryElement extends LitElement {
     const label = option.label ?? name
     const checked = option.isSelected()
 
+    const inputClass = checked ? 'selected-option' : ''
+
     return html`
       <div class="item-button">
         <input
+          class=${inputClass}
           type="radio"
           name=${categoryName}
           value=${name}
@@ -106,12 +109,8 @@ export default class LPCAssetCategoryElement extends LitElement {
       transform: translate(0, -2px) scale(1.05);
     }
 
-    .item-button input[type=radio]:checked + label {
+    .item-button input[type=radio].selected-option + label {
       box-shadow: 1px 1px 8px -2px var(--color-shadow), var(--selected) inset;
-    }
-
-    .item-button input[type=radio]:checked:hover + label {
-      transform: translate(0, -2px) scale(1.05);
     }
   `
 }
