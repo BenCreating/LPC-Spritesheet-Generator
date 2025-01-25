@@ -27,22 +27,6 @@ export default class Palette {
     this.selectedColorRamp = preselectedColorRamp ?? this.colorRamps[0]
   }
 
-  html() {
-    const container = document.createElement('fieldset')
-
-    const label = document.createElement('legend')
-    label.textContent = this.name
-    container.appendChild(label)
-
-    this.colorRamps.forEach(colorRamp => {
-      const colorRampHTML = colorRamp.html()
-
-      container.appendChild(colorRampHTML)
-    })
-
-    return container
-  }
-
   /**
    * Sets the selected color ramp
    *

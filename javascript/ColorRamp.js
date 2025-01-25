@@ -14,30 +14,11 @@ export default class ColorRamp {
   constructor(palette, name, colors) {
     this.palette = palette
     this.name = name
-    this.colors = colors
+    this.colorList = colors
   }
 
-  /**
-   * The HTML for this color option
-   *
-   * @returns {HTMLElement}
-   */
-  html() {
-    const checked = this === this.palette.selectedColorRamp
-
-    const radioButton = document.createElement('input')
-    radioButton.setAttribute('type', 'radio')
-    radioButton.setAttribute('name', this.palette.urlParameterKey())
-    radioButton.setAttribute('value', this.name)
-    radioButton.addEventListener('click', this.selectColor.bind(this))
-
-    radioButton.checked = checked
-
-    radioButton.className = 'color-option'
-    radioButton.style.backgroundColor = this.colors[0]
-    radioButton.style.borderColor = this.colors[1]
-
-    return radioButton
+  get colors() {
+    return this.colorList
   }
 
   /**
@@ -47,5 +28,9 @@ export default class ColorRamp {
    */
   selectColor(_event) {
     this.palette.setSelectedColorRamp(this)
+  }
+
+  isSelected() {
+    return this === this.palette.selectedColorRamp
   }
 }

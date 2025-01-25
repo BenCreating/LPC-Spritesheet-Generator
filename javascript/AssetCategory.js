@@ -39,6 +39,10 @@ export default class AssetCategory {
   get paletteDefinitions() { return this.optionController.paletteDefinitions }
   get categoryDefinitions() { return this.optionController.categoryDefinitions }
 
+  categoryId() {
+    return `${this.name}-category`
+  }
+
   /**
    * Returns the tags for the selected option
    *
@@ -88,9 +92,7 @@ export default class AssetCategory {
 
     if (redrawSpritesheet) {
       this.optionController.fixExcludedOptions(this)
-      this.optionController.update()
       await this.spritesheetController.update()
-      this.attributionController.update()
       this.optionController.updatePreviewFrameSize()
     }
   }
@@ -154,57 +156,6 @@ export default class AssetCategory {
     }
 
     return true
-  }
-
-  /**
-   * Returns the HTML to display this category
-   *
-   * @returns {HTMLElement}
-   */
-  html() {
-    const name = this.name
-
-    const container = document.createElement('fieldset')
-    container.id = `${name}-options`
-
-    const label = document.createElement('legend')
-    label.textContent = name
-    container.appendChild(label)
-
-    container.appendChild(this.colorsHTML())
-
-    const optionsContainer = document.createElement('div')
-    optionsContainer.className = 'category-item-options'
-    container.appendChild(optionsContainer)
-
-    const options = this.availableOptions()
-    options.forEach(option => {
-      optionsContainer.appendChild(option.html())
-    })
-
-    return container
-  }
-
-  /**
-   * Returns the HTML for this category's color options
-   *
-   * @returns {HTMLElement}
-   */
-  colorsHTML() {
-    const colorsContatinerID = `${this.name}-colors`
-    const previousColors = document.getElementById(colorsContatinerID)
-    if (previousColors) previousColors.remove()
-
-    const container = document.createElement('div')
-    container.id = colorsContatinerID
-    container.className = 'item-color-options'
-
-    this.selectedPaletteNames().forEach(paletteName => {
-      const palette = this.palettes[paletteName]
-      container.appendChild(palette.html())
-    })
-
-    return container
   }
 
   /**

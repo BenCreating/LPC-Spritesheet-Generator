@@ -18,13 +18,6 @@ export default class OptionController {
   get paletteDefinitions() { return this.characterGenerator.paletteDefinitions }
   get categoryDefinitions() { return this.characterGenerator.categoryDefinitions }
 
-  update() {
-    const sidebar = document.querySelector('.sidebar')
-    sidebar.innerHTML = ''
-
-    this.buildOptionsHTML()
-  }
-
   async setupOptionButtons() {
     const categoryNames = Object.keys(this.sheetDefinitions)
     this.categories = categoryNames.map(categoryName => {
@@ -35,8 +28,6 @@ export default class OptionController {
     })
 
     await this.loadIcons()
-
-    this.buildOptionsHTML()
   }
 
   async loadIcons() {
@@ -45,14 +36,6 @@ export default class OptionController {
     await Promise.all(options.map(option => {
       return option.loadIcon()
     }))
-  }
-
-  buildOptionsHTML() {
-    const sidebar = document.querySelector('.sidebar')
-
-    this.categories.forEach(category => {
-      sidebar.appendChild(category.html())
-    })
   }
 
   /**
@@ -113,9 +96,9 @@ export default class OptionController {
   randomize() {
     this.categories.forEach(category => category.randomize())
 
-    this.update()
     this.spritesheetController.update()
-    this.attributionController.update()
+    this.updateSidebarOptions()
+    this.updateAttribution()
   }
 
   /**
@@ -134,5 +117,15 @@ export default class OptionController {
 
   updatePreviewFrameSize() {
     this.characterGenerator.updatePreviewFrameSize()
+  }
+
+  updateAttribution() {
+    const attributionElement = document.querySelector('lpc-attribution')
+    attributionElement.selectedOptions = this.attributionController.selectedOptions()
+  }
+
+  updateSidebarOptions() {
+    const sidebar = document.querySelector('lpc-option-sidebar')
+    sidebar.optionChanged()
   }
 }

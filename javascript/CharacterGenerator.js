@@ -36,11 +36,17 @@ export default class CharacterGenerator {
 
     await this.optionController.setupOptionButtons()
     await this.spritesheetController.update()
-    this.attributionController.update()
 
     const preview = document.querySelector('lpc-animation-preview')
     preview.spritesheetController = this.spritesheetController
     preview.start()
+
+    const sidebar = document.querySelector('lpc-option-sidebar')
+    sidebar.optionController = this.optionController
+
+    const attribution = document.querySelector('lpc-attribution')
+    attribution.attributionController = this.attributionController
+    attribution.selectedOptions = this.attributionController.selectedOptions()
   }
 
   /**
