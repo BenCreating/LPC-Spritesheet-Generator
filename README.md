@@ -1,4 +1,12 @@
-# LPC Spritesheet Generator
+# LPC Spritesheet Generator [ARCHIVED]
+
+## ⚠️ This project is archived
+
+When I created this project, it was an attempt to solve some problems with the existing generator. At the time, all animations had to be included in a single large image, and each color option also needed its own custom image. These restrictions were extremely limiting for the growth of LPC. New animations could not be added to the system without needing to update the files for every single asset. The color options were not consistent across similar assets, and required a significant amount of storage space to support.
+
+Since that time, the original generator has undergone several large updates that resolve these issues, making this project unnecessary. Please use it instead https://github.com/LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator
+
+___
 
 A browser app for generating spritesheets for [Liberated Pixel Cup](https://lpc.opengameart.org) characters.
 
